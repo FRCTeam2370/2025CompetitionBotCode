@@ -29,6 +29,8 @@ public class Constants {
     public static class ManipulatorConstants {
         public static final int ManipulatorID = 17;
         public static final int AlgaeMotorID = 18;
+
+        public static final int ManipulatorSensorID = 19;
     }
 
     public static class SwerveConstants {

@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.ManipulatorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class RunAlgaeManipulator extends Command {
+public class IntakeCoral extends Command {
   private ManipulatorSubsystem mManipulatorSubsystem;
   private double speed;
-  /** Creates a new RunAlgaeManipulator. */
-  public RunAlgaeManipulator(ManipulatorSubsystem mManipulatorSubsystem, double speed) {
+  /** Creates a new RunManipulator. */
+  public IntakeCoral(ManipulatorSubsystem mManipulatorSubsystem, double speed) {
     this.mManipulatorSubsystem = mManipulatorSubsystem;
     this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -21,27 +21,27 @@ public class RunAlgaeManipulator extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    if(speed < 0){
-      ManipulatorSubsystem.hasAlgae = false;
-    }
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ManipulatorSubsystem.runAlgaeIntake(speed);
+    ManipulatorSubsystem.runManipulator(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    ManipulatorSubsystem.runAlgaeIntake(0);
+    ManipulatorSubsystem.runManipulator(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(ManipulatorSubsystem.hasCoral() == true){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

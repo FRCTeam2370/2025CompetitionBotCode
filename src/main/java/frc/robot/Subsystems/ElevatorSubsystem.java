@@ -101,22 +101,22 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public static void configElevator(){
     //configures all of the values for PID and eventually Motion Magic --- Slot0 holds regular PID vals
-    elevatorConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    elevatorConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
     //SLOT0 CONFIGURATION --- NORMAL PID CONTROL
-    elevatorConfiguration.Slot0.kP = 0.05;//needs more tunning with weight and maybe Motion Magic pls , 2.25
-    elevatorConfiguration.Slot0.kI = 0.025;
-    elevatorConfiguration.Slot0.kD = 0.0025;//0.62
+    elevatorConfiguration.Slot0.kP = 0.06;//needs more tunning with weight and maybe Motion Magic pls , 2.25
+    elevatorConfiguration.Slot0.kI = 0.03;
+    elevatorConfiguration.Slot0.kD = 0.003;//0.62
     elevatorConfiguration.Slot0.GravityType = GravityTypeValue.Elevator_Static;
-    elevatorConfiguration.Slot0.kG = 0.032;//0.03
+    elevatorConfiguration.Slot0.kG = 0.025;//0.03
 
     elevatorConfiguration.Slot2.kP = 0.01;//needs more tunning with weight and maybe Motion Magic pls , 2.25
-    elevatorConfiguration.Slot2.kI = 0;
+    elevatorConfiguration.Slot2.kI = 0.0;
     elevatorConfiguration.Slot2.kD = 0.001;//0.62
     elevatorConfiguration.Slot2.GravityType = GravityTypeValue.Elevator_Static;
-    elevatorConfiguration.Slot2.kG = 0.037;//0.03
+    //elevatorConfiguration.Slot2.kG = 0.01;//0.037, this value is without the tension spring
 
-    elevatorConfiguration.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.5;
+    elevatorConfiguration.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.3;
 
     //SLOT1 CONFIGURATION --- MOTION MAGIC CONTROL
     var slot1Config = elevatorConfiguration.Slot1;
@@ -128,8 +128,6 @@ public class ElevatorSubsystem extends SubsystemBase {
     slot1Config.kD = 0;
 
     elevatorConfiguration.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-
-    elevatorConfiguration.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.0;
 
     // elevatorConfiguration.MotionMagic.MotionMagicAcceleration = 400;
     // elevatorConfiguration.MotionMagic.MotionMagicJerk = 4000;

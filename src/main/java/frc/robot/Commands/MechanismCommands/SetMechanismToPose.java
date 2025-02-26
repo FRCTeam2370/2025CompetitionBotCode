@@ -19,6 +19,6 @@ public class SetMechanismToPose extends SequentialCommandGroup {
   public SetMechanismToPose(double ElevatorPos, double SwingArmPos, SwingArmSubsystem mSwingArmSubsystem, ElevatorSubsystem mElevatorSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ElevatorControl(mElevatorSubsystem, ElevatorPos).andThen(new SetSwingArm(mSwingArmSubsystem, SwingArmPos)));
+    addCommands(new ElevatorControl(mElevatorSubsystem, ElevatorPos).alongWith(new SetSwingArm(mSwingArmSubsystem, SwingArmPos)));
   }
 }

@@ -34,7 +34,7 @@ public class SwingArmSubsystem extends SubsystemBase {
 
     resetArmToAbsolute();
 
-    //setSwingArmPos(0);
+    setSwingArmPos(0);
   }
 
   @Override
