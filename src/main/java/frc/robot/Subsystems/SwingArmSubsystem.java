@@ -15,6 +15,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class SwingArmSubsystem extends SubsystemBase {
   public static TalonFX swingArmMotor;
@@ -24,6 +25,8 @@ public class SwingArmSubsystem extends SubsystemBase {
   public static CANcoderConfiguration swingArmEncoderConfig = new CANcoderConfiguration();
 
   private static PositionDutyCycle swingArmPosCycle = new PositionDutyCycle(0);
+
+  private static double offset = 0;
   /** Creates a new SwingArmSubsystem. */
   public SwingArmSubsystem() {
     swingArmMotor = new TalonFX(Constants.SwingArmConstants.SwingArmID);
@@ -43,10 +46,18 @@ public class SwingArmSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("swingArm Motor rotations", swingArmMotor.getPosition().getValueAsDouble());
     SmartDashboard.putNumber("swingArm Mechanism Rotations", getArmRotations());
     SmartDashboard.putNumber("SwingArm Absolut Encoder", swingArmEncoder.getAbsolutePosition().getValueAsDouble());
+
+    offset = RobotContainer.offsetOI.getRawAxis(1) / 12;
+    SmartDashboard.putNumber("swing arm offset", offset);
   }
 
   public static void setSwingArmPos(double pos){
-    swingArmMotor.setControl(swingArmPosCycle.withPosition(armRotationsToKraken(pos)));
+    if(RobotContainer.enableOffsets){
+      swingArmMotor.setControl(swingArmPosCycle.withPosition(armRotationsToKraken((pos + offset) > Constants.SwingArmConstants.SwingArmMax ? Constants.SwingArmConstants.SwingArmMax : (pos + offset) < Constants.SwingArmConstants.SwingArmMin ? Constants.SwingArmConstants.SwingArmMin : (pos + offset))));
+    }else{
+      swingArmMotor.setControl(swingArmPosCycle.withPosition(armRotationsToKraken(pos)));
+    }
+    
   }
 
   public static double getArmRotations(){

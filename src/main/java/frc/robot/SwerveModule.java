@@ -95,9 +95,9 @@ public class SwerveModule {
         state.optimize(getState().angle);
         setAngle(state);
         setSpeed(state, isOpenLoop);
-        SmartDashboard.putNumber("Module angle", state.angle.getDegrees());
-        System.out.println("state degrees" + state.angle.getDegrees());
-        System.out.println("Module Speed" + state.speedMetersPerSecond);
+        // SmartDashboard.putNumber("Module angle", state.angle.getDegrees());
+        // System.out.println("state degrees" + state.angle.getDegrees());
+        // System.out.println("Module Speed" + state.speedMetersPerSecond);
         currentState = state;
     }
 

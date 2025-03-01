@@ -13,6 +13,7 @@ import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -20,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Commands.ResetGyro;
+import frc.robot.Commands.ClimberCommands.ControlClimberManual;
 import frc.robot.Commands.Drive.DriveRobotRelative;
 import frc.robot.Commands.Drive.GoToSwervePose;
 import frc.robot.Commands.Drive.TeleopSwerve;
@@ -33,6 +35,8 @@ import frc.robot.Commands.ManipulatorCommands.RunManipulator;
 import frc.robot.Commands.MechanismCommands.SetMechanismToPose;
 import frc.robot.Commands.MechanismCommands.StowMechanismWithCoral;
 import frc.robot.Commands.SwingArmCommands.SetSwingArm;
+import frc.robot.Constants.ClimberConstants;
+import frc.robot.Subsystems.ClimberSubsystem;
 import frc.robot.Subsystems.ElevatorSubsystem;
 import frc.robot.Subsystems.ManipulatorSubsystem;
 import frc.robot.Subsystems.SwerveSubsystem;
@@ -41,11 +45,16 @@ import pabeles.concurrency.ConcurrencyOps.Reset;
 
 public class RobotContainer {
   public static final CommandXboxController driver = new CommandXboxController(0);
+  public static final CommandXboxController operator = new CommandXboxController(1);
+  public static final GenericHID offsetOI = new GenericHID(2);
 
   private final SwerveSubsystem mSwerve = new SwerveSubsystem();
   private final ElevatorSubsystem mElevatorSubsystem = new ElevatorSubsystem();
   private final ManipulatorSubsystem mManipulatorSubsystem = new ManipulatorSubsystem();
   private final SwingArmSubsystem mSwingArmSubsystem = new SwingArmSubsystem();
+  private final ClimberSubsystem mClimberSubsystem = new ClimberSubsystem();
+
+  public static boolean enableOffsets = false;
 
   private final SendableChooser<Command> autoChooser;
 
@@ -61,6 +70,8 @@ public class RobotContainer {
   private void configureBindings() {
     mSwerve.setDefaultCommand(new TeleopSwerve(mSwerve, ()-> driver.getRawAxis(0), ()-> -driver.getRawAxis(1), ()-> driver.getRawAxis(4), ()-> false));
 
+    SmartDashboard.putNumber("offsetOI axis 0", offsetOI.getRawAxis(0));
+    SmartDashboard.putNumber("offsetOI axis 1", offsetOI.getRawAxis(1));
     //driver.b().toggleOnTrue(new GoToSwervePose(mSwerve, new Pose2d(new Translation2d(11.4, 7.7), Rotation2d.fromDegrees(90))));
 
     driver.start().onTrue(new ResetGyro(mSwerve));
@@ -77,14 +88,17 @@ public class RobotContainer {
     //driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 1.70));//L2
     // driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 5.1));//max height
     // driver.start().onTrue(new ElevatorControl(mElevatorSubsystem, 3));
-    driver.b().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem));
+    driver.b().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
 
     driver.y().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//L2
     driver.a().onTrue(new SetMechanismToPose(2.609, 0.3177, mSwingArmSubsystem, mElevatorSubsystem));//L3
     driver.x().onTrue(new SetMechanismToPose(4.7, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
 
     driver.povDown().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.2857));
-    driver.povUp().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.38));
+    driver.povUp().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.35));
+
+    operator.rightTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, 0.4));
+    operator.leftTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, -0.4));
 
     //driver.back().toggleOnTrue(new SetElevatorSpeed(mElevatorSubsystem));//this is for finding the kg for the elevator
   }

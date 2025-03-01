@@ -4,7 +4,10 @@
 
 package frc.robot.Commands.ElevatorCommands;
 
+import com.pathplanner.lib.config.RobotConfig;
+
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.Subsystems.ElevatorSubsystem;
 import frc.robot.Subsystems.ElevatorSubsystem.ElevatorState;
 
@@ -29,7 +32,7 @@ public class ElevatorControl extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ElevatorSubsystem.setElevatorPos(elevatorPos);;//in percent -1.0 to 1.0
+    ElevatorSubsystem.setElevatorPos(elevatorPos);
   }
 
   // Called once the command ends or is interrupted.
@@ -41,11 +44,12 @@ public class ElevatorControl extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ElevatorSubsystem.getElevatorShaftRots() > elevatorPos * 0.95 && ElevatorSubsystem.getElevatorShaftRots() < elevatorPos * 1.05){
-      ElevatorSubsystem.mElevatorState = ElevatorState.HoldingPosition;
-      return true;
-    }else{
-      return false;
-    }
+    // if(ElevatorSubsystem.getElevatorShaftRots() > elevatorPos * 0.95 && ElevatorSubsystem.getElevatorShaftRots() < elevatorPos * 1.05){
+    //   ElevatorSubsystem.mElevatorState = ElevatorState.HoldingPosition;
+    //   return true;
+    // }else{
+    //   return false;
+    // }
+    return false;
   }
 }

@@ -5,6 +5,7 @@
 package frc.robot.Commands.ElevatorCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.Subsystems.ElevatorSubsystem;
 import frc.robot.Subsystems.ElevatorSubsystem.ElevatorState;
 
@@ -23,6 +24,7 @@ public class StowElevator extends Command {
   public void initialize() {
     ElevatorSubsystem.setElevatorPos(0.12);
     ElevatorSubsystem.mElevatorState = ElevatorState.Idle;
+    RobotContainer.enableOffsets = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

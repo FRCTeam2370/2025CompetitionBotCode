@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.Encoder;
 public class Constants {
     public static class ElevatorConstants {
         public static final int ElevatorID = 14;
+        public static final double maxElevatorHeight = 4.75;
     }
 
     public static class SwingArmConstants {
@@ -24,13 +25,20 @@ public class Constants {
         public static final int SwingArmEncoderID = 16;
 
         public static final double SwingArmOffset = 0.5202636;
+
+        public static final double SwingArmMax = 0.4672;
+        public static final double SwingArmMin = -0.3447;
     }
 
     public static class ManipulatorConstants {
-        public static final int ManipulatorID = 17;
-        public static final int AlgaeMotorID = 18;
+        public static final int ManipulatorID = 18;
+        public static final int AlgaeMotorID = 17;
 
         public static final int ManipulatorSensorID = 19;
+    }
+
+    public static class ClimberConstants {
+        public static final int climberMotorID = 20;
     }
 
     public static class SwerveConstants {

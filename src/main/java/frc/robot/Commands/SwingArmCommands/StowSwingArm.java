@@ -5,19 +5,19 @@
 package frc.robot.Commands.SwingArmCommands;
 
 import edu.wpi.first.util.MsvcRuntimeException;
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Subsystems.ManipulatorSubsystem;
 import frc.robot.Subsystems.SwingArmSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class SetSwingArm extends Command {
-  private SwingArmSubsystem mSwingArmSubsystem;
-  private double pos;
-  /** Creates a new SetSwingArm. */
-  public SetSwingArm(SwingArmSubsystem mSwingArmSubsystem, double pos) {
-    this.mSwingArmSubsystem = mSwingArmSubsystem;
-    this.pos = pos;
+public class StowSwingArm extends Command {
+  SwingArmSubsystem mSwingArmSubsystem;
+  /** Creates a new StowSwingArm. */
+  public StowSwingArm(SwingArmSubsystem mSwingArmSubsystem, ManipulatorSubsystem mManipulatorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(mSwingArmSubsystem);
+    this.mSwingArmSubsystem = mSwingArmSubsystem;
+    addRequirements(mSwingArmSubsystem, mManipulatorSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -27,7 +27,11 @@ public class SetSwingArm extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SwingArmSubsystem.setSwingArmPos(pos);
+    if(ManipulatorSubsystem.hasAlgae){
+      SwingArmSubsystem.setSwingArmPos( 0.3);
+    }else{
+      SwingArmSubsystem.setSwingArmPos(0);
+    }
   }
 
   // Called once the command ends or is interrupted.

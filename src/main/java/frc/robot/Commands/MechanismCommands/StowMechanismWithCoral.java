@@ -8,7 +8,9 @@ import edu.wpi.first.util.MsvcRuntimeException;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Commands.ElevatorCommands.StowElevator;
 import frc.robot.Commands.SwingArmCommands.SetSwingArm;
+import frc.robot.Commands.SwingArmCommands.StowSwingArm;
 import frc.robot.Subsystems.ElevatorSubsystem;
+import frc.robot.Subsystems.ManipulatorSubsystem;
 import frc.robot.Subsystems.SwingArmSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -16,9 +18,9 @@ import frc.robot.Subsystems.SwingArmSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class StowMechanismWithCoral extends SequentialCommandGroup {
   /** Creates a new StowMechanismWithCoral. */
-  public StowMechanismWithCoral(ElevatorSubsystem mElevatorSubsystem, SwingArmSubsystem mSwingArmSubsystem) {
+  public StowMechanismWithCoral(ElevatorSubsystem mElevatorSubsystem, SwingArmSubsystem mSwingArmSubsystem, ManipulatorSubsystem manipulatorSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new StowElevator(mElevatorSubsystem).alongWith(new SetSwingArm(mSwingArmSubsystem, 0)));
+    addCommands(new StowElevator(mElevatorSubsystem).alongWith(new StowSwingArm(mSwingArmSubsystem, manipulatorSubsystem)));
   }
 }

@@ -29,6 +29,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
   public static CANrangeConfiguration mSensorConfig = new CANrangeConfiguration();
 
   public static SparkMaxConfig algaeConfig = new SparkMaxConfig();
+  public static SparkMaxConfig coralConfig = new SparkMaxConfig();
 
   public static boolean hasAlgae = false;
   /** Creates a new ManipulatorSubsystem. */
@@ -39,6 +40,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
     manipulatorSensor = new CANrange(Constants.ManipulatorConstants.ManipulatorSensorID);
 
     configureAlgaeMotor();
+    configCoral();
     configureManipulator();
   }
 
@@ -49,8 +51,10 @@ public class ManipulatorSubsystem extends SubsystemBase {
 
     SmartDashboard.putNumber("Algae Motor Resistence", algaeMotor.getOutputCurrent());
 
+    SmartDashboard.putBoolean("has Algae", hasAlgae);
+
     if(hasAlgae){
-      runAlgaeIntake(0.1);
+      runAlgaeIntake(0.15);
     }
   }
 
@@ -68,8 +72,15 @@ public class ManipulatorSubsystem extends SubsystemBase {
 
   private static void configureAlgaeMotor(){
     algaeConfig.idleMode(IdleMode.kBrake);
+    algaeConfig.inverted(false);
     
     algaeMotor.configure(algaeConfig, null, PersistMode.kPersistParameters);
+  }
+
+  private static void configCoral(){
+    coralConfig.inverted(true);
+
+    manipulatorMotor.configure(coralConfig, null, PersistMode.kPersistParameters);
   }
 
   private static void configureManipulator(){

@@ -87,19 +87,19 @@ public class SwerveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Mod 0 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[0].getCANcoder().getDegrees()).getDegrees());
-    SmartDashboard.putNumber("Mod 1 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[1].getCANcoder().getDegrees()).getDegrees());
-    SmartDashboard.putNumber("Mod 2 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[2].getCANcoder().getDegrees()).getDegrees());
-    SmartDashboard.putNumber("Mod 3 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[3].getCANcoder().getDegrees()).getDegrees());
+    // SmartDashboard.putNumber("Mod 0 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[0].getCANcoder().getDegrees()).getDegrees());
+    // SmartDashboard.putNumber("Mod 1 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[1].getCANcoder().getDegrees()).getDegrees());
+    // SmartDashboard.putNumber("Mod 2 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[2].getCANcoder().getDegrees()).getDegrees());
+    // SmartDashboard.putNumber("Mod 3 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[3].getCANcoder().getDegrees()).getDegrees());
 
-    SmartDashboard.putNumber("Wheel MPS", mSwerveModules[0].getWheelMPS());
-    SmartDashboard.putNumber("Wheel Meters", mSwerveModules[0].getModuleMeters());
+    // SmartDashboard.putNumber("Wheel MPS", mSwerveModules[0].getWheelMPS());
+    // SmartDashboard.putNumber("Wheel Meters", mSwerveModules[0].getModuleMeters());
 
-    SmartDashboard.putNumber("Gyro Val", gyro.getRotation2d().getDegrees());
-    SmartDashboard.putNumber("Heading", getHeading());
-    SmartDashboard.putNumber("pose x", poseEstimator.getEstimatedPosition().getX());
-    SmartDashboard.putNumber("pose y", poseEstimator.getEstimatedPosition().getY());
-    SmartDashboard.putNumber("pose rot", poseEstimator.getEstimatedPosition().getRotation().getDegrees());
+    // SmartDashboard.putNumber("Gyro Val", gyro.getRotation2d().getDegrees());
+    // SmartDashboard.putNumber("Heading", getHeading());
+    // SmartDashboard.putNumber("pose x", poseEstimator.getEstimatedPosition().getX());
+    // SmartDashboard.putNumber("pose y", poseEstimator.getEstimatedPosition().getY());
+    // SmartDashboard.putNumber("pose rot", poseEstimator.getEstimatedPosition().getRotation().getDegrees());
 
     //odometry.update(getRotation2d(), getModulePositions());
     odometry.update(getRotation2d(), getModulePositions());

@@ -16,10 +16,14 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.pathplanner.lib.config.RobotConfig;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 
 public class ElevatorSubsystem extends SubsystemBase {
   public static TalonFX elevatorMotor = new TalonFX(Constants.ElevatorConstants.ElevatorID);
@@ -32,6 +36,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   private static final VoltageOut elevatorVoltOut = new VoltageOut(0);
 
   public static double lastElevatorPosition; 
+
+  private static double offset = 0;
 
   //creates a public enum that can have 3 different states of the elevator to corespond to different control modes
   public static enum ElevatorState {
@@ -55,25 +61,46 @@ public class ElevatorSubsystem extends SubsystemBase {
     
     SmartDashboard.putNumber("Elevator Voltage", elevatorMotor.getMotorVoltage().getValueAsDouble());
 
+    offset = RobotContainer.offsetOI.getRawAxis(0) / 5;
+    SmartDashboard.putNumber("Elevator position offset", offset);
+    SmartDashboard.putBoolean("Offsets Enabled", RobotContainer.enableOffsets);
+
+    if(RobotContainer.operator.a().getAsBoolean()){
+      RobotContainer.enableOffsets = true;
+    }
+    if(RobotContainer.operator.b().getAsBoolean()){
+      RobotContainer.enableOffsets = false;
+    }
+
     switch(mElevatorState) {
       case Idle:
         if(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()) <= 0.13){
           elevatorMotor.set(0);
           break;
         }else{
-          setElevatorPos(0.12);
+          if(RobotContainer.enableOffsets){
+            setElevatorPos(0.12 - offset);
+          }else{
+            setElevatorPos(0.12);
+          }
         }
         break;
       case Moving:
         break;
       case HoldingPosition:
-        setElevatorPos(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()));
+        elevatorMotor.setControl(elevatorPosCycle.withPosition(lastElevatorPosition));
     }
   }
 
   public static void setElevatorPos(double position){//PID control of the position of the elevator
-    position = OutputShaftToKraken(position);
-    elevatorMotor.setControl(elevatorPosCycle.withPosition(position));//in rotations of the motor
+    if(RobotContainer.enableOffsets){
+      position = OutputShaftToKraken((position + offset) > Constants.ElevatorConstants.maxElevatorHeight ? Constants.ElevatorConstants.maxElevatorHeight : position + offset);
+      elevatorMotor.setControl(elevatorPosCycle.withPosition(position));//in rotations of the motor
+    }else{
+      position = OutputShaftToKraken(position > Constants.ElevatorConstants.maxElevatorHeight ? Constants.ElevatorConstants.maxElevatorHeight : position);
+      elevatorMotor.setControl(elevatorPosCycle.withPosition(position));//in rotations of the motor
+    }
+    lastElevatorPosition = position;
   }
 
   public static double getElevatorShaftRots(){
@@ -104,11 +131,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
     //SLOT0 CONFIGURATION --- NORMAL PID CONTROL
-    elevatorConfiguration.Slot0.kP = 0.06;//needs more tunning with weight and maybe Motion Magic pls , 2.25
-    elevatorConfiguration.Slot0.kI = 0.03;
-    elevatorConfiguration.Slot0.kD = 0.003;//0.62
+    elevatorConfiguration.Slot0.kP = 0.04;//needs more tunning with weight and maybe Motion Magic pls , 2.25
+    elevatorConfiguration.Slot0.kI = 0.001;
+    elevatorConfiguration.Slot0.kD = 0.002;//0.62
     elevatorConfiguration.Slot0.GravityType = GravityTypeValue.Elevator_Static;
-    elevatorConfiguration.Slot0.kG = 0.025;//0.03
+    elevatorConfiguration.Slot0.kG = 0.022;//0.03
 
     elevatorConfiguration.Slot2.kP = 0.01;//needs more tunning with weight and maybe Motion Magic pls , 2.25
     elevatorConfiguration.Slot2.kI = 0.0;
