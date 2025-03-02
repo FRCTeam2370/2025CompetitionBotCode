@@ -38,6 +38,7 @@ import frc.robot.Commands.SwingArmCommands.SetSwingArm;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Subsystems.ClimberSubsystem;
 import frc.robot.Subsystems.ElevatorSubsystem;
+import frc.robot.Subsystems.LEDSubsystem;
 import frc.robot.Subsystems.ManipulatorSubsystem;
 import frc.robot.Subsystems.SwerveSubsystem;
 import frc.robot.Subsystems.SwingArmSubsystem;
@@ -53,6 +54,7 @@ public class RobotContainer {
   private final ManipulatorSubsystem mManipulatorSubsystem = new ManipulatorSubsystem();
   private final SwingArmSubsystem mSwingArmSubsystem = new SwingArmSubsystem();
   private final ClimberSubsystem mClimberSubsystem = new ClimberSubsystem();
+  private final LEDSubsystem mLedSubsystem = new LEDSubsystem();
 
   public static boolean enableOffsets = false;
 
@@ -76,6 +78,11 @@ public class RobotContainer {
 
     driver.start().onTrue(new ResetGyro(mSwerve));
 
+    driver.x().whileTrue(mSwerve.PathfindToPose(() -> Constants.RedSidePoses.REDFRONTLEFTSCORERIGHT));
+    driver.y().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.REDBACKLEFTSCORE));
+    driver.a().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.REDLEFTLOADING));
+    driver.b().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.REDPROCESSOR));
+
     driver.leftBumper().toggleOnTrue(new IntakeCoral(mManipulatorSubsystem, 1));
     driver.rightBumper().whileTrue(new RunManipulator(mManipulatorSubsystem, -1));
 
@@ -88,11 +95,12 @@ public class RobotContainer {
     //driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 1.70));//L2
     // driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 5.1));//max height
     // driver.start().onTrue(new ElevatorControl(mElevatorSubsystem, 3));
-    driver.b().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
+    driver.rightStick().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
 
-    driver.y().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//L2
-    driver.a().onTrue(new SetMechanismToPose(2.609, 0.3177, mSwingArmSubsystem, mElevatorSubsystem));//L3
-    driver.x().onTrue(new SetMechanismToPose(4.7, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.x().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//L2
+    operator.y().onTrue(new SetMechanismToPose(2.609, 0.3177, mSwingArmSubsystem, mElevatorSubsystem));//L3
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.7, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));
 
     driver.povDown().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.2857));
     driver.povUp().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.35));
