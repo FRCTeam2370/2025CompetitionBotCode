@@ -60,6 +60,19 @@ public class RobotContainer {
 
   private final SendableChooser<Command> autoChooser;
 
+  public Pose2d findNearestLoad(){
+    Pose2d nearestLoad;
+    if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() >= 4){
+      nearestLoad = Constants.RedSidePoses.RED_RIGHT_LOADING_LEFT;
+    }else if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() < 4){
+      nearestLoad = Constants.RedSidePoses.RED_LEFT_LOADING_RIGHT;
+    }else{
+      nearestLoad = Constants.RedSidePoses.RED_CLOSE_DESCORE;
+    }
+
+    return nearestLoad;
+  }
+
   public RobotContainer() {
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
@@ -78,10 +91,11 @@ public class RobotContainer {
 
     driver.start().onTrue(new ResetGyro(mSwerve));
 
-    driver.x().whileTrue(mSwerve.PathfindToPose(() -> Constants.RedSidePoses.REDFRONTLEFTSCORERIGHT));
-    driver.y().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.REDBACKLEFTSCORE));
-    driver.a().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.REDLEFTLOADING));
-    driver.b().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.REDPROCESSOR));
+    driver.x().whileTrue(mSwerve.PathfindToPose(() -> Constants.RedSidePoses.RED_CLOSE_SCORE_RIGHT));
+    driver.y().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.RED_FAR_DESCORE));
+    //driver.a().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.RED_LEFT_LOADING_RIGHT));
+    driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
+    driver.b().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.RED_PROCESSOR));
 
     driver.leftBumper().toggleOnTrue(new IntakeCoral(mManipulatorSubsystem, 1));
     driver.rightBumper().whileTrue(new RunManipulator(mManipulatorSubsystem, -1));

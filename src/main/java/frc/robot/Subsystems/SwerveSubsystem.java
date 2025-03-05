@@ -46,6 +46,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructArrayPublisher;
 import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -67,7 +69,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public SwerveModule[] mSwerveModules;
   public static SwerveDriveOdometry odometry;
 
-  public static PIDController rotationPIDauto = new PIDController(0.075, 0.0, 0.01);
+  public static PIDController rotationPIDauto = new PIDController(0.082, 0.01, 0.001);
   public static PIDController rotationPID = new PIDController(0.5, 0, 0);
 
   public static Field2d field = new Field2d();
@@ -77,6 +79,11 @@ public class SwerveSubsystem extends SubsystemBase {
   public static Optional<Alliance> color;
 
   private static Pose2d limelightPose, limelight2Pose;
+
+  StructArrayPublisher<SwerveModuleState> publisher = NetworkTableInstance.getDefault().getStructArrayTopic("MyStates", SwerveModuleState.struct).publish();
+
+  StructArrayPublisher<Pose2d> posePublisher = NetworkTableInstance.getDefault().getStructArrayTopic("MyPose", Pose2d.struct).publish();
+
 
   /** Creates a new SwerveSubsystem. */
   public SwerveSubsystem() {
@@ -137,6 +144,8 @@ public class SwerveSubsystem extends SubsystemBase {
     resetOdometry(poseEstimator.getEstimatedPosition());
 
     field.setRobotPose(poseEstimator.getEstimatedPosition());
+
+    posePublisher.set(new Pose2d[] {poseEstimator.getEstimatedPosition()});
   }
 
   public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop){
@@ -151,6 +160,7 @@ public class SwerveSubsystem extends SubsystemBase {
     mSwerveModules[1].setDesiredState(swerveModuleStates[1], isOpenLoop);
     mSwerveModules[2].setDesiredState(swerveModuleStates[2], isOpenLoop);
     mSwerveModules[3].setDesiredState(swerveModuleStates[3], isOpenLoop);
+    publisher.set(swerveModuleStates);
   }
 
   public SwerveModulePosition[] getModulePositions(){
