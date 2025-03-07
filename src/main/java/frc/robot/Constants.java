@@ -47,11 +47,11 @@ public class Constants {
 
     public static class SwerveConstants {
         public static final PathConstraints telePathConstraints = new PathConstraints(2, 2, Math.toRadians(540.000), Math.toRadians(720.000));
-        public static final double DrivekP = 0.02;
+        public static final double DrivekP = 0.035;
         public static final double DrivekI = 0;
-        public static final double DrivekD = 0.001;
-        public static final double DriveKS = 0.15;//for finding the kv and ks based off of each other -> 10 vel at 1.45 volt -> 1.45 - 0.3 = 1.15 / 10 = 0.115
-        public static final double DriveKV = 0.0;//0.125
+        public static final double DrivekD = 0.00;
+        public static final double DriveKS = 0.2;//for finding the kv and ks based off of each other -> 10 vel at 1.45 volt -> 1.45 - 0.3 = 1.15 / 10 = 0.115
+        public static final double DriveKV = 0.0105;//0.125
 
         public static final double TurnkP = 4;
         public static final double TurnkI = 0;

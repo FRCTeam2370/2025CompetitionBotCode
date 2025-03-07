@@ -32,6 +32,7 @@ import frc.robot.Commands.ManipulatorCommands.IntakeAlgae;
 import frc.robot.Commands.ManipulatorCommands.IntakeCoral;
 import frc.robot.Commands.ManipulatorCommands.RunAlgaeManipulator;
 import frc.robot.Commands.ManipulatorCommands.RunManipulator;
+import frc.robot.Commands.ManipulatorCommands.SpitPeiceWithTime;
 import frc.robot.Commands.MechanismCommands.SetMechanismToPose;
 import frc.robot.Commands.MechanismCommands.StowMechanismWithCoral;
 import frc.robot.Commands.SwingArmCommands.SetSwingArm;
@@ -77,7 +78,9 @@ public class RobotContainer {
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
     //Put all NamedCommands here
-    NamedCommands.registerCommand("Test", new ResetGyro(mSwerve));
+    NamedCommands.registerCommand("Elevator L4", new SetMechanismToPose(4.75, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    NamedCommands.registerCommand("Stow Elevator", new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
+    NamedCommands.registerCommand("Spit Piece", new SpitPeiceWithTime(mManipulatorSubsystem, 0.5));//runs the manipulator back wards for x amount of seconds
     
     configureBindings();
   }
@@ -113,7 +116,7 @@ public class RobotContainer {
 
     operator.x().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//L2
     operator.y().onTrue(new SetMechanismToPose(2.609, 0.3177, mSwingArmSubsystem, mElevatorSubsystem));//L3
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.7, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.75, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));
 
     driver.povDown().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.2857));

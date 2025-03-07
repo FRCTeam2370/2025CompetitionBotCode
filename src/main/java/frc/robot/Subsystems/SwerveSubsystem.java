@@ -60,6 +60,7 @@ import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
+import frc.robot.RobotContainer;
 import frc.robot.SwerveModule;
 import frc.robot.Constants.SwerveConstants;
 
@@ -69,7 +70,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public SwerveModule[] mSwerveModules;
   public static SwerveDriveOdometry odometry;
 
-  public static PIDController rotationPIDauto = new PIDController(0.082, 0.01, 0.001);
+  public static PIDController rotationPIDauto = new PIDController(0.055, 0.0, 0.001);
   public static PIDController rotationPID = new PIDController(0.5, 0, 0);
 
   public static Field2d field = new Field2d();
@@ -200,7 +201,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
   public void resetOdometry(Pose2d pose){
     odometry.resetPosition(getRotation2d(), getModulePositions(), pose);//pose.getRotation()
-    //poseEstimator.resetPose(pose);
+    poseEstimator.resetPose(pose);
   }
 
   public void updateOdometry(){
@@ -369,8 +370,8 @@ public class SwerveSubsystem extends SubsystemBase {
               this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
               (speeds, feedforwards) -> drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond / 3.1154127, false, true),//driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
               new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                      new PIDConstants(0.55, 0.0, 0.05), // Translation PID constants
-                      new PIDConstants(0.01, 0.0, 0.001) // Rotation PID constants
+                      new PIDConstants(0.6, 0.01, 0.05), // Translation PID constants
+                      new PIDConstants(0.0075, 0.0, 0.001) // Rotation PID constants
               ),
               config, // The robot configuration
               () -> {
