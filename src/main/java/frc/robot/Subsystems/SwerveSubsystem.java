@@ -70,7 +70,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public SwerveModule[] mSwerveModules;
   public static SwerveDriveOdometry odometry;
 
-  public static PIDController rotationPIDauto = new PIDController(0.055, 0.0, 0.001);
+  public static PIDController rotationPIDauto = new PIDController(0.055, 0.001, 0.001);
   public static PIDController rotationPID = new PIDController(0.5, 0, 0);
 
   public static Field2d field = new Field2d();
@@ -78,6 +78,8 @@ public class SwerveSubsystem extends SubsystemBase {
   public static SwerveDrivePoseEstimator poseEstimator;
 
   public static Optional<Alliance> color;
+
+  private static ChassisSpeeds lastSpeeds;
 
   private static Pose2d limelightPose, limelight2Pose;
 
@@ -125,6 +127,16 @@ public class SwerveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Mod 2 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[2].getCANcoder().getDegrees()).getDegrees());
     SmartDashboard.putNumber("Mod 3 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[3].getCANcoder().getDegrees()).getDegrees());
 
+    SmartDashboard.putNumber("Mod 0 Rot Pose", mSwerveModules[0].getTurnMotorRotation());
+    SmartDashboard.putNumber("Mod 1 Rot Pose", mSwerveModules[1].getTurnMotorRotation());
+    SmartDashboard.putNumber("Mod 2 Rot Pose", mSwerveModules[2].getTurnMotorRotation());
+    SmartDashboard.putNumber("Mod 3 Rot Pose", mSwerveModules[3].getTurnMotorRotation());
+
+    SmartDashboard.putNumber("Mod 0 drive Pose", mSwerveModules[0].getDriveMotorRotation());
+    SmartDashboard.putNumber("Mod 1 drive Pose", mSwerveModules[1].getDriveMotorRotation());
+    SmartDashboard.putNumber("Mod 2 drive Pose", mSwerveModules[2].getDriveMotorRotation());
+    SmartDashboard.putNumber("Mod 3 drive Pose", mSwerveModules[3].getDriveMotorRotation());
+
     SmartDashboard.putNumber("Wheel MPS", mSwerveModules[0].getWheelMPS());
     SmartDashboard.putNumber("Wheel Meters", mSwerveModules[0].getModuleMeters());
 
@@ -151,9 +163,9 @@ public class SwerveSubsystem extends SubsystemBase {
 
   public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop){
     SwerveModuleState[] swerveModuleStates = Constants.SwerveConstants.kinematics.toSwerveModuleStates(
-      fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotationPID.calculate(-rotation), getRotation2d()) :
-      new ChassisSpeeds(translation.getX(), translation.getY(), rotationPIDauto.calculate(-rotation))
-    );    
+      fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotationPID.calculate(rotation), getRotation2d()) :
+      new ChassisSpeeds(translation.getX(), translation.getY(), rotationPIDauto.calculate(rotation))
+    );
 
     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.SwerveConstants.maxSpeed);
 
@@ -312,6 +324,10 @@ public class SwerveSubsystem extends SubsystemBase {
     return odometry.getPoseMeters();//poseEstimator.getEstimatedPosition();
   }
 
+  public Pose2d getEstimatedPose(){
+    return poseEstimator.getEstimatedPosition();
+  }
+
   public ChassisSpeeds getRobotRelativeSpeeds(){
     return Constants.SwerveConstants.kinematics.toChassisSpeeds(
       mSwerveModules[0].getState(),
@@ -339,20 +355,26 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public void driveRobotRelative(ChassisSpeeds speeds){
-    speeds.omegaRadiansPerSecond /= 3.1154127;
+    // speeds.omegaRadiansPerSecond /= Constants.SwerveConstants.maxAngularVelocity;
+    // speeds.omegaRadiansPerSecond = -speeds.omegaRadiansPerSecond;
 
-    ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(speeds, 0.02);
+    // ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(speeds, 0.02);
 
-    SmartDashboard.putNumber("translation speed x", speeds.vxMetersPerSecond);
-    SmartDashboard.putNumber("translation speed y", speeds.vyMetersPerSecond);
+    // SmartDashboard.putNumber("translation speed x", speeds.vxMetersPerSecond);
+    // SmartDashboard.putNumber("translation speed y", speeds.vyMetersPerSecond);
 
-    SwerveModuleState[] states = Constants.SwerveConstants.kinematics.toSwerveModuleStates(targetSpeeds);
-    SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.SwerveConstants.maxSpeed);
+    // SwerveModuleState[] states = Constants.SwerveConstants.kinematics.toSwerveModuleStates(targetSpeeds);
+    // SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.SwerveConstants.maxSpeed);
 
-    mSwerveModules[0].setDesiredState(states[0], false);
-    mSwerveModules[1].setDesiredState(states[1], false);
-    mSwerveModules[2].setDesiredState(states[2], false);
-    mSwerveModules[3].setDesiredState(states[3], false);
+    // mSwerveModules[0].setDesiredState(states[0], false);
+    // mSwerveModules[1].setDesiredState(states[1], false);
+    // mSwerveModules[2].setDesiredState(states[2], false);
+    // mSwerveModules[3].setDesiredState(states[3], false);
+    if(Math.abs(speeds.vxMetersPerSecond) <= (Constants.SwerveConstants.maxSpeed * 0.005) && Math.abs(speeds.vyMetersPerSecond) <= (Constants.SwerveConstants.maxSpeed * 0.005)){
+      drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, true);
+    }else{
+      drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false);
+    }
   }
 
   public void configurePathPlanner(){
@@ -368,9 +390,9 @@ public class SwerveSubsystem extends SubsystemBase {
               this::getPose, // Robot pose supplier
               this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
               this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-              (speeds, feedforwards) -> drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond / 3.1154127, false, true),//driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
+              (speeds, feedforwards) -> driveRobotRelative(speeds),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond / 3.1154127, false, true),//driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
               new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                      new PIDConstants(0.6, 0.01, 0.05), // Translation PID constants
+                      new PIDConstants(0.6, 0.0, 0.05), // Translation PID constants
                       new PIDConstants(0.0075, 0.0, 0.001) // Rotation PID constants
               ),
               config, // The robot configuration

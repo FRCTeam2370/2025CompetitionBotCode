@@ -51,7 +51,7 @@ public class Constants {
         public static final double DrivekI = 0;
         public static final double DrivekD = 0.00;
         public static final double DriveKS = 0.2;//for finding the kv and ks based off of each other -> 10 vel at 1.45 volt -> 1.45 - 0.3 = 1.15 / 10 = 0.115
-        public static final double DriveKV = 0.0105;//0.125
+        public static final double DriveKV = 0.0105;//0.125//0.0105
 
         public static final double TurnkP = 4;
         public static final double TurnkI = 0;
@@ -127,7 +127,7 @@ public class Constants {
         public static final int turnMotorID = 22;
         public static final int CANCoderID = 23;
 
-        public static final InvertedValue driveInverted = InvertedValue.CounterClockwise_Positive;
+        public static final InvertedValue driveInverted = InvertedValue.Clockwise_Positive;//counter clockwise
         public static final InvertedValue turnInverted = InvertedValue.Clockwise_Positive;
 
         public static final Rotation2d EncoderOffset = Rotation2d.fromDegrees(290.2148);
@@ -142,7 +142,7 @@ public class Constants {
         public static final int turnMotorID = 12;
         public static final int CANCoderID = 13;
 
-        public static final InvertedValue driveInverted = InvertedValue.Clockwise_Positive;
+        public static final InvertedValue driveInverted = InvertedValue.CounterClockwise_Positive;//clockwise
         public static final InvertedValue turnInverted = InvertedValue.Clockwise_Positive;
 
         public static final Rotation2d EncoderOffset = Rotation2d.fromDegrees(173.5830);
@@ -157,7 +157,7 @@ public class Constants {
         public static final int turnMotorID = 32;
         public static final int CANCoderID = 33;
 
-        public static final InvertedValue driveInverted = InvertedValue.CounterClockwise_Positive;
+        public static final InvertedValue driveInverted = InvertedValue.Clockwise_Positive;//counter clockwise
         public static final InvertedValue turnInverted = InvertedValue.Clockwise_Positive;
 
         public static final Rotation2d EncoderOffset = Rotation2d.fromDegrees(82.3535);
@@ -172,7 +172,7 @@ public class Constants {
         public static final int turnMotorID = 42;
         public static final int CANCoderID = 43;
 
-        public static final InvertedValue driveInverted = InvertedValue.Clockwise_Positive;
+        public static final InvertedValue driveInverted = InvertedValue.CounterClockwise_Positive;//clockwise
         public static final InvertedValue turnInverted = InvertedValue.Clockwise_Positive;
 
         public static final Rotation2d EncoderOffset = Rotation2d.fromDegrees(318.07617);

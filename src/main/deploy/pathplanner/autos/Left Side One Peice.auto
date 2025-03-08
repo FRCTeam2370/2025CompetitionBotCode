@@ -11,28 +11,15 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "wait",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Elevator L4"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Spit Piece"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Stow Elevator"
-                }
-              }
-            ]
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "FR - Loading"
           }
         }
       ]

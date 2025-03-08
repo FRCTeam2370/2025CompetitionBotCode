@@ -70,6 +70,12 @@ public class ManipulatorSubsystem extends SubsystemBase {
     algaeMotor.set(speed);
   }
 
+  public static void runManipulatorFor(double repeats, double speed){
+    for(int i = 0; i < repeats; i++){
+      runManipulator(speed);
+    }
+  }
+
   private static void configureAlgaeMotor(){
     algaeConfig.idleMode(IdleMode.kBrake);
     algaeConfig.inverted(false);

@@ -110,6 +110,14 @@ public class SwerveModule {
         return driveMotor.getVelocity().getValueAsDouble();
     }
 
+    public double getTurnMotorRotation(){
+        return turnMotor.getPosition().getValueAsDouble();
+    }
+
+    public double getDriveMotorRotation(){
+        return driveMotor.getPosition().getValueAsDouble();
+    }
+
     public double getWheelVoltage(){
         return driveMotor.getMotorVoltage().getValueAsDouble();
     }

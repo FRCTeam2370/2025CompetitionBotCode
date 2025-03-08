@@ -2,21 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.Commands.ManipulatorCommands;
+package frc.robot.Commands.SwingArmCommands;
 
+import edu.wpi.first.util.MsvcRuntimeException;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Subsystems.ManipulatorSubsystem;
+import frc.robot.Subsystems.ElevatorSubsystem;
+import frc.robot.Subsystems.ElevatorSubsystem.ElevatorState;
+import frc.robot.Subsystems.SwingArmSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class RunManipulator extends Command {
-  private ManipulatorSubsystem mManipulatorSubsystem;
-  private double speed;
-  /** Creates a new RunManipulator. */
-  public RunManipulator(ManipulatorSubsystem mManipulatorSubsystem, double speed) {
-    this.mManipulatorSubsystem = mManipulatorSubsystem;
-    this.speed = speed;
+public class SetSwingArmAuto extends Command {
+  private SwingArmSubsystem mSwingArmSubsystem;
+  private double pos;
+  /** Creates a new SetSwingArm. */
+  public SetSwingArmAuto(SwingArmSubsystem mSwingArmSubsystem, double pos) {
+    this.mSwingArmSubsystem = mSwingArmSubsystem;
+    this.pos = pos;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(mManipulatorSubsystem);
+    addRequirements(mSwingArmSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,18 +29,20 @@ public class RunManipulator extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ManipulatorSubsystem.runManipulator(speed);    
+    SwingArmSubsystem.setSwingArmPos(pos);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    ManipulatorSubsystem.runManipulator(0);
-  }
- 
+  public void end(boolean interrupted) {}
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(SwingArmSubsystem.getArmRotations() > pos * 0.95 && ElevatorSubsystem.getElevatorShaftRots() < pos * 1.05){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

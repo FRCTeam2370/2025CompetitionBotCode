@@ -9,6 +9,7 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Subsystems.SwerveSubsystem;
@@ -39,6 +40,10 @@ public class TeleopSwerve extends Command {
     double xVal = Math.abs(xSup.getAsDouble()) < 0.01 ? 0 : xSup.getAsDouble();
     double yVal = Math.abs(ySup.getAsDouble()) < 0.01 ? 0 : ySup.getAsDouble();
     double rotVal = Math.abs(rotSup.getAsDouble()) < 0.01 ? 0 : rotSup.getAsDouble();
+    if(SwerveSubsystem.color.get() == Alliance.Blue){
+      xVal = -xVal;
+      yVal = -yVal;
+    }
 
     mSwerve.drive(new Translation2d(xLimiter.calculate(xVal), yLimiter.calculate(yVal)).times(Constants.SwerveConstants.maxSpeed), rotLimiter.calculate(rotVal * 0.2), !robotCentricSup.getAsBoolean(), true);
   }
