@@ -7,9 +7,12 @@ package frc.robot.Commands.MechanismCommands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Commands.ElevatorCommands.ElevatorAutoPose;
 import frc.robot.Commands.ElevatorCommands.ElevatorControl;
+import frc.robot.Commands.ManipulatorCommands.SpitPeice;
 import frc.robot.Commands.SwingArmCommands.SetSwingArm;
+import frc.robot.Commands.SwingArmCommands.SetSwingArmAuto;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Subsystems.ElevatorSubsystem;
+import frc.robot.Subsystems.ManipulatorSubsystem;
 import frc.robot.Subsystems.SwingArmSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -20,6 +23,6 @@ public class SetMechanismToPoseAuto extends SequentialCommandGroup {
   public SetMechanismToPoseAuto(double ElevatorPos, double SwingArmPos, SwingArmSubsystem mSwingArmSubsystem, ElevatorSubsystem mElevatorSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ElevatorAutoPose(mElevatorSubsystem, ElevatorPos).alongWith(new SetSwingArm(mSwingArmSubsystem, SwingArmPos)));
+    addCommands((new ElevatorAutoPose(mElevatorSubsystem, ElevatorPos).alongWith(new SetSwingArmAuto(mSwingArmSubsystem, SwingArmPos))));
   }
 }

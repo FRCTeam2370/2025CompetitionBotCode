@@ -70,7 +70,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public SwerveModule[] mSwerveModules;
   public static SwerveDriveOdometry odometry;
 
-  public static PIDController rotationPIDauto = new PIDController(0.055, 0.001, 0.001);
+  public static PIDController rotationPIDauto = new PIDController(0.055, 0.00, 0.001);
   public static PIDController rotationPID = new PIDController(0.5, 0, 0);
 
   public static Field2d field = new Field2d();
@@ -103,6 +103,8 @@ public class SwerveSubsystem extends SubsystemBase {
       new SwerveModule(2, Constants.BLConstants.BLConstants),
       new SwerveModule(3, Constants.BRConstants.BRConstants)
     };
+
+    
 
     LimelightHelpers.setPipelineIndex("limelight", 0);
     LimelightHelpers.setPipelineIndex("limelight-two", 0);
@@ -152,6 +154,8 @@ public class SwerveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Odometry x", odometry.getPoseMeters().getX());
     SmartDashboard.putNumber("Odometry y", odometry.getPoseMeters().getY());
 
+    SmartDashboard.putNumber("limelight tx", LimelightHelpers.getTX("limelight"));
+
     updateOdometry();
     //odometry.update(getRotation2d(), getModulePositions());//USE THIS WHEN TESTING AUTOS WITHOUT FIELD LOCALIZATION
     resetOdometry(poseEstimator.getEstimatedPosition());
@@ -190,11 +194,7 @@ public class SwerveSubsystem extends SubsystemBase {
     resetGyro();
   }
   public static void resetGyro(){
-    if(color.isPresent() && color.get() == Alliance.Blue){
-      gyro.setYaw(90);
-    }else{
-      gyro.setYaw(270);
-    }
+    gyro.setYaw(270);
     
   }
 
@@ -392,7 +392,7 @@ public class SwerveSubsystem extends SubsystemBase {
               this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
               (speeds, feedforwards) -> driveRobotRelative(speeds),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond / 3.1154127, false, true),//driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
               new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                      new PIDConstants(0.6, 0.0, 0.05), // Translation PID constants
+                      new PIDConstants(0.4, 0.0, 0.05), // Translation PID constants
                       new PIDConstants(0.0075, 0.0, 0.001) // Rotation PID constants
               ),
               config, // The robot configuration

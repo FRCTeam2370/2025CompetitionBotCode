@@ -31,19 +31,19 @@ public class SpitPeice extends Command {
   public void execute() {
     if(!isFinished){
       ManipulatorSubsystem.runManipulator(speed);
-      if(!ManipulatorSubsystem.hasCoral()){
-        isFinished = true;
-      }
     }else{
-      ManipulatorSubsystem.runManipulatorFor(8, speed);
+      ManipulatorSubsystem.runManipulatorFor(10, speed);
     }
-    
+
+    if(!ManipulatorSubsystem.hasCoral()){
+      isFinished = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    ManipulatorSubsystem.runManipulator(0);
+    //ManipulatorSubsystem.runManipulator(0);
   }
  
   // Returns true when the command should end.

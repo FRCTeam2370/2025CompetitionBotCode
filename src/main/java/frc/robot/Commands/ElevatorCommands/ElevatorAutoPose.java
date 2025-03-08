@@ -44,7 +44,7 @@ public class ElevatorAutoPose extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ElevatorSubsystem.getElevatorShaftRots() > elevatorPos * 0.95 && ElevatorSubsystem.getElevatorShaftRots() < elevatorPos * 1.05){
+    if(ElevatorSubsystem.getElevatorShaftRots() > elevatorPos * 0.9 && ElevatorSubsystem.getElevatorShaftRots() < elevatorPos * 1.1){
       ElevatorSubsystem.mElevatorState = ElevatorState.HoldingPosition;
       return true;
     }else{

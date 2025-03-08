@@ -66,11 +66,9 @@ public class RobotContainer {
   public Pose2d findNearestLoad(){
     Pose2d nearestLoad;
     if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() >= 4){
-      nearestLoad = Constants.RedSidePoses.RED_RIGHT_LOADING_LEFT;
-    }else if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() < 4){
-      nearestLoad = Constants.RedSidePoses.RED_LEFT_LOADING_RIGHT;
-    }else{
-      nearestLoad = Constants.RedSidePoses.RED_CLOSE_DESCORE;
+      nearestLoad = Constants.BlueSidePoses.RIGHT_LOADING_LEFT;
+    }else {
+      nearestLoad = Constants.BlueSidePoses.LEFT_LOADING_RIGHT;
     }
 
     return nearestLoad;
@@ -82,6 +80,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Stow Elevator", new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
     NamedCommands.registerCommand("Spit Piece", new SpitPeice(-1, mManipulatorSubsystem));//runs the manipulator back wards for x amount of seconds
     NamedCommands.registerCommand("Stop Spit Piece", new RunManipulator(mManipulatorSubsystem, 0));
+    NamedCommands.registerCommand("Run Manipulator", new RunManipulator(mManipulatorSubsystem, -1));
     NamedCommands.registerCommand("Loading Elevator", new SetSwingArm(mSwingArmSubsystem, 0.165));
 
     autoChooser = AutoBuilder.buildAutoChooser();
@@ -99,19 +98,20 @@ public class RobotContainer {
 
     driver.start().onTrue(new ResetGyro(mSwerve));
 
-    driver.x().whileTrue(mSwerve.PathfindToPose(() -> Constants.RedSidePoses.RED_CLOSE_SCORE_RIGHT));
-    driver.y().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.RED_FAR_DESCORE));
-    //driver.a().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.RED_LEFT_LOADING_RIGHT));
-    driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
-    driver.b().whileTrue(mSwerve.PathfindToPose(()-> Constants.RedSidePoses.RED_PROCESSOR));
+    driver.x().whileTrue(mSwerve.PathfindToPose(() -> Constants.BlueSidePoses.CLOSE_SCORE_RIGHT));
+    driver.y().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.CLOSE_DESCORE));
+    driver.a().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.LEFT_LOADING_RIGHT));
+    //driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
+    driver.b().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.CLOSE_SCORE_LEFT));
 
     driver.leftBumper().toggleOnTrue(new IntakeCoral(mManipulatorSubsystem, 1));
-    driver.rightBumper().toggleOnTrue(new SpitPeice(-1, mManipulatorSubsystem));
+    driver.rightBumper().whileTrue(new RunManipulator(mManipulatorSubsystem, -1));
 
     driver.leftTrigger().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));
     driver.rightTrigger().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
     driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
+    //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.132));
     //driver.x().onTrue(new SetSwingArm(mSwingArmSubsystem, 0));
 
     //driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 1.70));//L2
@@ -121,14 +121,15 @@ public class RobotContainer {
 
     operator.x().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//L2
     operator.y().onTrue(new SetMechanismToPose(2.609, 0.3177, mSwingArmSubsystem, mElevatorSubsystem));//L3
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.75, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.77, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));
+    operator.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.216));
 
     driver.povDown().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.2857));
     driver.povUp().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.35));
 
-    operator.rightTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, 0.4));
-    operator.leftTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, -0.4));
+    operator.rightTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, 0.8));
+    operator.leftTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, -0.8));
 
     //driver.back().toggleOnTrue(new SetElevatorSpeed(mElevatorSubsystem));//this is for finding the kg for the elevator
   }

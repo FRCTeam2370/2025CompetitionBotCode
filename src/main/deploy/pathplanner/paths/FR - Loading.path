@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.3325819672131143,
-        "y": 5.157838114754097
+        "x": 3.560348360655738,
+        "y": 4.990010245901639
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.4574795081967213,
-        "y": 6.032940573770491
+        "x": 2.685245901639345,
+        "y": 5.865112704918033
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.7382172131147542,
-        "y": 6.752202868852459
+        "x": 1.690266393442623,
+        "y": 7.399538934426229
       },
       "prevControl": {
-        "x": 2.085860655737705,
-        "y": 6.344620901639344
+        "x": 2.037909836065573,
+        "y": 6.991956967213113
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,12 +31,23 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.6808417360806638,
-      "rotationDegrees": 37.502128123407466
+      "rotationDegrees": -143.33716352778944
     }
   ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
+    {
+      "name": "Stow",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Stow Elevator"
+        }
+      }
+    },
     {
       "name": "Loading Elevator",
       "waypointRelativePos": 0.40562036055143136,
@@ -59,7 +70,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 38.796552098308204
+    "rotation": -144.19665589162886
   },
   "reversed": false,
   "folder": "Left Auto Paths",
