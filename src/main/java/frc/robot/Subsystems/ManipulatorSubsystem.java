@@ -71,7 +71,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
   }
 
   public static void runManipulatorFor(double repeats, double speed){
-    for(int i = 0; i < repeats; i++){
+    for(int i = 0; i <= repeats; i++){
       runManipulator(speed);
     }
   }

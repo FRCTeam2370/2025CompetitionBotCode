@@ -38,6 +38,7 @@ import frc.robot.Commands.MechanismCommands.SetMechanismToPose;
 import frc.robot.Commands.MechanismCommands.SetMechanismToPoseAuto;
 import frc.robot.Commands.MechanismCommands.StowMechanismWithCoral;
 import frc.robot.Commands.SwingArmCommands.SetSwingArm;
+import frc.robot.Commands.SwingArmCommands.SetSwingArmAuto;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Subsystems.ClimberSubsystem;
 import frc.robot.Subsystems.ElevatorSubsystem;
@@ -77,11 +78,16 @@ public class RobotContainer {
   public RobotContainer() {
     //Put all NamedCommands here
     NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.75, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPose(4.75, 0.38, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Stow Elevator", new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
     NamedCommands.registerCommand("Spit Piece", new SpitPeice(-1, mManipulatorSubsystem));//runs the manipulator back wards for x amount of seconds
     NamedCommands.registerCommand("Stop Spit Piece", new RunManipulator(mManipulatorSubsystem, 0));
     NamedCommands.registerCommand("Run Manipulator", new RunManipulator(mManipulatorSubsystem, -1));
-    NamedCommands.registerCommand("Loading Elevator", new SetSwingArm(mSwingArmSubsystem, 0.165));
+    NamedCommands.registerCommand("Loading Elevator", new SetSwingArmAuto(mSwingArmSubsystem, 0.17));
+    NamedCommands.registerCommand("Intake Coral", new IntakeCoral(mManipulatorSubsystem, 0.5));
+    NamedCommands.registerCommand("Elevator L2", new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Intake Algae", new IntakeAlgae(mManipulatorSubsystem, 0.5));
+    NamedCommands.registerCommand("Spit Algae", new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
@@ -98,11 +104,11 @@ public class RobotContainer {
 
     driver.start().onTrue(new ResetGyro(mSwerve));
 
-    driver.x().whileTrue(mSwerve.PathfindToPose(() -> Constants.BlueSidePoses.CLOSE_SCORE_RIGHT));
-    driver.y().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.CLOSE_DESCORE));
-    driver.a().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.LEFT_LOADING_RIGHT));
+    driver.x().whileTrue(mSwerve.PathfindToPose(() -> Constants.BlueSidePoses.CLOSE_LEFT_SCORE_LEFT));
+    driver.y().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.CLOSE_REVERSE_DESCORE));
+    driver.a().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.LEFT_LOADING_LEFT));
     //driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
-    driver.b().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.CLOSE_SCORE_LEFT));
+    driver.b().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.CLOSE_LEFT_SCORE_RIGHT));
 
     driver.leftBumper().toggleOnTrue(new IntakeCoral(mManipulatorSubsystem, 1));
     driver.rightBumper().whileTrue(new RunManipulator(mManipulatorSubsystem, -1));
@@ -110,8 +116,8 @@ public class RobotContainer {
     driver.leftTrigger().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));
     driver.rightTrigger().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
-    driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
-    //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.132));
+    //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
+    driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.13));
     //driver.x().onTrue(new SetSwingArm(mSwingArmSubsystem, 0));
 
     //driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 1.70));//L2

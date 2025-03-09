@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 1.690266393442623,
-        "y": 7.399538934426229
+        "x": 1.4864754098360655,
+        "y": 7.4594774590163935
       },
       "prevControl": {
-        "x": 2.037909836065573,
-        "y": 6.991956967213113
+        "x": 1.8341188524590157,
+        "y": 7.051895491803278
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,8 +30,8 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.6808417360806638,
-      "rotationDegrees": -143.33716352778944
+      "waypointRelativePos": 0.6352476983779034,
+      "rotationDegrees": -140.95373852996522
     }
   ],
   "constraintZones": [],
@@ -50,7 +50,7 @@
     },
     {
       "name": "Loading Elevator",
-      "waypointRelativePos": 0.40562036055143136,
+      "waypointRelativePos": 0.7555673382820801,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -61,8 +61,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 1.0,
-    "maxAcceleration": 1.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -70,7 +70,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -144.19665589162886
+    "rotation": -145.12467165539783
   },
   "reversed": false,
   "folder": "Left Auto Paths",

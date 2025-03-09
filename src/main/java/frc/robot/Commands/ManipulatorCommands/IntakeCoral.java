@@ -4,6 +4,7 @@
 
 package frc.robot.Commands.ManipulatorCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.ManipulatorSubsystem;
 
@@ -11,6 +12,8 @@ import frc.robot.Subsystems.ManipulatorSubsystem;
 public class IntakeCoral extends Command {
   private ManipulatorSubsystem mManipulatorSubsystem;
   private double speed;
+  private boolean isFinished = false;
+  private Timer timer = new Timer();
   /** Creates a new RunManipulator. */
   public IntakeCoral(ManipulatorSubsystem mManipulatorSubsystem, double speed) {
     this.mManipulatorSubsystem = mManipulatorSubsystem;
@@ -21,7 +24,9 @@ public class IntakeCoral extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    isFinished = false;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -38,7 +43,7 @@ public class IntakeCoral extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ManipulatorSubsystem.hasCoral() == true){
+    if(ManipulatorSubsystem.hasCoral()){
       return true;
     }else{
       return false;

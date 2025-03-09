@@ -4,7 +4,9 @@
 
 package frc.robot.Commands.SwingArmCommands;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.util.MsvcRuntimeException;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.ElevatorSubsystem;
 import frc.robot.Subsystems.ElevatorSubsystem.ElevatorState;
@@ -39,7 +41,8 @@ public class SetSwingArmAuto extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(SwingArmSubsystem.getArmRotations() > pos * 0.95 && ElevatorSubsystem.getElevatorShaftRots() < pos * 1.05){
+    if(SwingArmSubsystem.getArmRotations() < pos + 0.05 && SwingArmSubsystem.getArmRotations() > pos -0.05){
+      SmartDashboard.putBoolean("Swing Arm Command Active", false);
       return true;
     }else{
       return false;

@@ -41,6 +41,18 @@ public class StowSwingArm extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(ManipulatorSubsystem.hasAlgae){
+      if(SwingArmSubsystem.getArmRotations() < 0.35 && SwingArmSubsystem.getArmRotations() > 0.25){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      if(SwingArmSubsystem.getArmRotations() < 0.05 && SwingArmSubsystem.getArmRotations() > -0.05){
+        return true;
+      }else{
+        return false;
+      }
+    }
   }
 }

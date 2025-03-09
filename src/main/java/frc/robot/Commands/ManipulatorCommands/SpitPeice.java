@@ -4,6 +4,7 @@
 
 package frc.robot.Commands.ManipulatorCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.ManipulatorSubsystem;
 
@@ -11,7 +12,6 @@ import frc.robot.Subsystems.ManipulatorSubsystem;
 public class SpitPeice extends Command {
   private ManipulatorSubsystem mManipulatorSubsystem;
   private double speed;
-  private boolean isFinished = false;
   /** Creates a new SpitPeice. */
   public SpitPeice(double speed, ManipulatorSubsystem mManipulatorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -23,32 +23,30 @@ public class SpitPeice extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    isFinished = false;
+    SmartDashboard.putBoolean("Started Spit Piece", true);
   }
 
 
   @Override
   public void execute() {
-    if(!isFinished){
-      ManipulatorSubsystem.runManipulator(speed);
-    }else{
-      ManipulatorSubsystem.runManipulatorFor(10, speed);
-    }
-
-    if(!ManipulatorSubsystem.hasCoral()){
-      isFinished = true;
-    }
+    ManipulatorSubsystem.runManipulator(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //ManipulatorSubsystem.runManipulator(0);
+    ManipulatorSubsystem.runManipulatorFor(120, speed);
+    ManipulatorSubsystem.runManipulator(0);
   }
  
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return isFinished;
+    if(!ManipulatorSubsystem.hasCoral()){
+      return true;
+    }else{
+      return false;
+    }
+    
   }
 }

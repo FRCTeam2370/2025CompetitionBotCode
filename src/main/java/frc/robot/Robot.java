@@ -25,8 +25,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("throttle_set").setNumber(200);
-    NetworkTableInstance.getDefault().getTable("limelight-two").getEntry("throttle_set").setNumber(200);
+    LimelightHelpers.setLimelightNTDouble("limelight", "throttle_set", 200);
+    LimelightHelpers.setLimelightNTDouble("limelight-two", "throttle_set", 200);
   }
 
   @Override
@@ -37,6 +37,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    LimelightHelpers.setLimelightNTDouble("limelight", "throttle_set", 0);
+    LimelightHelpers.setLimelightNTDouble("limelight-two", "throttle_set", 0);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     if (m_autonomousCommand != null) {
@@ -52,8 +54,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("throttle_set").setNumber(0);
-    NetworkTableInstance.getDefault().getTable("limelight-two").getEntry("throttle_set").setNumber(0);
+    LimelightHelpers.setLimelightNTDouble("limelight", "throttle_set", 0);
+    LimelightHelpers.setLimelightNTDouble("limelight-two", "throttle_set", 0);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

@@ -1,0 +1,133 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Start - FR R L4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Elevator L4"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.125
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Spit Piece"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.125
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "FR - Loading"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Coral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Loading - FR L"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Elevator L4"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.125
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Spit Piece"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.125
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "FR - Loading"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Coral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Loading- F L"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Elevator L4"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.125
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Spit Piece"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.125
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stow Elevator"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

@@ -8,36 +8,36 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.692152141157961,
-        "y": 7.337043096976937
+        "x": 5.115053216027485,
+        "y": 6.7821389058880115
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.65625,
-        "y": 6.812141393442622
+        "x": 4.195696721311475,
+        "y": 6.212756147540984
       },
       "prevControl": {
-        "x": 3.8281721158028064,
-        "y": 6.993642870290295
+        "x": 4.432766040642195,
+        "y": 6.4477946313778345
       },
       "nextControl": {
-        "x": 3.4843278841971936,
-        "y": 6.630639916594949
+        "x": 3.8527796078064966,
+        "y": 5.872776606251284
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.52,
-        "y": 4.88
+        "x": 3.8360655737704916,
+        "y": 5.121875
       },
       "prevControl": {
-        "x": 3.2366803278688523,
-        "y": 5.469518442622951
+        "x": 3.8579572928265953,
+        "y": 5.5017658041264905
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "constraintZones": [
     {
       "name": "Slow to Score",
-      "minWaypointRelativePos": 1.8123011664899191,
+      "minWaypointRelativePos": 1.8377518557794215,
       "maxWaypointRelativePos": 2.0,
       "constraints": {
         "maxVelocity": 1.0,
@@ -63,8 +63,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 1.0,
-    "maxAcceleration": 1.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -72,7 +72,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 30.425783801961256
+    "rotation": 29.357753542791205
   },
   "reversed": false,
   "folder": "Left Auto Paths",

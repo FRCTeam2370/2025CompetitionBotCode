@@ -1,0 +1,87 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 5.778073770491804,
+        "y": 4.078944672131147
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.761065573770492,
+        "y": 4.00701844262295
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.988831967213113,
+        "y": 3.9590676229508195
+      },
+      "prevControl": {
+        "x": 6.581249999999997,
+        "y": 3.7073258196721306
+      },
+      "nextControl": {
+        "x": 7.201531466552936,
+        "y": 4.090440843131297
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.778073770491804,
+        "y": 3.78
+      },
+      "prevControl": {
+        "x": 6.5172399717654725,
+        "y": 3.78
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.7093380096448939,
+      "rotationDegrees": 90.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Descore",
+      "waypointRelativePos": 0.9766702014846169,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Elevator L2"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 89.0556495964204
+  },
+  "reversed": false,
+  "folder": "Middle Auto Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -91.39718102729628
+  },
+  "useDefaultConstraints": true
+}

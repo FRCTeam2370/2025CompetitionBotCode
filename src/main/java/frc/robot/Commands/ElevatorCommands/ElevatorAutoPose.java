@@ -6,6 +6,7 @@ package frc.robot.Commands.ElevatorCommands;
 
 import com.pathplanner.lib.config.RobotConfig;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.Subsystems.ElevatorSubsystem;
@@ -44,8 +45,9 @@ public class ElevatorAutoPose extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ElevatorSubsystem.getElevatorShaftRots() > elevatorPos * 0.9 && ElevatorSubsystem.getElevatorShaftRots() < elevatorPos * 1.1){
+    if(ElevatorSubsystem.getElevatorShaftRots() > elevatorPos * 0.95 && ElevatorSubsystem.getElevatorShaftRots() < elevatorPos * 1.05){
       ElevatorSubsystem.mElevatorState = ElevatorState.HoldingPosition;
+      SmartDashboard.putBoolean("Elevator Command Active", false);
       return true;
     }else{
       return false;
