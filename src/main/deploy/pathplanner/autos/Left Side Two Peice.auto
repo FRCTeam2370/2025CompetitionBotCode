@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Start - FR R L4"
+            "pathName": "Start - BR L"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.125
+            "waitTime": 0.25
           }
         },
         {
@@ -43,7 +43,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "FR - Loading"
+            "pathName": "BR - Loading"
           }
         },
         {
@@ -67,7 +67,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.125
+            "waitTime": 0.25
           }
         },
         {
@@ -91,7 +91,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "FR - Loading"
+            "pathName": "FR L - Loading"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Coral"
           }
         }
       ]

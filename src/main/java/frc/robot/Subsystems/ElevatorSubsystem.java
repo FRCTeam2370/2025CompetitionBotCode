@@ -133,7 +133,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     //SLOT0 CONFIGURATION --- NORMAL PID CONTROL
     elevatorConfiguration.Slot0.kP = 0.04;//needs more tunning with weight and maybe Motion Magic pls , 2.25
     elevatorConfiguration.Slot0.kI = 0.001;
-    elevatorConfiguration.Slot0.kD = 0.002;//0.62
+    elevatorConfiguration.Slot0.kD = 0.0015;//0.002
     elevatorConfiguration.Slot0.GravityType = GravityTypeValue.Elevator_Static;
     elevatorConfiguration.Slot0.kG = 0.022;//0.03
 

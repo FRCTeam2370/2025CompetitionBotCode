@@ -30,6 +30,7 @@ import frc.robot.Commands.ElevatorCommands.SetElevatorSpeed;
 import frc.robot.Commands.ElevatorCommands.StowElevator;
 import frc.robot.Commands.ManipulatorCommands.IntakeAlgae;
 import frc.robot.Commands.ManipulatorCommands.IntakeCoral;
+import frc.robot.Commands.ManipulatorCommands.IntakeCoralBetter;
 import frc.robot.Commands.ManipulatorCommands.RunAlgaeManipulator;
 import frc.robot.Commands.ManipulatorCommands.RunManipulator;
 import frc.robot.Commands.ManipulatorCommands.SpitPeice;
@@ -40,6 +41,7 @@ import frc.robot.Commands.MechanismCommands.StowMechanismWithCoral;
 import frc.robot.Commands.SwingArmCommands.SetSwingArm;
 import frc.robot.Commands.SwingArmCommands.SetSwingArmAuto;
 import frc.robot.Constants.ClimberConstants;
+import frc.robot.Lib.Utils.SwervePOILogic;
 import frc.robot.Subsystems.ClimberSubsystem;
 import frc.robot.Subsystems.ElevatorSubsystem;
 import frc.robot.Subsystems.LEDSubsystem;
@@ -77,14 +79,14 @@ public class RobotContainer {
 
   public RobotContainer() {
     //Put all NamedCommands here
-    NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.75, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.75, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
     NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPose(4.75, 0.38, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Stow Elevator", new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
     NamedCommands.registerCommand("Spit Piece", new SpitPeice(-1, mManipulatorSubsystem));//runs the manipulator back wards for x amount of seconds
     NamedCommands.registerCommand("Stop Spit Piece", new RunManipulator(mManipulatorSubsystem, 0));
     NamedCommands.registerCommand("Run Manipulator", new RunManipulator(mManipulatorSubsystem, -1));
     NamedCommands.registerCommand("Loading Elevator", new SetSwingArmAuto(mSwingArmSubsystem, 0.17));
-    NamedCommands.registerCommand("Intake Coral", new IntakeCoral(mManipulatorSubsystem, 0.5));
+    NamedCommands.registerCommand("Intake Coral", new IntakeCoralBetter(mManipulatorSubsystem));
     NamedCommands.registerCommand("Elevator L2", new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Intake Algae", new IntakeAlgae(mManipulatorSubsystem, 0.5));
     NamedCommands.registerCommand("Spit Algae", new RunAlgaeManipulator(mManipulatorSubsystem, -1));
@@ -104,13 +106,13 @@ public class RobotContainer {
 
     driver.start().onTrue(new ResetGyro(mSwerve));
 
-    driver.x().whileTrue(mSwerve.PathfindToPose(() -> Constants.BlueSidePoses.CLOSE_LEFT_SCORE_LEFT));
-    driver.y().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.CLOSE_REVERSE_DESCORE));
-    driver.a().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.LEFT_LOADING_LEFT));
+    driver.x().whileTrue(mSwerve.PathfindToPose(() -> SwervePOILogic.findNearestLeftScore()));
+    driver.y().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore()));
+    driver.a().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestReverseDescore()));
     //driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
-    driver.b().whileTrue(mSwerve.PathfindToPose(()-> Constants.BlueSidePoses.CLOSE_LEFT_SCORE_RIGHT));
+    driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestRightScore()));
 
-    driver.leftBumper().toggleOnTrue(new IntakeCoral(mManipulatorSubsystem, 1));
+    driver.leftBumper().toggleOnTrue(new IntakeCoralBetter(mManipulatorSubsystem));
     driver.rightBumper().whileTrue(new RunManipulator(mManipulatorSubsystem, -1));
 
     driver.leftTrigger().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));

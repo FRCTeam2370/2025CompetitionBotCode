@@ -3,54 +3,54 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.560348360655738,
-        "y": 4.990010245901639
+        "x": 4.735143442622951,
+        "y": 5.301690573770491
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.685245901639345,
-        "y": 5.865112704918033
+        "x": 3.536372950819672,
+        "y": 6.50046106557377
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.4864754098360655,
-        "y": 7.4594774590163935
+        "x": 2.6372950819672134,
+        "y": 6.1648053278688515
       },
       "prevControl": {
-        "x": 1.8341188524590157,
-        "y": 7.051895491803278
+        "x": 3.0928278688524595,
+        "y": 6.03294057377049
+      },
+      "nextControl": {
+        "x": 2.1629117756996905,
+        "y": 6.302126811262083
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.3905737704918033,
+        "y": 7.423514344262295
+      },
+      "prevControl": {
+        "x": 1.9659836065573777,
+        "y": 6.524436475409836
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.6352476983779034,
-      "rotationDegrees": -140.95373852996522
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Stow",
-      "waypointRelativePos": 0.0,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "Stow Elevator"
-        }
-      }
-    },
-    {
       "name": "Loading Elevator",
-      "waypointRelativePos": 0.7555673382820801,
+      "waypointRelativePos": 1.3669141039236417,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -70,13 +70,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -145.12467165539786
+    "rotation": -142.6404067610268
   },
   "reversed": false,
   "folder": "Left Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 29.827084654474724
+    "rotation": -29.74488129694222
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

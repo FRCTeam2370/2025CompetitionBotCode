@@ -134,8 +134,8 @@ public class Constants {
         public static final Pose2d CLOSE_DESCORE = new Pose2d(3.03, 3.79, Rotation2d.fromDegrees(90));
 
         public static final Pose2d CLOSE_LEFT_SCORE_RIGHT = new Pose2d(3.48, 4.85, Rotation2d.fromDegrees(35.02));
-        public static final Pose2d CLOSE_LEFT_SCORE_LEFT = new Pose2d(4.06, 5.1, Rotation2d.fromDegrees(35.02));
-        public static final Pose2d CLOSE_LEFT_REVERSE_DESCORE = new Pose2d(4.12, 5.48, Rotation2d.fromDegrees(-143.55));
+        public static final Pose2d CLOSE_LEFT_SCORE_LEFT = new Pose2d(4.04, 5.07, Rotation2d.fromDegrees(35.02));
+        public static final Pose2d CLOSE_LEFT_REVERSE_DESCORE = new Pose2d(4.29, 5.3, Rotation2d.fromDegrees(-148));//-143.33
         public static final Pose2d CLOSE_LEFT_DESCORE = new Pose2d(3.83, 5.24, Rotation2d.fromDegrees(35.02));
 
         public static final Pose2d FAR_LEFT_SCORE_RIGHT = new Pose2d(4.71, 5.32, Rotation2d.fromDegrees(-30.93));
