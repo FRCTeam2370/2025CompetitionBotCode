@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.778073770491804,
-        "y": 4.078944672131147
+        "x": 5.142725409836065,
+        "y": 2.976075819672131
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.761065573770492,
-        "y": 4.00701844262295
+        "x": 4.615266393442623,
+        "y": 2.0650102459016386
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.988831967213113,
-        "y": 3.9590676229508195
+        "x": 1.342622950819672,
+        "y": 0.7103995901639337
       },
       "prevControl": {
-        "x": 6.581249999999997,
-        "y": 3.7073258196721306
-      },
-      "nextControl": {
-        "x": 7.201531466552937,
-        "y": 4.090440843131298
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 5.646209016393443,
-        "y": 3.8032274590163935
-      },
-      "prevControl": {
-        "x": 6.385375217667112,
-        "y": 3.8032274590163935
+        "x": 1.582377049180328,
+        "y": 1.4176741803278685
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,21 +30,21 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.7093380096448939,
-      "rotationDegrees": 90.0
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": -49.64408192556095
     }
   ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Descore",
-      "waypointRelativePos": 0.9766702014846169,
+      "name": "Intake Coral",
+      "waypointRelativePos": 0.6304347826086921,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Elevator L2"
+          "name": "Loading Elevator"
         }
       }
     }
@@ -75,13 +59,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 89.0556495964204
+    "rotation": -37.74680538727462
   },
   "reversed": false,
-  "folder": "Middle Auto Paths",
+  "folder": "Right Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -91.39718102729628
+    "rotation": -150.25511870305783
   },
   "useDefaultConstraints": true
 }

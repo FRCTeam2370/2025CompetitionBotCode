@@ -40,7 +40,7 @@ public class IntakeAlgae extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ManipulatorSubsystem.algaeMotor.getOutputCurrent() > 40){
+    if(ManipulatorSubsystem.algaeMotor.getOutputCurrent() > 50){
       ManipulatorSubsystem.hasAlgae = true;
       return true;
     }else{

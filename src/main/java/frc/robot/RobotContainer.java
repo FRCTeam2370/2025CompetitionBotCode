@@ -80,7 +80,7 @@ public class RobotContainer {
   public RobotContainer() {
     //Put all NamedCommands here
     NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.75, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPose(4.75, 0.38, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPoseAuto(4.75, 0.38, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Stow Elevator", new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
     NamedCommands.registerCommand("Spit Piece", new SpitPeice(-1, mManipulatorSubsystem));//runs the manipulator back wards for x amount of seconds
     NamedCommands.registerCommand("Stop Spit Piece", new RunManipulator(mManipulatorSubsystem, 0));
