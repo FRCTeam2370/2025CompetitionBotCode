@@ -22,6 +22,17 @@ public class SwervePOILogic {
         return distance;
     }
 
+    public static Pose2d findNearestCloseLoad(){
+        Pose2d nearestLoad;
+        if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() <= 4){
+          nearestLoad = Constants.BlueSidePoses.RIGHT_LOADING_LEFT;
+        }else {
+          nearestLoad = Constants.BlueSidePoses.LEFT_LOADING_RIGHT;
+        }
+    
+        return nearestLoad;
+      }
+
     public static Pose2d findNearestLeftScore(){
         Pose2d currentPose = SwerveSubsystem.poseEstimator.getEstimatedPosition();
         Pose2d returnPose;

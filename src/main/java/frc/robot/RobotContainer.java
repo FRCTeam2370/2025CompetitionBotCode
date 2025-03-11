@@ -35,6 +35,7 @@ import frc.robot.Commands.ManipulatorCommands.RunAlgaeManipulator;
 import frc.robot.Commands.ManipulatorCommands.RunManipulator;
 import frc.robot.Commands.ManipulatorCommands.SpitPeice;
 import frc.robot.Commands.ManipulatorCommands.SpitPeiceWithTime;
+import frc.robot.Commands.MechanismCommands.MechanismToLoading;
 import frc.robot.Commands.MechanismCommands.SetMechanismToPose;
 import frc.robot.Commands.MechanismCommands.SetMechanismToPoseAuto;
 import frc.robot.Commands.MechanismCommands.StowMechanismWithCoral;
@@ -66,17 +67,6 @@ public class RobotContainer {
 
   private final SendableChooser<Command> autoChooser;
 
-  public Pose2d findNearestLoad(){
-    Pose2d nearestLoad;
-    if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() >= 4){
-      nearestLoad = Constants.BlueSidePoses.RIGHT_LOADING_LEFT;
-    }else {
-      nearestLoad = Constants.BlueSidePoses.LEFT_LOADING_RIGHT;
-    }
-
-    return nearestLoad;
-  }
-
   public RobotContainer() {
     //Put all NamedCommands here
     NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.75, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
@@ -88,6 +78,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Loading Elevator", new SetSwingArmAuto(mSwingArmSubsystem, 0.17));
     NamedCommands.registerCommand("Intake Coral", new IntakeCoralBetter(mManipulatorSubsystem));
     NamedCommands.registerCommand("Elevator L2", new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Elevator Descore Low", new SetSwingArm(mSwingArmSubsystem, 0.35));
     NamedCommands.registerCommand("Intake Algae", new IntakeAlgae(mManipulatorSubsystem, 0.5));
     NamedCommands.registerCommand("Spit Algae", new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
@@ -112,14 +103,15 @@ public class RobotContainer {
     //driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
     driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestRightScore()));
 
-    driver.leftBumper().toggleOnTrue(new IntakeCoralBetter(mManipulatorSubsystem));
+    driver.leftBumper().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestCloseLoad()));
     driver.rightBumper().whileTrue(new RunManipulator(mManipulatorSubsystem, -1));
 
     driver.leftTrigger().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));
     driver.rightTrigger().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
-    driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.13));
+    //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.13));
+    driver.leftStick().onTrue(new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem));
     //driver.x().onTrue(new SetSwingArm(mSwingArmSubsystem, 0));
 
     //driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 1.70));//L2

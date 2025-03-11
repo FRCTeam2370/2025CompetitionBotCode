@@ -12,6 +12,8 @@ import frc.robot.Subsystems.ManipulatorSubsystem;
 public class SpitPeice extends Command {
   private ManipulatorSubsystem mManipulatorSubsystem;
   private double speed;
+  boolean isFinished = false;
+  double counter;
   /** Creates a new SpitPeice. */
   public SpitPeice(double speed, ManipulatorSubsystem mManipulatorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -24,29 +26,36 @@ public class SpitPeice extends Command {
   @Override
   public void initialize() {
     SmartDashboard.putBoolean("Started Spit Piece", true);
+    isFinished = false;
+    counter = 0;
   }
 
 
   @Override
   public void execute() {
-    ManipulatorSubsystem.runManipulator(speed);
+    if(!ManipulatorSubsystem.hasCoral()){
+      if(counter < 10){
+        ManipulatorSubsystem.runManipulator(speed);
+        counter++;
+      }else{
+        isFinished = true;
+      }
+    }else{
+      ManipulatorSubsystem.runManipulator(speed);
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    ManipulatorSubsystem.runManipulatorFor(120, speed);
     ManipulatorSubsystem.runManipulator(0);
   }
  
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(!ManipulatorSubsystem.hasCoral()){
-      return true;
-    }else{
-      return false;
-    }
+    return isFinished;
     
   }
 }
