@@ -16,12 +16,28 @@
     },
     {
       "anchor": {
+        "x": 2.805122950819672,
+        "y": 2.0170594262295083
+      },
+      "prevControl": {
+        "x": 3.545363729508196,
+        "y": 2.1661565061475403
+      },
+      "nextControl": {
+        "x": 2.0648821721311474,
+        "y": 1.8679623463114754
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
         "x": 1.342622950819672,
         "y": 0.7103995901639337
       },
       "prevControl": {
         "x": 1.582377049180328,
-        "y": 1.4176741803278685
+        "y": 1.417674180327869
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,7 +46,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 1.0,
       "rotationDegrees": -49.64408192556095
     }
   ],
@@ -39,7 +55,7 @@
   "eventMarkers": [
     {
       "name": "Intake Coral",
-      "waypointRelativePos": 0.6304347826086921,
+      "waypointRelativePos": 0.9,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -65,7 +81,7 @@
   "folder": "Right Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -150.25511870305783
+    "rotation": -150.25511870305786
   },
   "useDefaultConstraints": true
 }

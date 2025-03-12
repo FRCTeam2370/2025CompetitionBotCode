@@ -40,11 +40,10 @@ public class TeleopSwerve extends Command {
     double xVal = Math.abs(xSup.getAsDouble()) < 0.01 ? 0 : xSup.getAsDouble();
     double yVal = Math.abs(ySup.getAsDouble()) < 0.01 ? 0 : ySup.getAsDouble();
     double rotVal = Math.abs(rotSup.getAsDouble()) < 0.01 ? 0 : rotSup.getAsDouble();
-    if(SwerveSubsystem.color.get() != null){
-      if(SwerveSubsystem.color.get() == Alliance.Blue){
-        xVal = -xVal;
-        yVal = -yVal;
-      }
+
+    if(SwerveSubsystem.isBlue()){
+      xVal = -xVal;
+      yVal = -yVal;
     }
     
 

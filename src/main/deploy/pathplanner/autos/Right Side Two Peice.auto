@@ -51,6 +51,42 @@
           "data": {
             "name": "Intake Coral"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Loading - CR R"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Elevator L4"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Spit Piece"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.125
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stow Elevator"
+          }
         }
       ]
     }

@@ -190,6 +190,14 @@ public class SwerveSubsystem extends SubsystemBase {
     return positions;
   }
 
+  public static boolean isBlue(){
+    if(color.isPresent()){
+      return color.get() == Alliance.Red ? false : true;
+    }else{
+      return true;
+    }
+  }
+
   public static void configureGyro(){
     resetGyro();
   }
