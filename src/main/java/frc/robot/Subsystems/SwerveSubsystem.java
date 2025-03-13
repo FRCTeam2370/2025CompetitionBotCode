@@ -109,11 +109,11 @@ public class SwerveSubsystem extends SubsystemBase {
     LimelightHelpers.setPipelineIndex("limelight", 0);
     LimelightHelpers.setPipelineIndex("limelight-two", 0);
 
-    odometry = new SwerveDriveOdometry(Constants.SwerveConstants.kinematics, getRotation2d(), getModulePositions());
+    odometry = new SwerveDriveOdometry(Constants.SwerveConstants.kinematics, gyro.getRotation2d(), getModulePositions());
 
     configurePathPlanner();
 
-    poseEstimator = new SwerveDrivePoseEstimator(Constants.SwerveConstants.kinematics, getYaw(), getModulePositions(), getPose());
+    poseEstimator = new SwerveDrivePoseEstimator(Constants.SwerveConstants.kinematics, gyro.getRotation2d(), getModulePositions(), new Pose2d(getPose().getTranslation(), gyro.getRotation2d()));
 
     PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
 
@@ -191,6 +191,7 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public static boolean isBlue(){
+    color = DriverStation.getAlliance();
     if(color.isPresent()){
       return color.get() == Alliance.Red ? false : true;
     }else{
@@ -203,7 +204,7 @@ public class SwerveSubsystem extends SubsystemBase {
   }
   public static void resetGyro(){
     gyro.setYaw(270);
-    
+        
   }
 
   public Rotation2d getYaw(){
@@ -212,7 +213,12 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public double getHeading(){
-    return Math.IEEEremainder(gyro.getRotation2d().getDegrees(), 360);
+    if(isBlue()){
+      return Math.IEEEremainder(gyro.getRotation2d().getDegrees(), 360);
+    }else{
+      return Math.IEEEremainder(gyro.getRotation2d().getDegrees() + 180, 360);
+    }
+    
   }
 
   public Rotation2d getRotation2d(){

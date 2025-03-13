@@ -24,23 +24,41 @@ public class SwervePOILogic {
 
     public static Pose2d findNearestCloseLoad(){
         Pose2d nearestLoad;
-        if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() <= 4){
-          nearestLoad = Constants.BlueSidePoses.RIGHT_LOADING_LEFT;
-        }else {
-          nearestLoad = Constants.BlueSidePoses.LEFT_LOADING_RIGHT;
+
+        if(SwerveSubsystem.isBlue()){
+          if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() <= 4){
+            nearestLoad = Constants.BlueSidePoses.RIGHT_LOADING_LEFT;
+          }else {
+            nearestLoad = Constants.BlueSidePoses.LEFT_LOADING_RIGHT;
+          }
+        }else{
+          if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() >= 4){
+            nearestLoad = Constants.RedSidePoses.RIGHT_LOADING_LEFT;
+          }else {
+            nearestLoad = Constants.RedSidePoses.LEFT_LOADING_RIGHT;
+          }
         }
-    
+        
         return nearestLoad;
       }
 
       public static Pose2d findNearestFarLoad(){
         Pose2d nearestLoad;
-        if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() <= 4){
-          nearestLoad = Constants.BlueSidePoses.RIGHT_LOADING_RIGHT;
-        }else {
-          nearestLoad = Constants.BlueSidePoses.LEFT_LOADING_LEFT;
+
+        if(SwerveSubsystem.isBlue()){
+          if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() <= 4){
+            nearestLoad = Constants.BlueSidePoses.RIGHT_LOADING_RIGHT;
+          }else {
+            nearestLoad = Constants.BlueSidePoses.LEFT_LOADING_LEFT;
+          }
+        }else{
+          if(SwerveSubsystem.poseEstimator.getEstimatedPosition().getY() >= 4){
+            nearestLoad = Constants.RedSidePoses.RIGHT_LOADING_RIGHT;
+          }else {
+            nearestLoad = Constants.RedSidePoses.LEFT_LOADING_LEFT;
+          }
         }
-    
+        
         return nearestLoad;
       }
 
@@ -48,25 +66,46 @@ public class SwervePOILogic {
         Pose2d currentPose = SwerveSubsystem.poseEstimator.getEstimatedPosition();
         Pose2d returnPose;
 
-        double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_SCORE_LEFT.getTranslation());
-        double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_LEFT_SCORE_LEFT.getTranslation());
-        double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_RIGHT_SCORE_LEFT.getTranslation());
-        double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_LEFT_SCORE_LEFT.getTranslation());
-        double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_RIGHT_SCORE_LEFT.getTranslation());
-        double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_SCORE_LEFT.getTranslation());
+        if(SwerveSubsystem.isBlue()){
+          double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_SCORE_LEFT.getTranslation());
+          double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_LEFT_SCORE_LEFT.getTranslation());
+          double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_RIGHT_SCORE_LEFT.getTranslation());
+          double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_LEFT_SCORE_LEFT.getTranslation());
+          double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_RIGHT_SCORE_LEFT.getTranslation());
+          double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_SCORE_LEFT.getTranslation());
 
-        List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
+          List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
 
-        double closest = Collections.min(distances);
+          double closest = Collections.min(distances);
 
-        returnPose = 
-            closest == distance1 ? Constants.BlueSidePoses.CLOSE_SCORE_LEFT : 
-            closest == distance2 ? Constants.BlueSidePoses.CLOSE_LEFT_SCORE_LEFT :
-            closest == distance3 ? Constants.BlueSidePoses.CLOSE_RIGHT_SCORE_LEFT : 
-            closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_SCORE_LEFT :
-            closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_SCORE_LEFT :
-            closest == distance6 ? Constants.BlueSidePoses.FAR_SCORE_LEFT : null;
+          returnPose = 
+              closest == distance1 ? Constants.BlueSidePoses.CLOSE_SCORE_LEFT : 
+              closest == distance2 ? Constants.BlueSidePoses.CLOSE_LEFT_SCORE_LEFT :
+              closest == distance3 ? Constants.BlueSidePoses.CLOSE_RIGHT_SCORE_LEFT : 
+              closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_SCORE_LEFT :
+              closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_SCORE_LEFT :
+              closest == distance6 ? Constants.BlueSidePoses.FAR_SCORE_LEFT : null;
+        }else{
+          double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_SCORE_LEFT.getTranslation());
+          double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_LEFT_SCORE_LEFT.getTranslation());
+          double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_RIGHT_SCORE_LEFT.getTranslation());
+          double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_LEFT_SCORE_LEFT.getTranslation());
+          double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_RIGHT_SCORE_LEFT.getTranslation());
+          double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_SCORE_LEFT.getTranslation());
 
+          List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
+
+          double closest = Collections.min(distances);
+
+          returnPose = 
+              closest == distance1 ? Constants.RedSidePoses.CLOSE_SCORE_LEFT : 
+              closest == distance2 ? Constants.RedSidePoses.CLOSE_LEFT_SCORE_LEFT :
+              closest == distance3 ? Constants.RedSidePoses.CLOSE_RIGHT_SCORE_LEFT : 
+              closest == distance4 ? Constants.RedSidePoses.FAR_LEFT_SCORE_LEFT :
+              closest == distance5 ? Constants.RedSidePoses.FAR_RIGHT_SCORE_LEFT :
+              closest == distance6 ? Constants.RedSidePoses.FAR_SCORE_LEFT : null;
+        }
+        
         return returnPose;
     }
 
@@ -74,25 +113,46 @@ public class SwervePOILogic {
         Pose2d currentPose = SwerveSubsystem.poseEstimator.getEstimatedPosition();
         Pose2d returnPose;
 
-        double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_SCORE_RIGHT.getTranslation());
-        double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_LEFT_SCORE_RIGHT.getTranslation());
-        double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_RIGHT_SCORE_RIGHT.getTranslation());
-        double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_LEFT_SCORE_RIGHT.getTranslation());
-        double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_RIGHT_SCORE_RIGHT.getTranslation());
-        double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_SCORE_RIGHT.getTranslation());
+        if(SwerveSubsystem.isBlue()){
+          double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_SCORE_RIGHT.getTranslation());
+          double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_LEFT_SCORE_RIGHT.getTranslation());
+          double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_RIGHT_SCORE_RIGHT.getTranslation());
+          double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_LEFT_SCORE_RIGHT.getTranslation());
+          double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_RIGHT_SCORE_RIGHT.getTranslation());
+          double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_SCORE_RIGHT.getTranslation());
 
-        List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
+          List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
 
-        double closest = Collections.min(distances);
+          double closest = Collections.min(distances);
 
-        returnPose = 
-            closest == distance1 ? Constants.BlueSidePoses.CLOSE_SCORE_RIGHT : 
-            closest == distance2 ? Constants.BlueSidePoses.CLOSE_LEFT_SCORE_RIGHT :
-            closest == distance3 ? Constants.BlueSidePoses.CLOSE_RIGHT_SCORE_RIGHT : 
-            closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_SCORE_RIGHT :
-            closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_SCORE_RIGHT :
-            closest == distance6 ? Constants.BlueSidePoses.FAR_SCORE_RIGHT : null;
+          returnPose = 
+              closest == distance1 ? Constants.BlueSidePoses.CLOSE_SCORE_RIGHT : 
+              closest == distance2 ? Constants.BlueSidePoses.CLOSE_LEFT_SCORE_RIGHT :
+              closest == distance3 ? Constants.BlueSidePoses.CLOSE_RIGHT_SCORE_RIGHT : 
+              closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_SCORE_RIGHT :
+              closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_SCORE_RIGHT :
+              closest == distance6 ? Constants.BlueSidePoses.FAR_SCORE_RIGHT : null;
+        }else{
+          double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_SCORE_RIGHT.getTranslation());
+          double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_LEFT_SCORE_RIGHT.getTranslation());
+          double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_RIGHT_SCORE_RIGHT.getTranslation());
+          double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_LEFT_SCORE_RIGHT.getTranslation());
+          double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_RIGHT_SCORE_RIGHT.getTranslation());
+          double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_SCORE_RIGHT.getTranslation());
 
+          List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
+
+          double closest = Collections.min(distances);
+
+          returnPose = 
+              closest == distance1 ? Constants.RedSidePoses.CLOSE_SCORE_RIGHT : 
+              closest == distance2 ? Constants.RedSidePoses.CLOSE_LEFT_SCORE_RIGHT :
+              closest == distance3 ? Constants.RedSidePoses.CLOSE_RIGHT_SCORE_RIGHT : 
+              closest == distance4 ? Constants.RedSidePoses.FAR_LEFT_SCORE_RIGHT :
+              closest == distance5 ? Constants.RedSidePoses.FAR_RIGHT_SCORE_RIGHT :
+              closest == distance6 ? Constants.RedSidePoses.FAR_SCORE_RIGHT : null;
+        }
+        
         return returnPose;
     }
 
@@ -100,24 +160,45 @@ public class SwervePOILogic {
         Pose2d currentPose = SwerveSubsystem.poseEstimator.getEstimatedPosition();
         Pose2d returnPose;
 
-        double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_REVERSE_DESCORE.getTranslation());
-        double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_LEFT_REVERSE_DESCORE.getTranslation());
-        double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_RIGHT_REVERSE_DESCORE.getTranslation());
-        double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_LEFT_REVERSE_DESCORE.getTranslation());
-        double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_RIGHT_REVERSE_DESCORE.getTranslation());
-        double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_REVERSE_DESCORE.getTranslation());
+        if(SwerveSubsystem.isBlue()){
+          double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_REVERSE_DESCORE.getTranslation());
+          double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_LEFT_REVERSE_DESCORE.getTranslation());
+          double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_RIGHT_REVERSE_DESCORE.getTranslation());
+          double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_LEFT_REVERSE_DESCORE.getTranslation());
+          double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_RIGHT_REVERSE_DESCORE.getTranslation());
+          double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_REVERSE_DESCORE.getTranslation());
 
-        List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
+          List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
 
-        double closest = Collections.min(distances);
+          double closest = Collections.min(distances);
 
-        returnPose = 
-            closest == distance1 ? Constants.BlueSidePoses.CLOSE_REVERSE_DESCORE : 
-            closest == distance2 ? Constants.BlueSidePoses.CLOSE_LEFT_REVERSE_DESCORE :
-            closest == distance3 ? Constants.BlueSidePoses.CLOSE_RIGHT_REVERSE_DESCORE : 
-            closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_REVERSE_DESCORE :
-            closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_REVERSE_DESCORE :
-            closest == distance6 ? Constants.BlueSidePoses.FAR_REVERSE_DESCORE : null;
+          returnPose = 
+              closest == distance1 ? Constants.BlueSidePoses.CLOSE_REVERSE_DESCORE : 
+              closest == distance2 ? Constants.BlueSidePoses.CLOSE_LEFT_REVERSE_DESCORE :
+              closest == distance3 ? Constants.BlueSidePoses.CLOSE_RIGHT_REVERSE_DESCORE : 
+              closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_REVERSE_DESCORE :
+              closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_REVERSE_DESCORE :
+              closest == distance6 ? Constants.BlueSidePoses.FAR_REVERSE_DESCORE : null;
+        }else{
+          double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_REVERSE_DESCORE.getTranslation());
+          double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_LEFT_REVERSE_DESCORE.getTranslation());
+          double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_RIGHT_REVERSE_DESCORE.getTranslation());
+          double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_LEFT_REVERSE_DESCORE.getTranslation());
+          double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_RIGHT_REVERSE_DESCORE.getTranslation());
+          double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_REVERSE_DESCORE.getTranslation());
+
+          List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
+
+          double closest = Collections.min(distances);
+
+          returnPose = 
+              closest == distance1 ? Constants.RedSidePoses.CLOSE_REVERSE_DESCORE : 
+              closest == distance2 ? Constants.RedSidePoses.CLOSE_LEFT_REVERSE_DESCORE :
+              closest == distance3 ? Constants.RedSidePoses.CLOSE_RIGHT_REVERSE_DESCORE : 
+              closest == distance4 ? Constants.RedSidePoses.FAR_LEFT_REVERSE_DESCORE :
+              closest == distance5 ? Constants.RedSidePoses.FAR_RIGHT_REVERSE_DESCORE :
+              closest == distance6 ? Constants.RedSidePoses.FAR_REVERSE_DESCORE : null;
+        } 
 
         return returnPose;
     }
@@ -126,25 +207,46 @@ public class SwervePOILogic {
         Pose2d currentPose = SwerveSubsystem.poseEstimator.getEstimatedPosition();
         Pose2d returnPose;
 
-        double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_DESCORE.getTranslation());
-        double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_LEFT_DESCORE.getTranslation());
-        double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_RIGHT_DESCORE.getTranslation());
-        double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_LEFT_DESCORE.getTranslation());
-        double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_RIGHT_DESCORE.getTranslation());
-        double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_DESCORE.getTranslation());
+        if(SwerveSubsystem.isBlue()){
+          double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_DESCORE.getTranslation());
+          double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_LEFT_DESCORE.getTranslation());
+          double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_RIGHT_DESCORE.getTranslation());
+          double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_LEFT_DESCORE.getTranslation());
+          double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_RIGHT_DESCORE.getTranslation());
+          double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.FAR_DESCORE.getTranslation());
 
-        List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
+          List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
 
-        double closest = Collections.min(distances);
+          double closest = Collections.min(distances);
 
-        returnPose = 
-            closest == distance1 ? Constants.BlueSidePoses.CLOSE_DESCORE : 
-            closest == distance2 ? Constants.BlueSidePoses.CLOSE_LEFT_DESCORE :
-            closest == distance3 ? Constants.BlueSidePoses.CLOSE_RIGHT_DESCORE : 
-            closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_DESCORE :
-            closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_DESCORE :
-            closest == distance6 ? Constants.BlueSidePoses.FAR_DESCORE : null;
+          returnPose = 
+              closest == distance1 ? Constants.BlueSidePoses.CLOSE_DESCORE : 
+              closest == distance2 ? Constants.BlueSidePoses.CLOSE_LEFT_DESCORE :
+              closest == distance3 ? Constants.BlueSidePoses.CLOSE_RIGHT_DESCORE : 
+              closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_DESCORE :
+              closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_DESCORE :
+              closest == distance6 ? Constants.BlueSidePoses.FAR_DESCORE : null;
+        }else{
+          double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_DESCORE.getTranslation());
+          double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_LEFT_DESCORE.getTranslation());
+          double distance3 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_RIGHT_DESCORE.getTranslation());
+          double distance4 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_LEFT_DESCORE.getTranslation());
+          double distance5 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_RIGHT_DESCORE.getTranslation());
+          double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_DESCORE.getTranslation());
 
+          List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
+
+          double closest = Collections.min(distances);
+
+          returnPose = 
+              closest == distance1 ? Constants.RedSidePoses.CLOSE_DESCORE : 
+              closest == distance2 ? Constants.RedSidePoses.CLOSE_LEFT_DESCORE :
+              closest == distance3 ? Constants.RedSidePoses.CLOSE_RIGHT_DESCORE : 
+              closest == distance4 ? Constants.RedSidePoses.FAR_LEFT_DESCORE :
+              closest == distance5 ? Constants.RedSidePoses.FAR_RIGHT_DESCORE :
+              closest == distance6 ? Constants.RedSidePoses.FAR_DESCORE : null;
+        }
+        
         return returnPose;
     }
 }

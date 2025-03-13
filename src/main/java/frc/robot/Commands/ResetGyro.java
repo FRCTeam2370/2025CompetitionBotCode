@@ -4,6 +4,10 @@
 
 package frc.robot.Commands;
 
+import static edu.wpi.first.units.Units.Rotation;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.SwerveSubsystem;
 
@@ -21,6 +25,7 @@ public class ResetGyro extends Command {
   @Override
   public void initialize() {
     SwerveSubsystem.resetGyro();
+    mSwerve.resetOdometry(new Pose2d(SwerveSubsystem.poseEstimator.getEstimatedPosition().getTranslation(), Rotation2d.fromDegrees(SwerveSubsystem.gyro.getYaw().getValueAsDouble() + 270)));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

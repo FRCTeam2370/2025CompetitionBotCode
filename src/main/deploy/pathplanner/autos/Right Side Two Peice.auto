@@ -87,6 +87,18 @@
           "data": {
             "name": "Stow Elevator"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CR R - Loading"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Coral"
+          }
         }
       ]
     }

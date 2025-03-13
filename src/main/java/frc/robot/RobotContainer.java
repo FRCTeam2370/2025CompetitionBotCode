@@ -107,12 +107,12 @@ public class RobotContainer {
     driver.leftBumper().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestCloseLoad()));
     driver.rightBumper().whileTrue(new RunManipulator(mManipulatorSubsystem, -1));
 
-    driver.back().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));
+    driver.leftStick().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));
     driver.rightTrigger().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.13));
-    driver.leftStick().onTrue(new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem));
+    operator.rightStick().onTrue(new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem));
     //driver.x().onTrue(new SetSwingArm(mSwingArmSubsystem, 0));
 
     //driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 1.70));//L2
@@ -128,7 +128,6 @@ public class RobotContainer {
 
     driver.povDown().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.2857));
     driver.povUp().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.35));
-
     operator.rightTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, 0.8));
     operator.leftTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, -0.8));
 

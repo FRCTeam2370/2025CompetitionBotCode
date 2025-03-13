@@ -18,6 +18,6 @@ public class MechanismToLoading extends ParallelCommandGroup {
   public MechanismToLoading(ManipulatorSubsystem manipulatorSubsystem, SwingArmSubsystem mSwingArmSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SetSwingArm(mSwingArmSubsystem, -0.13).alongWith(new IntakeCoral(manipulatorSubsystem, 1)));
+    addCommands(new SetSwingArm(mSwingArmSubsystem, 0.165).alongWith(new IntakeCoral(manipulatorSubsystem, 1)));
   }
 }
