@@ -25,7 +25,12 @@ public class ResetGyro extends Command {
   @Override
   public void initialize() {
     SwerveSubsystem.resetGyro();
-    mSwerve.resetOdometry(new Pose2d(SwerveSubsystem.poseEstimator.getEstimatedPosition().getTranslation(), Rotation2d.fromDegrees(SwerveSubsystem.gyro.getYaw().getValueAsDouble() + 270)));
+    if(SwerveSubsystem.isBlue()){
+      mSwerve.resetOdometry(new Pose2d(SwerveSubsystem.poseEstimator.getEstimatedPosition().getTranslation(), Rotation2d.fromDegrees(SwerveSubsystem.gyro.getYaw().getValueAsDouble() + 90)));
+    }else{
+      mSwerve.resetOdometry(new Pose2d(SwerveSubsystem.poseEstimator.getEstimatedPosition().getTranslation(), Rotation2d.fromDegrees(SwerveSubsystem.gyro.getYaw().getValueAsDouble() + 270)));
+    }
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.

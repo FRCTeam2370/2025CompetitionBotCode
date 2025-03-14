@@ -46,7 +46,7 @@ public class Constants {
     }
 
     public static class SwerveConstants {
-        public static final PathConstraints telePathConstraints = new PathConstraints(2, 2, Math.toRadians(540.000), Math.toRadians(720.000));
+        public static final PathConstraints telePathConstraints = new PathConstraints(2.5, 2, Math.toRadians(540.000), Math.toRadians(720.000));
         public static final double DrivekP = 0.02;
         public static final double DrivekI = 0;
         public static final double DrivekD = 0.00;
@@ -122,11 +122,11 @@ public class Constants {
     }
 
     public static class BlueSidePoses {
-        public static final Pose2d RIGHT_LOADING_RIGHT = new Pose2d(1.49, 0.62, Rotation2d.fromDegrees(144));
-        public static final Pose2d RIGHT_LOADING_LEFT = new Pose2d(0.63, 1.21, Rotation2d.fromDegrees(140));
+        public static final Pose2d RIGHT_LOADING_RIGHT = new Pose2d(1.2, 0.77, Rotation2d.fromDegrees(-33.5));
+        public static final Pose2d RIGHT_LOADING_LEFT = new Pose2d(0.56, 1.33, Rotation2d.fromDegrees(-33.5));
 
-        public static final Pose2d LEFT_LOADING_RIGHT = new Pose2d(0.61,6.68, Rotation2d.fromDegrees(35));//-140.93
-        public static final Pose2d LEFT_LOADING_LEFT = new Pose2d(1.26, 7.3, Rotation2d.fromDegrees(39));//-140.17
+        public static final Pose2d LEFT_LOADING_RIGHT = new Pose2d(0.61,6.68, Rotation2d.fromDegrees(-138));//-140.93
+        public static final Pose2d LEFT_LOADING_LEFT = new Pose2d(1.26, 7.3, Rotation2d.fromDegrees(-138));//-140.17
 
         public static final Pose2d CLOSE_SCORE_RIGHT = new Pose2d(3.23, 3.58, Rotation2d.fromDegrees(90));
         public static final Pose2d CLOSE_SCORE_LEFT = new Pose2d(3.24, 3.91, Rotation2d.fromDegrees(90));

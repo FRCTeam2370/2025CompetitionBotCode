@@ -113,8 +113,12 @@ public class SwerveSubsystem extends SubsystemBase {
 
     configurePathPlanner();
 
-    poseEstimator = new SwerveDrivePoseEstimator(Constants.SwerveConstants.kinematics, gyro.getRotation2d(), getModulePositions(), new Pose2d(getPose().getTranslation(), gyro.getRotation2d()));
-
+    if(isBlue()){
+      poseEstimator = new SwerveDrivePoseEstimator(Constants.SwerveConstants.kinematics, gyro.getRotation2d(), getModulePositions(), new Pose2d(getPose().getTranslation(), gyro.getRotation2d()));
+    }else{
+      poseEstimator = new SwerveDrivePoseEstimator(Constants.SwerveConstants.kinematics, gyro.getRotation2d(), getModulePositions(), new Pose2d(getPose().getTranslation(), gyro.getRotation2d()));
+    }
+    
     PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
 
     SmartDashboard.putData("Field", field);
@@ -406,7 +410,7 @@ public class SwerveSubsystem extends SubsystemBase {
               this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
               (speeds, feedforwards) -> driveRobotRelative(speeds),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond / 3.1154127, false, true),//driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
               new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                      new PIDConstants(3.75, 0.0, 0.05), // Translation PID constants
+                      new PIDConstants(3.5, 0.0, 0.05), // Translation PID constants// 3.75 - p
                       new PIDConstants(5, 0.0, 0.00) // Rotation PID constants//kp 0.00755, ki 0.0001
               ),
               config, // The robot configuration
