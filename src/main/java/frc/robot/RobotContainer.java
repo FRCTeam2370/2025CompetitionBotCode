@@ -120,11 +120,14 @@ public class RobotContainer {
     // driver.start().onTrue(new ElevatorControl(mElevatorSubsystem, 3));
     driver.rightStick().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
 
-    operator.x().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//L2
-    operator.y().onTrue(new SetMechanismToPose(2.609, 0.3177, mSwingArmSubsystem, mElevatorSubsystem));//L3
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.77, 0.32, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.x().onTrue(new SetMechanismToPose(0.1, 0.231, mSwingArmSubsystem, mElevatorSubsystem));//L2
+    operator.y().onTrue(new SetMechanismToPose(1.752, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.641, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));
     operator.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.216));
+    
+    operator.povUp().onTrue(new SetMechanismToPose(4.77, 0.405, mSwingArmSubsystem, mElevatorSubsystem));//Barge
+    operator.povDown().onTrue(new SetMechanismToPose(0.1, -0.3, mSwingArmSubsystem, mElevatorSubsystem));
 
     driver.povDown().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.2857));
     driver.povUp().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.35));

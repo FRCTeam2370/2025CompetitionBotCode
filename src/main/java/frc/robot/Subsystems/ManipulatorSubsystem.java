@@ -49,6 +49,8 @@ public class ManipulatorSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Manipulator Sensor Val", manipulatorSensor.getDistance().getValueAsDouble());
 
+    SmartDashboard.putBoolean("Has Coral", hasCoral());
+
     SmartDashboard.putNumber("Algae Motor Resistence", algaeMotor.getOutputCurrent());
 
     SmartDashboard.putBoolean("has Algae", hasAlgae);
