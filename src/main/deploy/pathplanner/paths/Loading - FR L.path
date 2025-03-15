@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 3.800102459016393,
-        "y": 5.013985655737705
+        "x": 3.81,
+        "y": 5.04
       },
       "prevControl": {
-        "x": 3.0928278688524578,
-        "y": 5.517469262295083
+        "x": 3.0581357729132934,
+        "y": 5.47408901390256
       },
       "nextControl": null,
       "isLocked": false,
@@ -61,7 +61,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 31.11309358620339
+    "rotation": 28.39301942138304
   },
   "reversed": false,
   "folder": "Left Auto Paths",

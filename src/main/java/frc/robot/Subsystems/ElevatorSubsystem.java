@@ -74,14 +74,14 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     switch(mElevatorState) {
       case Idle:
-        if(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()) <= 0.13){
+        if(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()) <= 0.11){
           elevatorMotor.set(0);
           break;
         }else{
           if(RobotContainer.enableOffsets){
-            setElevatorPos(0.12 - offset);
+            setElevatorPos(0.1 - offset);
           }else{
-            setElevatorPos(0.12);
+            setElevatorPos(0.1);
           }
         }
         break;
