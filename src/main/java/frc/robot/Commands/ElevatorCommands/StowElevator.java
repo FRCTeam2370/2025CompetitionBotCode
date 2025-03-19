@@ -22,7 +22,7 @@ public class StowElevator extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ElevatorSubsystem.setElevatorPos(0.12);
+    ElevatorSubsystem.setElevatorPos(0.06);
     ElevatorSubsystem.mElevatorState = ElevatorState.Idle;
     RobotContainer.enableOffsets = false;
   }

@@ -74,14 +74,14 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     switch(mElevatorState) {
       case Idle:
-        if(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()) <= 0.11){
+        if(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()) <= 0.06){
           elevatorMotor.set(0);
           break;
         }else{
           if(RobotContainer.enableOffsets){
-            setElevatorPos(0.1 - offset);
+            setElevatorPos(0.06 - offset);
           }else{
-            setElevatorPos(0.1);
+            setElevatorPos(0.06);
           }
         }
         break;
@@ -131,9 +131,9 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
     //SLOT0 CONFIGURATION --- NORMAL PID CONTROL
-    elevatorConfiguration.Slot0.kP = 0.04;//needs more tunning with weight and maybe Motion Magic pls , 2.25
+    elevatorConfiguration.Slot0.kP = 0.05;//needs more tunning with weight and maybe Motion Magic pls , 2.25
     elevatorConfiguration.Slot0.kI = 0.001;
-    elevatorConfiguration.Slot0.kD = 0.0015;//0.002
+    elevatorConfiguration.Slot0.kD = 0.0013;//0.002
     elevatorConfiguration.Slot0.GravityType = GravityTypeValue.Elevator_Static;
     elevatorConfiguration.Slot0.kG = 0.022;//0.03
 

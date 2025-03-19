@@ -76,6 +76,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Stop Spit Piece", new RunManipulator(mManipulatorSubsystem, 0));
     NamedCommands.registerCommand("Run Manipulator", new RunManipulator(mManipulatorSubsystem, -1));
     NamedCommands.registerCommand("Loading Elevator", new SetSwingArmAuto(mSwingArmSubsystem, 0.165));
+    NamedCommands.registerCommand("Reverse Loading Elevator", new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem));
     NamedCommands.registerCommand("Intake Coral", new IntakeCoralBetter(mManipulatorSubsystem));
     NamedCommands.registerCommand("Elevator L2", new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Elevator Descore Low", new SetSwingArm(mSwingArmSubsystem, 0.35));
@@ -111,7 +112,7 @@ public class RobotContainer {
     driver.rightTrigger().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
-    //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.13));
+    //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.125));
     operator.rightStick().onTrue(new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem));
     //driver.x().onTrue(new SetSwingArm(mSwingArmSubsystem, 0));
 
@@ -121,14 +122,16 @@ public class RobotContainer {
     driver.rightStick().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
 
     operator.x().onTrue(new SetMechanismToPose(0.1, 0.231, mSwingArmSubsystem, mElevatorSubsystem));//L2
-    operator.y().onTrue(new SetMechanismToPose(1.752, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.y().onTrue(new SetMechanismToPose(1.805, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
+    //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.741, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));
     operator.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.216));
     
     operator.povUp().onTrue(new SetMechanismToPose(4.77, 0.405, mSwingArmSubsystem, mElevatorSubsystem));//Barge
     operator.povDown().onTrue(new SetMechanismToPose(0.1, -0.3, mSwingArmSubsystem, mElevatorSubsystem));//L1
     operator.povLeft().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//Descore high Algae
+    operator.povRight().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.35));
 
     driver.povDown().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.2857));
     driver.povUp().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.35));

@@ -55,7 +55,7 @@ public class Constants {
 
         public static final double TurnkP = 4;
         public static final double TurnkI = 0;
-        public static final double TurnkD = 0;
+        public static final double TurnkD = 0;x
 
         public static final double driveRamp = 0.2;
 
