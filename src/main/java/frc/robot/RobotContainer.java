@@ -125,17 +125,17 @@ public class RobotContainer {
     operator.x().onTrue(new SetMechanismToPose(0.1, 0.231, mSwingArmSubsystem, mElevatorSubsystem));//L2
     operator.y().onTrue(new SetMechanismToPose(1.805, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
     //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.75, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.75, 0.315, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));
-    operator.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.216));
+    operator.leftStick().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.216)));
     
     operator.povUp().onTrue(new SetMechanismToPose(4.77, 0.405, mSwingArmSubsystem, mElevatorSubsystem));//Barge
     operator.povDown().onTrue(new SetMechanismToPose(0.1, -0.3, mSwingArmSubsystem, mElevatorSubsystem));//L1
     operator.povLeft().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//Descore high Algae
-    operator.povRight().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.35));
+    operator.povRight().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.35)));//Descore low Algae
 
-    driver.povDown().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.2857));
-    driver.povUp().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.35));
+    driver.povDown().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2857)));//If this doesn't work then set it back to just the swing arm command
+    driver.povUp().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.35)));//Descore low Algae on the driver's controller
     operator.rightTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, 0.8));
     operator.leftTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, -0.8));
 
