@@ -55,7 +55,7 @@ public class Constants {
 
         public static final double TurnkP = 4;
         public static final double TurnkI = 0;
-        public static final double TurnkD = 0;x
+        public static final double TurnkD = 0;
 
         public static final double driveRamp = 0.2;
 
@@ -122,11 +122,11 @@ public class Constants {
     }
 
     public static class BlueSidePoses {
-        public static final Pose2d RIGHT_LOADING_RIGHT = new Pose2d(1.2, 0.77, Rotation2d.fromDegrees(-33.5));
-        public static final Pose2d RIGHT_LOADING_LEFT = new Pose2d(0.56, 1.33, Rotation2d.fromDegrees(-33.5));
+        public static final Pose2d RIGHT_LOADING_RIGHT = new Pose2d(1.47, 0.65, Rotation2d.fromDegrees(143));//-33.5
+        public static final Pose2d RIGHT_LOADING_LEFT = new Pose2d(0.64, 1.23, Rotation2d.fromDegrees(143));
 
-        public static final Pose2d LEFT_LOADING_RIGHT = new Pose2d(0.61,6.68, Rotation2d.fromDegrees(-138));//-140.93
-        public static final Pose2d LEFT_LOADING_LEFT = new Pose2d(1.26, 7.3, Rotation2d.fromDegrees(-138));//-140.17
+        public static final Pose2d LEFT_LOADING_RIGHT = new Pose2d(0.61,6.68, Rotation2d.fromDegrees(36));//-140.93
+        public static final Pose2d LEFT_LOADING_LEFT = new Pose2d(1.42, 7.37, Rotation2d.fromDegrees(36));//-138// better
 
         public static final Pose2d CLOSE_SCORE_RIGHT = new Pose2d(3.23, 3.58, Rotation2d.fromDegrees(90));
         public static final Pose2d CLOSE_SCORE_LEFT = new Pose2d(3.24, 3.91, Rotation2d.fromDegrees(90));

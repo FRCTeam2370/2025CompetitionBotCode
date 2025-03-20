@@ -6,6 +6,7 @@ package frc.robot.Commands.ManipulatorCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Subsystems.LEDSubsystem;
 import frc.robot.Subsystems.ManipulatorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -15,11 +16,11 @@ public class IntakeCoral extends Command {
   private boolean isFinished = false;
   private Timer timer = new Timer();
   /** Creates a new RunManipulator. */
-  public IntakeCoral(ManipulatorSubsystem mManipulatorSubsystem, double speed) {
+  public IntakeCoral(LEDSubsystem mLedSubsystem, ManipulatorSubsystem mManipulatorSubsystem, double speed) {
     this.mManipulatorSubsystem = mManipulatorSubsystem;
     this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(mManipulatorSubsystem);
+    addRequirements(mManipulatorSubsystem, mLedSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -38,6 +39,7 @@ public class IntakeCoral extends Command {
   @Override
   public void end(boolean interrupted) {
     ManipulatorSubsystem.runManipulator(0);
+    LEDSubsystem.obtainedPieceLED();
   }
 
   // Returns true when the command should end.

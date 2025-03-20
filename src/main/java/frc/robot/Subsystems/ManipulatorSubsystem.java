@@ -56,7 +56,12 @@ public class ManipulatorSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("has Algae", hasAlgae);
 
     if(hasAlgae){
+      LEDSubsystem.hasAlgaeLED();
       runAlgaeIntake(0.15);
+    }
+
+    if(hasCoral()){
+      LEDSubsystem.hasCoralLED();
     }
   }
 

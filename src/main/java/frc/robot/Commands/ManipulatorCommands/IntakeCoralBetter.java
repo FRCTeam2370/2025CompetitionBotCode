@@ -5,6 +5,7 @@
 package frc.robot.Commands.ManipulatorCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Subsystems.LEDSubsystem;
 import frc.robot.Subsystems.ManipulatorSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -12,9 +13,9 @@ import frc.robot.Subsystems.ManipulatorSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class IntakeCoralBetter extends SequentialCommandGroup {
   /** Creates a new IntakeCoralBetter. */
-  public IntakeCoralBetter(ManipulatorSubsystem mManipulatorSubsystem) {
+  public IntakeCoralBetter(ManipulatorSubsystem mManipulatorSubsystem, LEDSubsystem mLedSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new IntakeCoral(mManipulatorSubsystem, 1).andThen(new IntakeCoralALittle(mManipulatorSubsystem)));
+    addCommands(new IntakeCoral(mLedSubsystem, mManipulatorSubsystem, 1).andThen(new IntakeCoralALittle(mManipulatorSubsystem)));
   }
 }

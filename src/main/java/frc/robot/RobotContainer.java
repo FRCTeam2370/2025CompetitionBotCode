@@ -55,6 +55,7 @@ public class RobotContainer {
   public static final CommandXboxController driver = new CommandXboxController(0);
   public static final CommandXboxController operator = new CommandXboxController(1);
   public static final GenericHID offsetOI = new GenericHID(2);
+  public static final CommandXboxController testing = new CommandXboxController(3);
 
   private final SwerveSubsystem mSwerve = new SwerveSubsystem();
   private final ElevatorSubsystem mElevatorSubsystem = new ElevatorSubsystem();
@@ -76,8 +77,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("Stop Spit Piece", new RunManipulator(mManipulatorSubsystem, 0));
     NamedCommands.registerCommand("Run Manipulator", new RunManipulator(mManipulatorSubsystem, -1));
     NamedCommands.registerCommand("Loading Elevator", new SetSwingArmAuto(mSwingArmSubsystem, 0.165));
-    NamedCommands.registerCommand("Reverse Loading Elevator", new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem));
-    NamedCommands.registerCommand("Intake Coral", new IntakeCoralBetter(mManipulatorSubsystem));
+    NamedCommands.registerCommand("Reverse Loading Elevator", new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem));
+    NamedCommands.registerCommand("Intake Coral", new IntakeCoralBetter(mManipulatorSubsystem, mLedSubsystem));
     NamedCommands.registerCommand("Elevator L2", new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Elevator Descore Low", new SetSwingArm(mSwingArmSubsystem, 0.35));
     NamedCommands.registerCommand("Intake Algae", new IntakeAlgae(mManipulatorSubsystem, 0.5));
@@ -113,7 +114,7 @@ public class RobotContainer {
 
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.125));
-    operator.rightStick().onTrue(new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem));
+    operator.rightStick().onTrue(new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem));
     //driver.x().onTrue(new SetSwingArm(mSwingArmSubsystem, 0));
 
     //driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 1.70));//L2
@@ -124,7 +125,7 @@ public class RobotContainer {
     operator.x().onTrue(new SetMechanismToPose(0.1, 0.231, mSwingArmSubsystem, mElevatorSubsystem));//L2
     operator.y().onTrue(new SetMechanismToPose(1.805, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
     //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.741, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.75, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));
     operator.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.216));
     

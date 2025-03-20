@@ -74,7 +74,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     switch(mElevatorState) {
       case Idle:
-        if(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()) <= 0.06){
+        if(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()) <= 0.065){
           elevatorMotor.set(0);
           break;
         }else{

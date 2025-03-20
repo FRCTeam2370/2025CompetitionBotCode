@@ -7,37 +7,38 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Start - FR R L4"
+            "pathName": "Start - BR L"
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Elevator L4"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.125
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Spit Piece"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.125
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Elevator L4"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.1
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Spit Piece"
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "FR L - Loading"
+            "pathName": "BL L - Reverse Load"
           }
         },
         {
@@ -49,37 +50,38 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Loading - FR R"
+            "pathName": "Reverse Loading - FL L"
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Elevator L4"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.125
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Spit Piece"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.125
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Elevator L4"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.1
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Spit Piece"
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "FR - Loading"
+            "pathName": "FL L - Reverse Loading"
           }
         },
         {
@@ -91,31 +93,32 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Loading- F L"
+            "pathName": "Reverse Loading - FL R"
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Elevator L4"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.125
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Spit Piece"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.125
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Elevator L4"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.1
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Spit Piece"
+                }
+              }
+            ]
           }
         },
         {
