@@ -39,7 +39,7 @@ public class IntakeCoral extends Command {
   @Override
   public void end(boolean interrupted) {
     ManipulatorSubsystem.runManipulator(0);
-    LEDSubsystem.obtainedPieceLED();
+    //LEDSubsystem.obtainedPieceLED();
   }
 
   // Returns true when the command should end.

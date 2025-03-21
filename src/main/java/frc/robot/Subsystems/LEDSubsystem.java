@@ -32,7 +32,7 @@ public class LEDSubsystem extends SubsystemBase {
     }else if(RobotContainer.testing.b().getAsBoolean()){
       hasAlgaeLED();
     }else if(RobotContainer.testing.x().getAsBoolean()){
-      obtainedPieceLED();
+      endgameWarningLED();
     }else if(RobotContainer.testing.y().getAsBoolean()){
       blueClimbingAnimLED();
     }
@@ -40,24 +40,33 @@ public class LEDSubsystem extends SubsystemBase {
   }
 
   public static void obtainedPieceLED() {
-    output1.set(false);
-    output2.set(true);
-    output3.set(true);
-    output4.set(true);
+    // output1.set(false);
+    // output2.set(true);
+    // output3.set(true);
+    // output4.set(true);
+    output2.set(false);
+    output3.set(false);
+    output4.set(false);
   }
 
   public static void hasCoralLED() {
-    output1.set(true);
-    output2.set(false);
-    output3.set(true);
+    // output1.set(true);
+    // output2.set(false);
+    // output3.set(true);
+    // output4.set(true);
+    output2.set(true);
+    output3.set(false);
     output4.set(true);
   }
 
   public static void hasAlgaeLED() {
-    output1.set(false);
-    output2.set(false);
+    // output1.set(false);
+    // output2.set(false);
+    // output3.set(true);
+    // output4.set(true);
+    output2.set(true);
     output3.set(true);
-    output4.set(true);
+    output4.set(false);
   }
 
   public static void ableToScoreLED() {
@@ -68,9 +77,12 @@ public class LEDSubsystem extends SubsystemBase {
   }
 
   public static void endgameWarningLED() {
-    output1.set(false);
+    // output1.set(false);
+    // output2.set(true);
+    // output3.set(false);
+    // output4.set(true);
     output2.set(true);
-    output3.set(false);
+    output3.set(true);
     output4.set(true);
   }
 

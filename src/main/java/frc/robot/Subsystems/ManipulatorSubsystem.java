@@ -63,6 +63,10 @@ public class ManipulatorSubsystem extends SubsystemBase {
     if(hasCoral()){
       LEDSubsystem.hasCoralLED();
     }
+
+    if(!hasAlgae && !hasCoral()){
+      LEDSubsystem.blueClimbingAnimLED();
+    }
   }
 
   public static boolean hasCoral(){
