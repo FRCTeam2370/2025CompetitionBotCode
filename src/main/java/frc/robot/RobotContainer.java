@@ -127,7 +127,7 @@ public class RobotContainer {
     //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.rightBumper().onTrue(new SetMechanismToPose(4.75, 0.315, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));
-    operator.leftStick().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.216)));
+    operator.leftStick().onTrue(new StowElevator(mElevatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.216)));
     
     operator.povUp().onTrue(new SetMechanismToPose(4.77, 0.405, mSwingArmSubsystem, mElevatorSubsystem));//Barge
     operator.povDown().onTrue(new SetMechanismToPose(0.1, -0.3, mSwingArmSubsystem, mElevatorSubsystem));//L1

@@ -6,6 +6,7 @@ package frc.robot.Commands.MechanismCommands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.Commands.ManipulatorCommands.IntakeCoral;
+import frc.robot.Commands.ManipulatorCommands.IntakeCoralBetter;
 import frc.robot.Commands.SwingArmCommands.SetSwingArm;
 import frc.robot.Subsystems.LEDSubsystem;
 import frc.robot.Subsystems.ManipulatorSubsystem;
@@ -19,6 +20,6 @@ public class MechanismToLoading extends ParallelCommandGroup {
   public MechanismToLoading(ManipulatorSubsystem manipulatorSubsystem, SwingArmSubsystem mSwingArmSubsystem, LEDSubsystem mLedSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SetSwingArm(mSwingArmSubsystem,  -0.125).alongWith(new IntakeCoral(mLedSubsystem, manipulatorSubsystem, 1)));
+    addCommands(new SetSwingArm(mSwingArmSubsystem,  -0.125).alongWith(new IntakeCoralBetter(manipulatorSubsystem, mLedSubsystem)));
   }
 }
