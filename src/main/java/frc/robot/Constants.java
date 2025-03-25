@@ -82,11 +82,11 @@ public class Constants {
     }
 
     public static class RedSidePoses {
-        public static final Pose2d RIGHT_LOADING_RIGHT = new Pose2d(16.16, 7.23, Rotation2d.fromDegrees(142 + 180));
-        public static final Pose2d RIGHT_LOADING_LEFT = new Pose2d(17, 6.76, Rotation2d.fromDegrees(142 + 180));
+        public static final Pose2d RIGHT_LOADING_RIGHT = new Pose2d(16.16, 7.23, Rotation2d.fromDegrees(142 - 180));
+        public static final Pose2d RIGHT_LOADING_LEFT = new Pose2d(17, 6.76, Rotation2d.fromDegrees(142 - 180));
 
-        public static final Pose2d LEFT_LOADING_RIGHT = new Pose2d(16.75,1.15, Rotation2d.fromDegrees(39 + 180));// May need some tuning// 220.5
-        public static final Pose2d LEFT_LOADING_LEFT = new Pose2d(16.05, 0.55, Rotation2d.fromDegrees(39 + 180));
+        public static final Pose2d LEFT_LOADING_RIGHT = new Pose2d(16.75,1.15, Rotation2d.fromDegrees(39 - 180));// May need some tuning// 220.5
+        public static final Pose2d LEFT_LOADING_LEFT = new Pose2d(16.05, 0.55, Rotation2d.fromDegrees(39 - 180));
 
         public static final Pose2d CLOSE_SCORE_RIGHT = new Pose2d(14.31, 4.49, Rotation2d.fromDegrees(-90));
         public static final Pose2d CLOSE_SCORE_LEFT = new Pose2d(14.32, 4.08, Rotation2d.fromDegrees(-90));

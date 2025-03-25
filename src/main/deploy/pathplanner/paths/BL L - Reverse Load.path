@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.207684426229508,
-        "y": 6.248719262295082
+        "x": 5.058811475409836,
+        "y": 5.6613217213114755
       },
       "isLocked": false,
       "linkedName": null
@@ -34,7 +34,7 @@
   "eventMarkers": [
     {
       "name": "stow",
-      "waypointRelativePos": 0.05143160127253291,
+      "waypointRelativePos": 0.0,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

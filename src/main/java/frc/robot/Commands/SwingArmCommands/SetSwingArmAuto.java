@@ -41,7 +41,7 @@ public class SetSwingArmAuto extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(SwingArmSubsystem.getArmRotations() < pos + 0.05 && SwingArmSubsystem.getArmRotations() > pos -0.05){
+    if(SwingArmSubsystem.getArmRotations() < pos + 0.075 && SwingArmSubsystem.getArmRotations() > pos -0.075){
       SmartDashboard.putBoolean("Swing Arm Command Active", false);
       return true;
     }else{

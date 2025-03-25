@@ -70,7 +70,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
   }
 
   public static boolean hasCoral(){
-    return manipulatorSensor.getDistance().getValueAsDouble() < 0.040 ? true : false;
+    return manipulatorSensor.getDistance().getValueAsDouble() < 0.035 ? true : false;
   }
 
   public static void runManipulator(double speed){

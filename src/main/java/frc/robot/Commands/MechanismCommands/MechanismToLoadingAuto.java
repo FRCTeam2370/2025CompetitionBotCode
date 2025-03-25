@@ -5,6 +5,8 @@
 package frc.robot.Commands.MechanismCommands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Commands.ElevatorCommands.StowElevator;
 import frc.robot.Commands.ManipulatorCommands.IntakeCoral;
 import frc.robot.Commands.ManipulatorCommands.IntakeCoralBetter;
 import frc.robot.Commands.SwingArmCommands.SetSwingArm;
@@ -16,11 +18,11 @@ import frc.robot.Subsystems.SwingArmSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class MechanismToLoading extends ParallelCommandGroup {
+public class MechanismToLoadingAuto extends SequentialCommandGroup {
   /** Creates a new MechanismToLoading. */
-  public MechanismToLoading(ManipulatorSubsystem manipulatorSubsystem, SwingArmSubsystem mSwingArmSubsystem, LEDSubsystem mLedSubsystem, ElevatorSubsystem mElevatorSubsystem) {
+  public MechanismToLoadingAuto(ManipulatorSubsystem manipulatorSubsystem, SwingArmSubsystem mSwingArmSubsystem, LEDSubsystem mLedSubsystem, ElevatorSubsystem mElevatorSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SetSwingArm(mSwingArmSubsystem,  -0.124).alongWith(new IntakeCoralBetter(manipulatorSubsystem, mLedSubsystem)));// -0.125
+    addCommands((new SetMechanismToPoseAuto(0.135, -0.13, mSwingArmSubsystem, mElevatorSubsystem).alongWith(new IntakeCoralBetter(manipulatorSubsystem, mLedSubsystem)).andThen(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, manipulatorSubsystem))));// -0.125
   }
 }

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.231659836065574,
-        "y": 2.8082479508196716
+        "x": 7.69610655737705,
+        "y": 5.097899590163934
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.7328425267012255,
-        "y": 2.4577505412703307
+        "x": 7.3364754098360665,
+        "y": 5.085911885245901
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.5344262295081967,
-        "y": 0.6624487704918033
+        "x": 6.257581967213115,
+        "y": 4.4865266393442615
       },
       "prevControl": {
-        "x": 2.36982724683401,
-        "y": 1.32679830070537
+        "x": 6.800922131147541,
+        "y": 4.339651639344262
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,12 +31,12 @@
   "rotationTargets": [],
   "constraintZones": [
     {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.95,
-      "maxWaypointRelativePos": 1.0,
+      "name": "Slow",
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 0.36744432661717885,
       "constraints": {
-        "maxVelocity": 3.0,
-        "maxAcceleration": 3.0,
+        "maxVelocity": 1.0,
+        "maxAcceleration": 1.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -47,8 +47,19 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Stow",
-      "waypointRelativePos": 0.04506892895016144,
+      "name": "spitpiece",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Spit Algae"
+        }
+      }
+    },
+    {
+      "name": "stow",
+      "waypointRelativePos": 0.6452810180275708,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -56,22 +67,11 @@
           "name": "Stow Elevator"
         }
       }
-    },
-    {
-      "name": "loading",
-      "waypointRelativePos": 0.6346765641569451,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "Reverse Loading Elevator"
-        }
-      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.2,
-    "maxAcceleration": 5.2,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -79,13 +79,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 143.13010235415592
+    "rotation": -99.41595363840615
   },
   "reversed": false,
-  "folder": "Right Auto Paths",
+  "folder": "Middle Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 149.50664159752432
+    "rotation": -90.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

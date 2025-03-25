@@ -65,9 +65,9 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Get off the line"
+            "name": "Spit Algae"
           }
         }
       ]

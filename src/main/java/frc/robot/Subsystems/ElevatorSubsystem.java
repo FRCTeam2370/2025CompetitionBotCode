@@ -74,14 +74,14 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     switch(mElevatorState) {
       case Idle:
-        if(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()) <= 0.065){
+        if(KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()) <= 0.115){
           elevatorMotor.set(0);
           break;
         }else{
           if(RobotContainer.enableOffsets){
-            setElevatorPos(0.06 - offset);
+            setElevatorPos(0.1 - offset);
           }else{
-            setElevatorPos(0.06);
+            setElevatorPos(0.1);
           }
         }
         break;
@@ -131,11 +131,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
     //SLOT0 CONFIGURATION --- NORMAL PID CONTROL
-    elevatorConfiguration.Slot0.kP = 0.05;//needs more tunning with weight and maybe Motion Magic pls , 2.25
-    elevatorConfiguration.Slot0.kI = 0.001;
-    elevatorConfiguration.Slot0.kD = 0.0013;//0.002
+    elevatorConfiguration.Slot0.kP = 0.06;//needs more tunning with weight and maybe Motion Magic pls , 2.25
+    elevatorConfiguration.Slot0.kI = 0.0015;
+    elevatorConfiguration.Slot0.kD = 0.00155;//0.002
     elevatorConfiguration.Slot0.GravityType = GravityTypeValue.Elevator_Static;
-    elevatorConfiguration.Slot0.kG = 0.022;//0.03
+    elevatorConfiguration.Slot0.kG = 0.026;//0.03
 
     elevatorConfiguration.Slot2.kP = 0.01;//needs more tunning with weight and maybe Motion Magic pls , 2.25
     elevatorConfiguration.Slot2.kI = 0.0;
@@ -143,7 +143,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorConfiguration.Slot2.GravityType = GravityTypeValue.Elevator_Static;
     //elevatorConfiguration.Slot2.kG = 0.01;//0.037, this value is without the tension spring
 
-    elevatorConfiguration.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.3;
+    elevatorConfiguration.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.15;
 
     //SLOT1 CONFIGURATION --- MOTION MAGIC CONTROL
     var slot1Config = elevatorConfiguration.Slot1;
@@ -170,12 +170,12 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   private static double OutputShaftToKraken(double OutputRotations){
-    double krakenVal = OutputRotations * 13.3333;//15.4
+    double krakenVal = OutputRotations * 9.78;//15.4, 13.333333
     return krakenVal;
   }
 
   private static double KrakenToOutputShaft(double KrakenRotations){
-    double OutputVal = KrakenRotations / 13.3333;//15.4
+    double OutputVal = KrakenRotations / 9.78;//15.4, 13.333333
     return OutputVal;
   }
 }
