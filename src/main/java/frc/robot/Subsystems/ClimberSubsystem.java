@@ -45,7 +45,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public static void configClimber(){
-    climberConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    climberConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
    
     climberConfig.Slot0.kP = 0.16;// seems to be pretty good
     climberConfig.Slot0.kI = 0;

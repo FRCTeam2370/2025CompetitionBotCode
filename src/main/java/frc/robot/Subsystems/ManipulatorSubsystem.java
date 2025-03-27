@@ -57,7 +57,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
 
     if(hasAlgae){
       LEDSubsystem.hasAlgaeLED();
-      runAlgaeIntake(0.15);
+      runAlgaeIntake(0.2);
     }
 
     if(hasCoral()){

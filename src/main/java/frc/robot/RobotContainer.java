@@ -71,8 +71,8 @@ public class RobotContainer {
 
   public RobotContainer() {
     //Put all NamedCommands here
-    NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.65, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPoseAuto(4.65, 0.38, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.72, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPoseAuto(4.72, 0.38, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Stow Elevator", new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
     NamedCommands.registerCommand("Spit Piece", new SpitPeice(-1, mManipulatorSubsystem));//runs the manipulator back wards for x amount of seconds
     NamedCommands.registerCommand("Stop Spit Piece", new RunManipulator(mManipulatorSubsystem, 0));
@@ -80,7 +80,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Loading Elevator", new SetMechanismToPoseAuto(0.1, -0.13, mSwingArmSubsystem, mElevatorSubsystem));//new SetSwingArmAuto(mSwingArmSubsystem, 0.165));
     NamedCommands.registerCommand("Reverse Loading Elevator", new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Intake Coral", new IntakeCoralBetter(mManipulatorSubsystem, mLedSubsystem));
-    NamedCommands.registerCommand("Elevator L2", new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Elevator L2", new SetMechanismToPoseAuto(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Elevator Descore Low", new SetSwingArm(mSwingArmSubsystem, 0.35));
     NamedCommands.registerCommand("Intake Algae", new IntakeAlgae(mManipulatorSubsystem, 0.5));
     NamedCommands.registerCommand("Spit Algae", new RunAlgaeManipulator(mManipulatorSubsystem, -1));
@@ -128,11 +128,11 @@ public class RobotContainer {
     operator.x().onTrue(new SetMechanismToPose(0.303, 0.248, mSwingArmSubsystem, mElevatorSubsystem));//L2
     operator.y().onTrue(new SetMechanismToPose(1.88, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
     //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.65, 0.315, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));
-    operator.leftStick().onTrue(new StowElevator(mElevatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.216)));
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.72, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));//Descore Don't pickup
+    operator.leftStick().onTrue(new StowElevator(mElevatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2)));//Processor
     
-    operator.povUp().onTrue(new SetMechanismToPose(4.65, 0.405, mSwingArmSubsystem, mElevatorSubsystem));//Barge
+    operator.povUp().onTrue(new SetMechanismToPose(4.72, 0.405, mSwingArmSubsystem, mElevatorSubsystem));//Barge
     operator.povDown().onTrue(new SetMechanismToPose(0.1, -0.254, mSwingArmSubsystem, mElevatorSubsystem));//L1
     operator.povLeft().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//Descore high Algae
     operator.povRight().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.35)));//Descore low Algae

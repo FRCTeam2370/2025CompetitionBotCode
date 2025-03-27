@@ -23,6 +23,6 @@ public class MechanismToLoadingAuto extends SequentialCommandGroup {
   public MechanismToLoadingAuto(ManipulatorSubsystem manipulatorSubsystem, SwingArmSubsystem mSwingArmSubsystem, LEDSubsystem mLedSubsystem, ElevatorSubsystem mElevatorSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands((new SetMechanismToPoseAuto(0.135, -0.13, mSwingArmSubsystem, mElevatorSubsystem).alongWith(new IntakeCoralBetter(manipulatorSubsystem, mLedSubsystem)).andThen(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, manipulatorSubsystem))));// -0.125
+    addCommands((new SetMechanismToPoseAuto(0.13, -0.1325, mSwingArmSubsystem, mElevatorSubsystem).alongWith(new IntakeCoralBetter(manipulatorSubsystem, mLedSubsystem)).andThen(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, manipulatorSubsystem))));// -0.125
   }
 }

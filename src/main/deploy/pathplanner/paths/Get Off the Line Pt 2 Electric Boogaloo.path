@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.291598360655737,
-        "y": 2.832223360655737
+        "x": 7.684118852459015,
+        "y": 5.757223360655737
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.7927810512913886,
-        "y": 2.4817259511063963
+        "x": 7.2885245901639335,
+        "y": 5.68529713114754
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.5344262295081967,
-        "y": 0.6624487704918033
+        "x": 5.838012295081967,
+        "y": 5.63734631147541
       },
       "prevControl": {
-        "x": 2.36982724683401,
-        "y": 1.32679830070537
+        "x": 6.137704918032787,
+        "y": 5.63734631147541
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.95,
-      "maxWaypointRelativePos": 1.0,
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0.231707317073166,
       "constraints": {
-        "maxVelocity": 3.0,
-        "maxAcceleration": 3.0,
+        "maxVelocity": 1.0,
+        "maxAcceleration": 1.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -47,8 +47,19 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
+      "name": "Spit Algae",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Spit Algae"
+        }
+      }
+    },
+    {
       "name": "Stow",
-      "waypointRelativePos": 0.04506892895016144,
+      "waypointRelativePos": 0.3186638388123029,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -56,22 +67,11 @@
           "name": "Stow Elevator"
         }
       }
-    },
-    {
-      "name": "loading",
-      "waypointRelativePos": 0.6346765641569451,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "Reverse Loading Elevator"
-        }
-      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.2,
-    "maxAcceleration": 5.2,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -79,13 +79,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 143.13010235415592
+    "rotation": -92.45403167452709
   },
   "reversed": false,
-  "folder": "Right Auto Paths",
+  "folder": "Middle Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 149.50664159752432
+    "rotation": -88.22853025996584
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

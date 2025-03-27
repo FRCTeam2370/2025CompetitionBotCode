@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.4084016393442615,
-        "y": 5.493493852459016
+        "x": 5.778073770491804,
+        "y": 5.649334016393442
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.084733606557376,
-        "y": 5.565420081967212
+        "x": 5.623618382508828,
+        "y": 5.452754431687836
       },
       "isLocked": false,
       "linkedName": null
@@ -31,7 +31,19 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Descore",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Elevator L2"
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -48,7 +60,7 @@
   "folder": "Middle Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -91.6365770416166
+    "rotation": 155.07152586453873
   },
   "useDefaultConstraints": true
 }

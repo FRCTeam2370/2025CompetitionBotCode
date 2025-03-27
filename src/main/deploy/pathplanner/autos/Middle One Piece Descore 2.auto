@@ -65,9 +65,33 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "Get off the line BL"
+          }
+        },
+        {
           "type": "named",
           "data": {
-            "name": "Spit Algae"
+            "name": "Intake Algae"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "From Descore BL - Barge"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Elevator Barge"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Get Off the Line Pt 2 Electric Boogaloo"
           }
         }
       ]
