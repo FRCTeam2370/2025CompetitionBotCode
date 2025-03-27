@@ -125,7 +125,7 @@ public class RobotContainer {
 
     driver.povLeft().onTrue(new MechanismToLoadingAuto(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
 
-    operator.x().onTrue(new SetMechanismToPose(0.303, 0.248, mSwingArmSubsystem, mElevatorSubsystem));//L2
+    operator.x().onTrue(new SetMechanismToPose(0.31, 0.248, mSwingArmSubsystem, mElevatorSubsystem));//L2
     operator.y().onTrue(new SetMechanismToPose(1.88, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
     //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.rightBumper().onTrue(new SetMechanismToPose(4.72, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
