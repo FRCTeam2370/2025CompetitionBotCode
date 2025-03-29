@@ -4,43 +4,28 @@
 
 package frc.robot.Subsystems;
 
-import static edu.wpi.first.units.Units.Rotation;
-
-import java.io.IOException;
-import java.net.ContentHandler;
-import java.text.Collator;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import org.json.simple.parser.ParseException;
-
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
-import com.ctre.phoenix6.hardware.TalonFX;
-import com.fasterxml.jackson.databind.node.BooleanNode;
-import com.fasterxml.jackson.databind.util.RootNameLookup;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.ModuleConfig;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
-import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.PathPlannerLogging;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.estimator.PoseEstimator;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.Kinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -48,10 +33,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructArrayPublisher;
-import edu.wpi.first.units.measure.Time;
-import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -60,9 +42,7 @@ import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
-import frc.robot.RobotContainer;
 import frc.robot.SwerveModule;
-import frc.robot.Constants.SwerveConstants;
 
 public class SwerveSubsystem extends SubsystemBase {
   public static Pigeon2 gyro = new Pigeon2(Constants.SwerveConstants.pigeonID);
@@ -117,6 +97,14 @@ public class SwerveSubsystem extends SubsystemBase {
       poseEstimator = new SwerveDrivePoseEstimator(Constants.SwerveConstants.kinematics, gyro.getRotation2d(), getModulePositions(), new Pose2d(getPose().getTranslation(), gyro.getRotation2d()));
     }else{
       poseEstimator = new SwerveDrivePoseEstimator(Constants.SwerveConstants.kinematics, gyro.getRotation2d(), getModulePositions(), new Pose2d(getPose().getTranslation(), gyro.getRotation2d()));
+    }
+
+
+    resetGyro();
+    if(SwerveSubsystem.isBlue()){
+      resetOdometry(new Pose2d(SwerveSubsystem.poseEstimator.getEstimatedPosition().getTranslation(), Rotation2d.fromDegrees(SwerveSubsystem.gyro.getYaw().getValueAsDouble() + 90)));
+    }else{
+      resetOdometry(new Pose2d(SwerveSubsystem.poseEstimator.getEstimatedPosition().getTranslation(), Rotation2d.fromDegrees(SwerveSubsystem.gyro.getYaw().getValueAsDouble() + 270)));
     }
     
     PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
@@ -410,7 +398,7 @@ public class SwerveSubsystem extends SubsystemBase {
               this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
               (speeds, feedforwards) -> driveRobotRelative(speeds),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond / 3.1154127, false, true),//driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
               new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                      new PIDConstants(3.65, 0.0, 0.0), // Translation PID constants// 3.75 - p
+                      new PIDConstants(3.625, 0.0, 0.01), // Translation PID constants// 3.75 - p
                       new PIDConstants(5, 0.0, 0.0) // Rotation PID constants//kp 0.00755, ki 0.0001
               ),
               config, // The robot configuration
