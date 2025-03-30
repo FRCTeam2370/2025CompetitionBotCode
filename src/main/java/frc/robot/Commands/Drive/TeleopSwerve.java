@@ -47,6 +47,6 @@ public class TeleopSwerve extends Command {
     }
     
 
-    mSwerve.drive(new Translation2d(xLimiter.calculate(xVal), yLimiter.calculate(yVal)).times(Constants.SwerveConstants.maxSpeed), rotLimiter.calculate(rotVal * 0.2), !robotCentricSup.getAsBoolean(), true);
+    mSwerve.drive(new Translation2d(xLimiter.calculate(xVal), yLimiter.calculate(yVal)).times(Constants.SwerveConstants.maxSpeed), rotLimiter.calculate(rotVal * 0.25), !robotCentricSup.getAsBoolean(), true);
   }
 }
