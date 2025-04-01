@@ -195,7 +195,7 @@ public class SwerveSubsystem extends SubsystemBase {
     resetGyro();
   }
   public static void resetGyro(){
-    gyro.setYaw(270);
+    gyro.setYaw(180);//270
         
   }
 

@@ -80,8 +80,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("Loading Elevator", new SetMechanismToPoseAuto(0.1, -0.13, mSwingArmSubsystem, mElevatorSubsystem));//new SetSwingArmAuto(mSwingArmSubsystem, 0.165));
     NamedCommands.registerCommand("Reverse Loading Elevator", new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Intake Coral", new IntakeCoralBetter(mManipulatorSubsystem, mLedSubsystem));
-    NamedCommands.registerCommand("Elevator L2", new SetMechanismToPoseAuto(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Elevator L2", new SetMechanismToPoseAuto(0.31, 0.248, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Elevator Descore Low", new SetSwingArm(mSwingArmSubsystem, 0.35));
+    NamedCommands.registerCommand("Descore High", new SetMechanismToPoseAuto(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Intake Algae", new IntakeAlgae(mManipulatorSubsystem, 0.5));
     NamedCommands.registerCommand("Spit Algae", new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 

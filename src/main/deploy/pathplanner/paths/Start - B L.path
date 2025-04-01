@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.641188524590164,
-        "y": 4.04298155737705
+        "x": 6.636307051760775,
+        "y": 3.971055327868852
       },
       "isLocked": false,
       "linkedName": null
@@ -53,7 +53,7 @@
   "folder": "Middle Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.7440592028887378
+    "rotation": -90.0
   },
   "useDefaultConstraints": false
 }

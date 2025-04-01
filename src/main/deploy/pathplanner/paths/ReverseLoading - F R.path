@@ -31,7 +31,19 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Stow",
+      "waypointRelativePos": 0.33351007423117673,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Stow Elevator"
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.2,
     "maxAcceleration": 5.2,
