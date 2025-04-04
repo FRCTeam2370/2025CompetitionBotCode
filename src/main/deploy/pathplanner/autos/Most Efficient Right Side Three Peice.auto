@@ -5,15 +5,75 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "Start - BL L"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Elevator L4"
+          }
+        },
+        {
           "type": "wait",
           "data": {
             "waitTime": 0.1
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Spit Piece"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "Start - B L"
+            "pathName": "BR L - ReverseLoading"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Coral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ReverseLoading - FR L"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Elevator L4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Spit Piece"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "FR L - ReverseLoading"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Coral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ReverseLoading - FR R"
           }
         },
         {
@@ -38,60 +98,6 @@
           "type": "named",
           "data": {
             "name": "Stow Elevator"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Reposition"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake Algae"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "To Barge"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Elevator Barge"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Get off the line BL"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake Algae"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "From Descore BL - Barge"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Elevator Barge"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Get Off the Line Pt 2 Electric Boogaloo"
           }
         }
       ]

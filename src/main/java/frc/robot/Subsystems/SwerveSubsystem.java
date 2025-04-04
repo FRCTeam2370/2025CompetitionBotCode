@@ -376,11 +376,14 @@ public class SwerveSubsystem extends SubsystemBase {
     // mSwerveModules[1].setDesiredState(states[1], false);
     // mSwerveModules[2].setDesiredState(states[2], false);
     // mSwerveModules[3].setDesiredState(states[3], false);
-    if(Math.abs(speeds.vxMetersPerSecond) <= (Constants.SwerveConstants.maxSpeed * 0.005) && Math.abs(speeds.vyMetersPerSecond) <= (Constants.SwerveConstants.maxSpeed * 0.005)){
-      drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, true);
-    }else{
-      drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false);
-    }
+    
+    // if(Math.abs(speeds.vxMetersPerSecond) <= (Constants.SwerveConstants.maxSpeed * 0.005) && Math.abs(speeds.vyMetersPerSecond) <= (Constants.SwerveConstants.maxSpeed * 0.005)){
+    //   drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, true);
+    // }else{
+    //   drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false);
+    // }
+
+    drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false);
   }
 
   public void configurePathPlanner(){
@@ -398,7 +401,7 @@ public class SwerveSubsystem extends SubsystemBase {
               this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
               (speeds, feedforwards) -> driveRobotRelative(speeds),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond / 3.1154127, false, true),//driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
               new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                      new PIDConstants(3.85, 0.0, 0.025), // Translation PID constants// 3.75 - p
+                      new PIDConstants(5, 0.0, 0.025), // Translation PID constants// 3.8 - p
                       new PIDConstants(5, 0.0, 0.0) // Rotation PID constants//kp 0.00755, ki 0.0001
               ),
               config, // The robot configuration

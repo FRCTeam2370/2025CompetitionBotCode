@@ -71,7 +71,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     //Put all NamedCommands here
-    NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.72, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.73, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
     NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPoseAuto(4.72, 0.38, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Stow Elevator", new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
     NamedCommands.registerCommand("Spit Piece", new SpitPeice(-1, mManipulatorSubsystem));//runs the manipulator back wards for x amount of seconds
@@ -126,7 +126,7 @@ public class RobotContainer {
 
     driver.povLeft().onTrue(new MechanismToLoadingAuto(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
 
-    operator.x().onTrue(new SetMechanismToPose(0.31, 0.248, mSwingArmSubsystem, mElevatorSubsystem));//L2
+    operator.x().onTrue(new SetMechanismToPose(0.31, 0.240, mSwingArmSubsystem, mElevatorSubsystem));//L2, //swing arm 0.248
     operator.y().onTrue(new SetMechanismToPose(1.88, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
     //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.rightBumper().onTrue(new SetMechanismToPose(4.73, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4

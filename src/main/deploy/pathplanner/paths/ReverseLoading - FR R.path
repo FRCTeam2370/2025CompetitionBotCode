@@ -3,40 +3,47 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.1566598360655735,
-        "y": 2.424641393442623
+        "x": 1.4984631147540983,
+        "y": 0.6384733606557381
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.605225409836065,
-        "y": 2.2568135245901635
+        "x": 2.2246204497136164,
+        "y": 1.316920706139271
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.219672131147541,
-        "y": 2.6883709016393436
+        "x": 4.207684426229508,
+        "y": 2.6763831967213116
       },
       "prevControl": {
-        "x": 3.907991803278688,
-        "y": 1.5255635245901633
+        "x": 3.861733542986361,
+        "y": 2.332808595559995
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.831652783866722,
-      "rotationDegrees": 151.4735501924992
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Stow",
+      "waypointRelativePos": 0.20837751855779296,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Stow Elevator"
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.2,
     "maxAcceleration": 5.2,
@@ -47,13 +54,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 150.68999292908384
+    "rotation": 150.98963973731261
   },
   "reversed": false,
   "folder": "Right Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 142.47155917659245
   },
   "useDefaultConstraints": false
 }
