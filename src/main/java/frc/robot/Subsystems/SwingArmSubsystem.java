@@ -35,7 +35,7 @@ public class SwingArmSubsystem extends SubsystemBase {
     swingArmEncoder = new CANcoder(Constants.SwingArmConstants.SwingArmEncoderID);
     configSwingArmEncoder();
 
-    resetArmToAbsolute();
+    //resetArmToAbsolute();
 
     setSwingArmPos(0);
   }
@@ -78,6 +78,8 @@ public class SwingArmSubsystem extends SubsystemBase {
     swingArmMotor.getConfigurator().apply(swingArmConfig);
 
     swingArmMotor.setNeutralMode(NeutralModeValue.Coast);
+
+    swingArmMotor.setPosition(0);
   }
 
   private static void configSwingArmEncoder(){

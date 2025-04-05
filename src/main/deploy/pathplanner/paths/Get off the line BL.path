@@ -20,12 +20,12 @@
         "y": 5.38560450819672
       },
       "prevControl": {
-        "x": 6.636891434216031,
-        "y": 5.2491707108509065
+        "x": 6.627249392062778,
+        "y": 5.545619119745081
       },
       "nextControl": {
-        "x": 5.849999999999999,
-        "y": 5.5414446721311466
+        "x": 5.814036885245901,
+        "y": 5.181813524590163
       },
       "isLocked": false,
       "linkedName": null
@@ -36,8 +36,8 @@
         "y": 4.894108606557377
       },
       "prevControl": {
-        "x": 5.538319672131147,
-        "y": 5.193801229508197
+        "x": 5.514344262295082,
+        "y": 5.133862704918033
       },
       "nextControl": null,
       "isLocked": false,
@@ -91,7 +91,7 @@
     },
     {
       "name": "Elevator Descore",
-      "waypointRelativePos": 1.1505832449628823,
+      "waypointRelativePos": 1.019088016967132,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
