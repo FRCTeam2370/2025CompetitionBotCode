@@ -9,10 +9,12 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.ManipulatorSubsystem;
 import frc.robot.Subsystems.SwingArmSubsystem;
+import frc.robot.Subsystems.ManipulatorSubsystem.AlgaeState;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class StowSwingArm extends Command {
   SwingArmSubsystem mSwingArmSubsystem;
+  private double pos = 0;
   /** Creates a new StowSwingArm. */
   public StowSwingArm(SwingArmSubsystem mSwingArmSubsystem, ManipulatorSubsystem mManipulatorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -27,11 +29,15 @@ public class StowSwingArm extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(ManipulatorSubsystem.hasAlgae){
-      SwingArmSubsystem.setSwingArmPos( 0.3);
+    if(ManipulatorSubsystem.algaeState == AlgaeState.RIGHT){
+      pos = 0.3;
+    }else if(ManipulatorSubsystem.algaeState == AlgaeState.LEFT){
+      pos = -0.3;
     }else{
-      SwingArmSubsystem.setSwingArmPos(0);
+      pos = 0;
     }
+
+    SwingArmSubsystem.setSwingArmPos(pos);
   }
 
   // Called once the command ends or is interrupted.
@@ -41,18 +47,23 @@ public class StowSwingArm extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ManipulatorSubsystem.hasAlgae){
-      if(SwingArmSubsystem.getArmRotations() < 0.35 && SwingArmSubsystem.getArmRotations() > 0.25){
+    // if(ManipulatorSubsystem.hasAlgae){
+    //   if(SwingArmSubsystem.getArmRotations() < pos + 0.5 && SwingArmSubsystem.getArmRotations() > pos - 0.5){
+    //     return true;
+    //   }else{
+    //     return false;
+    //   }
+    //  }//else{
+    // //   if(SwingArmSubsystem.getArmRotations() < 0.05 && SwingArmSubsystem.getArmRotations() > -0.05){
+    // //     return true;
+    // //   }else{
+    // //     return false;
+    // //   }
+    // // }
+    if(SwingArmSubsystem.getArmRotations() < pos + 0.5 && SwingArmSubsystem.getArmRotations() > pos - 0.5){
         return true;
       }else{
         return false;
       }
-    }else{
-      if(SwingArmSubsystem.getArmRotations() < 0.05 && SwingArmSubsystem.getArmRotations() > -0.05){
-        return true;
-      }else{
-        return false;
-      }
-    }
   }
 }

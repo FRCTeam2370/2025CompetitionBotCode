@@ -73,16 +73,22 @@ public class RobotContainer {
     //Put all NamedCommands here
     NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.73, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
     NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPoseAuto(4.72, 0.38, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Elevator Barge Reverse", new SetMechanismToPoseAuto(4.72, -0.38, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Elevator L2", new SetMechanismToPoseAuto(0.31, 0.248, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Stow Elevator", new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
-    NamedCommands.registerCommand("Spit Piece", new SpitPeice(-1, mManipulatorSubsystem));//runs the manipulator back wards for x amount of seconds
-    NamedCommands.registerCommand("Stop Spit Piece", new RunManipulator(mManipulatorSubsystem, 0));
-    NamedCommands.registerCommand("Run Manipulator", new RunManipulator(mManipulatorSubsystem, -1));
+    
     NamedCommands.registerCommand("Loading Elevator", new SetMechanismToPoseAuto(0.1, -0.13, mSwingArmSubsystem, mElevatorSubsystem));//new SetSwingArmAuto(mSwingArmSubsystem, 0.165));
     NamedCommands.registerCommand("Reverse Loading Elevator", new MechanismToLoading(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Intake Coral", new IntakeCoralBetter(mManipulatorSubsystem, mLedSubsystem));
-    NamedCommands.registerCommand("Elevator L2", new SetMechanismToPoseAuto(0.31, 0.248, mSwingArmSubsystem, mElevatorSubsystem));
+    
     NamedCommands.registerCommand("Elevator Descore Low", new SetSwingArm(mSwingArmSubsystem, 0.35));
+    NamedCommands.registerCommand("Elevator Descore Reverse", new SetSwingArm(mSwingArmSubsystem, -0.35));
     NamedCommands.registerCommand("Descore High", new SetMechanismToPoseAuto(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Descore High Reverse", new SetMechanismToPoseAuto(1.55, -0.34, mSwingArmSubsystem, mElevatorSubsystem));
+    
+    NamedCommands.registerCommand("Spit Piece", new SpitPeice(-1, mManipulatorSubsystem));//runs the manipulator back wards for x amount of seconds
+    NamedCommands.registerCommand("Stop Spit Piece", new RunManipulator(mManipulatorSubsystem, 0));
+    NamedCommands.registerCommand("Run Manipulator", new RunManipulator(mManipulatorSubsystem, -1));
     NamedCommands.registerCommand("Intake Algae", new IntakeAlgae(mManipulatorSubsystem, 0.5));
     NamedCommands.registerCommand("Spit Algae", new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
@@ -113,6 +119,7 @@ public class RobotContainer {
 
     driver.leftStick().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));
     driver.rightTrigger().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, -1));
+    driver.povRight().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, 0.5));
 
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.125));

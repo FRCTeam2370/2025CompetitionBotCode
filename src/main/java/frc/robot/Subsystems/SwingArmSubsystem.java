@@ -35,7 +35,7 @@ public class SwingArmSubsystem extends SubsystemBase {
     swingArmEncoder = new CANcoder(Constants.SwingArmConstants.SwingArmEncoderID);
     configSwingArmEncoder();
 
-    //resetArmToAbsolute();
+    resetArmToAbsolute();
 
     setSwingArmPos(0);
   }
@@ -52,12 +52,12 @@ public class SwingArmSubsystem extends SubsystemBase {
   }
 
   public static void setSwingArmPos(double pos){
+    //put the sign logic for the pos here ->
     if(RobotContainer.enableOffsets){
       swingArmMotor.setControl(swingArmPosCycle.withPosition(armRotationsToKraken((pos + offset) > Constants.SwingArmConstants.SwingArmMax ? Constants.SwingArmConstants.SwingArmMax : (pos + offset) < Constants.SwingArmConstants.SwingArmMin ? Constants.SwingArmConstants.SwingArmMin : (pos + offset))));
     }else{
       swingArmMotor.setControl(swingArmPosCycle.withPosition(armRotationsToKraken(pos)));
     }
-    
   }
 
   public static double getArmRotations(){
@@ -68,7 +68,7 @@ public class SwingArmSubsystem extends SubsystemBase {
     swingArmConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     swingArmConfig.Slot0.kP = 0.15;
-    swingArmConfig.Slot0.kI = 0.015;
+    swingArmConfig.Slot0.kI = 0.01;
     swingArmConfig.Slot0.kD = 0.02;
 
     swingArmConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = 0.2;

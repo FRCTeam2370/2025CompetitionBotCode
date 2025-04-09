@@ -32,6 +32,14 @@ public class ManipulatorSubsystem extends SubsystemBase {
   public static SparkMaxConfig coralConfig = new SparkMaxConfig();
 
   public static boolean hasAlgae = false;
+
+  public static enum AlgaeState {
+    LEFT,
+    RIGHT,
+    NONE
+  }
+
+  public static AlgaeState algaeState = AlgaeState.NONE;
   /** Creates a new ManipulatorSubsystem. */
   public ManipulatorSubsystem() {
     manipulatorMotor = new SparkMax(Constants.ManipulatorConstants.ManipulatorID, MotorType.kBrushless);
@@ -53,15 +61,22 @@ public class ManipulatorSubsystem extends SubsystemBase {
 
     SmartDashboard.putNumber("Algae Motor Resistence", algaeMotor.getOutputCurrent());
 
+    SmartDashboard.putNumber("Coral Motor Resistence", manipulatorMotor.getOutputCurrent());
+
     SmartDashboard.putBoolean("has Algae", hasAlgae);
+
+    SmartDashboard.putString("AlgaeState", algaeState.name());
 
     if(hasAlgae){
       LEDSubsystem.hasAlgaeLED();
       runAlgaeIntake(0.2);
+    }else{
+      algaeState = AlgaeState.NONE;
     }
 
     if(hasCoral()){
       LEDSubsystem.hasCoralLED();
+      runManipulator(0.05);
     }
 
     if(!hasAlgae && !hasCoral()){
@@ -90,6 +105,9 @@ public class ManipulatorSubsystem extends SubsystemBase {
   private static void configureAlgaeMotor(){
     algaeConfig.idleMode(IdleMode.kBrake);
     algaeConfig.inverted(false);
+
+    algaeConfig.smartCurrentLimit(40);
+    //algaeConfig.secondaryCurrentLimit(40);
     
     algaeMotor.configure(algaeConfig, null, PersistMode.kPersistParameters);
   }

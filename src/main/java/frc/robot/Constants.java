@@ -28,7 +28,7 @@ public class Constants {
         public static final int SwingArmID = 15;
         public static final int SwingArmEncoderID = 16;
 
-        public static final double SwingArmOffset = 0.5202636;
+        public static final double SwingArmOffset = 0.66381;//old offset 0.5202636
 
         public static final double SwingArmMax = 0.4672;
         public static final double SwingArmMin = -0.3447;

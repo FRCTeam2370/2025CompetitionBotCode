@@ -116,20 +116,20 @@ public class SwerveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Mod 0 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[0].getCANcoder().getDegrees()).getDegrees());
-    SmartDashboard.putNumber("Mod 1 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[1].getCANcoder().getDegrees()).getDegrees());
-    SmartDashboard.putNumber("Mod 2 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[2].getCANcoder().getDegrees()).getDegrees());
-    SmartDashboard.putNumber("Mod 3 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[3].getCANcoder().getDegrees()).getDegrees());
+    // SmartDashboard.putNumber("Mod 0 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[0].getCANcoder().getDegrees()).getDegrees());
+    // SmartDashboard.putNumber("Mod 1 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[1].getCANcoder().getDegrees()).getDegrees());
+    // SmartDashboard.putNumber("Mod 2 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[2].getCANcoder().getDegrees()).getDegrees());
+    // SmartDashboard.putNumber("Mod 3 CAN Pose", Rotation2d.fromDegrees(mSwerveModules[3].getCANcoder().getDegrees()).getDegrees());
 
-    SmartDashboard.putNumber("Mod 0 Rot Pose", mSwerveModules[0].getTurnMotorRotation());
-    SmartDashboard.putNumber("Mod 1 Rot Pose", mSwerveModules[1].getTurnMotorRotation());
-    SmartDashboard.putNumber("Mod 2 Rot Pose", mSwerveModules[2].getTurnMotorRotation());
-    SmartDashboard.putNumber("Mod 3 Rot Pose", mSwerveModules[3].getTurnMotorRotation());
+    // SmartDashboard.putNumber("Mod 0 Rot Pose", mSwerveModules[0].getTurnMotorRotation());
+    // SmartDashboard.putNumber("Mod 1 Rot Pose", mSwerveModules[1].getTurnMotorRotation());
+    // SmartDashboard.putNumber("Mod 2 Rot Pose", mSwerveModules[2].getTurnMotorRotation());
+    // SmartDashboard.putNumber("Mod 3 Rot Pose", mSwerveModules[3].getTurnMotorRotation());
 
-    SmartDashboard.putNumber("Mod 0 drive Pose", mSwerveModules[0].getDriveMotorRotation());
-    SmartDashboard.putNumber("Mod 1 drive Pose", mSwerveModules[1].getDriveMotorRotation());
-    SmartDashboard.putNumber("Mod 2 drive Pose", mSwerveModules[2].getDriveMotorRotation());
-    SmartDashboard.putNumber("Mod 3 drive Pose", mSwerveModules[3].getDriveMotorRotation());
+    // SmartDashboard.putNumber("Mod 0 drive Pose", mSwerveModules[0].getDriveMotorRotation());
+    // SmartDashboard.putNumber("Mod 1 drive Pose", mSwerveModules[1].getDriveMotorRotation());
+    // SmartDashboard.putNumber("Mod 2 drive Pose", mSwerveModules[2].getDriveMotorRotation());
+    // SmartDashboard.putNumber("Mod 3 drive Pose", mSwerveModules[3].getDriveMotorRotation());
 
     SmartDashboard.putNumber("Wheel MPS", mSwerveModules[0].getWheelMPS());
     SmartDashboard.putNumber("Wheel Meters", mSwerveModules[0].getModuleMeters());
@@ -143,10 +143,10 @@ public class SwerveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("pose y", poseEstimator.getEstimatedPosition().getY());
     SmartDashboard.putNumber("pose rot", poseEstimator.getEstimatedPosition().getRotation().getDegrees());
 
-    SmartDashboard.putNumber("Odometry x", odometry.getPoseMeters().getX());
-    SmartDashboard.putNumber("Odometry y", odometry.getPoseMeters().getY());
+    // SmartDashboard.putNumber("Odometry x", odometry.getPoseMeters().getX());
+    // SmartDashboard.putNumber("Odometry y", odometry.getPoseMeters().getY());
 
-    SmartDashboard.putNumber("limelight tx", LimelightHelpers.getTX("limelight"));
+    //SmartDashboard.putNumber("limelight tx", LimelightHelpers.getTX("limelight"));
 
     updateOdometry();
     //odometry.update(getRotation2d(), getModulePositions());//USE THIS WHEN TESTING AUTOS WITHOUT FIELD LOCALIZATION
@@ -255,15 +255,15 @@ public class SwerveSubsystem extends SubsystemBase {
       if(usell1 && usell2){
         Pose2d avepose = new Pose2d(new Translation2d((ll1pose.getX() + ll2pose.getX()) / 2, (ll1pose.getY() + ll2pose.getY()) / 2), poseEstimator.getEstimatedPosition().getRotation());
         botPose = avepose;
-        SmartDashboard.putNumber("bot Pose limelight average x", botPose.getX());
-        SmartDashboard.putNumber("bot Pose limelight average y", botPose.getY());
-        SmartDashboard.putNumber("bot Pose limelight average rot", botPose.getRotation().getDegrees());
-        SmartDashboard.putNumber("limelight 1 x", ll1pose.getX());
-        SmartDashboard.putNumber("limelight 1 y", ll1pose.getY());
-        SmartDashboard.putNumber("limelight 1 rot", ll1pose.getRotation().getDegrees());
-        SmartDashboard.putNumber("limelight 2 x", ll2pose.getX());
-        SmartDashboard.putNumber("limelight 2 y", ll2pose.getY());
-        SmartDashboard.putNumber("limelight 2 rot", ll2pose.getRotation().getDegrees());
+        // SmartDashboard.putNumber("bot Pose limelight average x", botPose.getX());
+        // SmartDashboard.putNumber("bot Pose limelight average y", botPose.getY());
+        // SmartDashboard.putNumber("bot Pose limelight average rot", botPose.getRotation().getDegrees());
+        // SmartDashboard.putNumber("limelight 1 x", ll1pose.getX());
+        // SmartDashboard.putNumber("limelight 1 y", ll1pose.getY());
+        // SmartDashboard.putNumber("limelight 1 rot", ll1pose.getRotation().getDegrees());
+        // SmartDashboard.putNumber("limelight 2 x", ll2pose.getX());
+        // SmartDashboard.putNumber("limelight 2 y", ll2pose.getY());
+        // SmartDashboard.putNumber("limelight 2 rot", ll2pose.getRotation().getDegrees());
   
         botTimestamp = (ll1timestamp + ll2timestamp) / 2; 
         poseEstimator.addVisionMeasurement(botPose, botTimestamp);
