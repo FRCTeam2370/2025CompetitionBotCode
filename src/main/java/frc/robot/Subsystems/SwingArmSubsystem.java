@@ -4,6 +4,8 @@
 
 package frc.robot.Subsystems;
 
+import java.util.List;
+
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
@@ -12,10 +14,13 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.Pair;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.Commands.MechanismCommands.SetMechanismToPose;
 
 public class SwingArmSubsystem extends SubsystemBase {
   public static TalonFX swingArmMotor;
@@ -27,6 +32,7 @@ public class SwingArmSubsystem extends SubsystemBase {
   private static PositionDutyCycle swingArmPosCycle = new PositionDutyCycle(0);
 
   private static double offset = 0;
+  public static double swingArmPos;
   /** Creates a new SwingArmSubsystem. */
   public SwingArmSubsystem() {
     swingArmMotor = new TalonFX(Constants.SwingArmConstants.SwingArmID);

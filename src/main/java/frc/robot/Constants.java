@@ -22,6 +22,9 @@ public class Constants {
     public static class ElevatorConstants {
         public static final int ElevatorID = 14;
         public static final double maxElevatorHeight = 4.75;
+
+        public static final double highDescoreVal = 1.55;
+        public static final double lowDescoreVal = 0.15;
     }
 
     public static class SwingArmConstants {
@@ -32,6 +35,9 @@ public class Constants {
 
         public static final double SwingArmMax = 0.4672;
         public static final double SwingArmMin = -0.3447;
+
+        public static final double forwardDescoreVal = 0.34;
+        public static final double reverseDescoreVal = -0.34;
     }
 
     public static class ManipulatorConstants {

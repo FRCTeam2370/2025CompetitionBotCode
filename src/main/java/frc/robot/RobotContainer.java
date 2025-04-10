@@ -35,6 +35,7 @@ import frc.robot.Commands.ManipulatorCommands.RunAlgaeManipulator;
 import frc.robot.Commands.ManipulatorCommands.RunManipulator;
 import frc.robot.Commands.ManipulatorCommands.SpitPeice;
 import frc.robot.Commands.ManipulatorCommands.SpitPeiceWithTime;
+import frc.robot.Commands.MechanismCommands.MechanismToDescore;
 import frc.robot.Commands.MechanismCommands.MechanismToLoading;
 import frc.robot.Commands.MechanismCommands.MechanismToLoadingAuto;
 import frc.robot.Commands.MechanismCommands.SetMechanismToPose;
@@ -108,8 +109,8 @@ public class RobotContainer {
     driver.start().onTrue(new ResetGyro(mSwerve));
 
     driver.x().whileTrue(mSwerve.PathfindToPose(() -> SwervePOILogic.findNearestLeftScore()));
-    driver.y().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore()));
-    driver.a().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestReverseDescore()));
+    driver.y().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore().getFirst()));
+    driver.a().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestReverseDescore().getFirst()));
     //driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
     driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestRightScore()));
     driver.leftTrigger().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestFarLoad()));
@@ -119,7 +120,7 @@ public class RobotContainer {
 
     driver.leftStick().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));
     driver.rightTrigger().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, -1));
-    driver.povRight().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, 0.5));
+    //driver.povRight().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, 0.5));
 
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.125));
@@ -137,13 +138,16 @@ public class RobotContainer {
     operator.y().onTrue(new SetMechanismToPose(1.88, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
     //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
     operator.rightBumper().onTrue(new SetMechanismToPose(4.73, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));//Descore Don't pickup
+    //operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));//Descore Don't pickup
+    operator.leftBumper().onTrue(new MechanismToDescore(mManipulatorSubsystem, mElevatorSubsystem, mSwingArmSubsystem, mLedSubsystem));
     operator.leftStick().onTrue(new StowElevator(mElevatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2)));//Processor
     
     operator.povUp().onTrue(new SetMechanismToPose(4.73, 0.405, mSwingArmSubsystem, mElevatorSubsystem));//Barge
     operator.povDown().onTrue(new SetMechanismToPose(0.1, -0.254, mSwingArmSubsystem, mElevatorSubsystem));//L1
     operator.povLeft().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//Descore high Algae
+    //operator.povLeft().onTrue(new MechanismToDescore(mManipulatorSubsystem, mElevatorSubsystem, mSwingArmSubsystem, mLedSubsystem));
     operator.povRight().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.35)));//Descore low Algae
+    operator.start().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
 
     driver.povDown().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2857)));//If this doesn't work then set it back to just the swing arm command
     driver.povUp().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.35)));//Descore low Algae on the driver's controller

@@ -43,6 +43,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import frc.robot.SwerveModule;
+import frc.robot.Lib.Utils.SwervePOILogic;
 
 public class SwerveSubsystem extends SubsystemBase {
   public static Pigeon2 gyro = new Pigeon2(Constants.SwerveConstants.pigeonID);
@@ -67,6 +68,9 @@ public class SwerveSubsystem extends SubsystemBase {
 
   StructArrayPublisher<Pose2d> posePublisher = NetworkTableInstance.getDefault().getStructArrayTopic("MyPose", Pose2d.struct).publish();
 
+  public static double descoreCompare; 
+  public static double reverseDescoreCompare;
+  public static boolean closerToDescore;
 
   /** Creates a new SwerveSubsystem. */
   public SwerveSubsystem() {
@@ -155,6 +159,34 @@ public class SwerveSubsystem extends SubsystemBase {
     field.setRobotPose(poseEstimator.getEstimatedPosition());
 
     posePublisher.set(new Pose2d[] {poseEstimator.getEstimatedPosition()});
+
+    descoreCompare = Math.abs(SwervePOILogic.findNearestDescore().getFirst().getRotation().getDegrees() - poseEstimator.getEstimatedPosition().getRotation().getDegrees());
+    reverseDescoreCompare = Math.abs(SwervePOILogic.findNearestReverseDescore().getFirst().getRotation().getDegrees() - poseEstimator.getEstimatedPosition().getRotation().getDegrees());
+    closerToDescore = descoreCompare < reverseDescoreCompare;
+
+    SmartDashboard.putNumber("descoreCompare", descoreCompare);
+    SmartDashboard.putNumber("reverseDescoreCompare", reverseDescoreCompare);
+    SmartDashboard.putBoolean("closertodescore", descoreCompare < reverseDescoreCompare);
+  }
+
+  public static Pair<Double, Double> findBestDescore(){
+    double elevatorPos;
+
+    if(closerToDescore){
+      SwingArmSubsystem.swingArmPos = Constants.SwingArmConstants.reverseDescoreVal;
+    }else if(!closerToDescore){
+      SwingArmSubsystem.swingArmPos = Constants.SwingArmConstants.forwardDescoreVal;
+    }else{
+      SwingArmSubsystem.swingArmPos = Constants.SwingArmConstants.reverseDescoreVal;
+    }
+    
+    if(SwervePOILogic.findNearestDescore().getSecond()){
+      elevatorPos = Constants.ElevatorConstants.highDescoreVal;
+    }else{
+      elevatorPos = Constants.ElevatorConstants.lowDescoreVal;
+    }
+    
+    return Pair.of(SwingArmSubsystem.swingArmPos, elevatorPos);
   }
 
   public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop){

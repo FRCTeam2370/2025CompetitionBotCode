@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -126,12 +127,13 @@ public class SwervePOILogic {
           double closest = Collections.min(distances);
 
           returnPose = 
-              closest == distance1 ? Constants.BlueSidePoses.CLOSE_SCORE_RIGHT : 
+              closest == distance1 ? Constants.BlueSidePoses.CLOSE_SCORE_RIGHT: 
               closest == distance2 ? Constants.BlueSidePoses.CLOSE_LEFT_SCORE_RIGHT :
               closest == distance3 ? Constants.BlueSidePoses.CLOSE_RIGHT_SCORE_RIGHT : 
               closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_SCORE_RIGHT :
               closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_SCORE_RIGHT :
               closest == distance6 ? Constants.BlueSidePoses.FAR_SCORE_RIGHT : null;
+
         }else{
           double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_SCORE_RIGHT.getTranslation());
           double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_LEFT_SCORE_RIGHT.getTranslation());
@@ -156,9 +158,10 @@ public class SwervePOILogic {
         return returnPose;
     }
 
-    public static Pose2d findNearestReverseDescore(){
+    public static Pair<Pose2d,Boolean> findNearestReverseDescore(){
         Pose2d currentPose = SwerveSubsystem.poseEstimator.getEstimatedPosition();
         Pose2d returnPose;
+        Boolean highAlgae;
 
         if(SwerveSubsystem.isBlue()){
           double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_REVERSE_DESCORE.getTranslation());
@@ -179,6 +182,10 @@ public class SwervePOILogic {
               closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_REVERSE_DESCORE :
               closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_REVERSE_DESCORE :
               closest == distance6 ? Constants.BlueSidePoses.FAR_REVERSE_DESCORE : null;
+
+          highAlgae = 
+              closest == distance1 || closest == distance4 || closest == distance5 ? true: 
+              closest == distance2 || closest == distance3 || closest == distance6 ? false : false;
         }else{
           double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_REVERSE_DESCORE.getTranslation());
           double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_LEFT_REVERSE_DESCORE.getTranslation());
@@ -198,14 +205,19 @@ public class SwervePOILogic {
               closest == distance4 ? Constants.RedSidePoses.FAR_LEFT_REVERSE_DESCORE :
               closest == distance5 ? Constants.RedSidePoses.FAR_RIGHT_REVERSE_DESCORE :
               closest == distance6 ? Constants.RedSidePoses.FAR_REVERSE_DESCORE : null;
+          
+          highAlgae = 
+              closest == distance1 || closest == distance4 || closest == distance5 ? true: 
+              closest == distance2 || closest == distance3 || closest == distance6 ? false : false;
         } 
 
-        return returnPose;
+        return Pair.of(returnPose, highAlgae);
     }
 
-    public static Pose2d findNearestDescore(){
+    public static Pair<Pose2d,Boolean> findNearestDescore(){
         Pose2d currentPose = SwerveSubsystem.poseEstimator.getEstimatedPosition();
         Pose2d returnPose;
+        Boolean highAlgae;
 
         if(SwerveSubsystem.isBlue()){
           double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.BlueSidePoses.CLOSE_DESCORE.getTranslation());
@@ -226,6 +238,10 @@ public class SwervePOILogic {
               closest == distance4 ? Constants.BlueSidePoses.FAR_LEFT_DESCORE :
               closest == distance5 ? Constants.BlueSidePoses.FAR_RIGHT_DESCORE :
               closest == distance6 ? Constants.BlueSidePoses.FAR_DESCORE : null;
+          
+          highAlgae = 
+              closest == distance1 || closest == distance4 || closest == distance5 ? true: 
+              closest == distance2 || closest == distance3 || closest == distance6 ? false : false;
         }else{
           double distance1 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_DESCORE.getTranslation());
           double distance2 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.CLOSE_LEFT_DESCORE.getTranslation());
@@ -235,7 +251,7 @@ public class SwervePOILogic {
           double distance6 = findDistanceBetweenAB(currentPose.getTranslation(), Constants.RedSidePoses.FAR_DESCORE.getTranslation());
 
           List<Double> distances = Arrays.asList(distance1, distance2, distance3, distance4, distance5, distance6);
-
+//Cheezy 
           double closest = Collections.min(distances);
 
           returnPose = 
@@ -245,10 +261,12 @@ public class SwervePOILogic {
               closest == distance4 ? Constants.RedSidePoses.FAR_LEFT_DESCORE :
               closest == distance5 ? Constants.RedSidePoses.FAR_RIGHT_DESCORE :
               closest == distance6 ? Constants.RedSidePoses.FAR_DESCORE : null;
+          
+          highAlgae = 
+              closest == distance1 || closest == distance4 || closest == distance5 ? true: 
+              closest == distance2 || closest == distance3 || closest == distance6 ? false : false;
         }
         
-        return returnPose;
+        return Pair.of(returnPose, highAlgae);
     }
 }
-
-//Cheezy 

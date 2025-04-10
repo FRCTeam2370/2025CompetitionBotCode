@@ -106,6 +106,8 @@ public class ManipulatorSubsystem extends SubsystemBase {
     algaeConfig.idleMode(IdleMode.kBrake);
     algaeConfig.inverted(false);
 
+    algaeConfig.openLoopRampRate(0.1);
+
     algaeConfig.smartCurrentLimit(40);
     //algaeConfig.secondaryCurrentLimit(40);
     
@@ -114,6 +116,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
 
   private static void configCoral(){
     coralConfig.inverted(true);
+    coralConfig.smartCurrentLimit(40);
 
     manipulatorMotor.configure(coralConfig, null, PersistMode.kPersistParameters);
   }
