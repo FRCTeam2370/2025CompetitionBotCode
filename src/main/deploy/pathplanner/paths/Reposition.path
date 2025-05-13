@@ -47,6 +47,17 @@
           "name": "Elevator Descore Low"
         }
       }
+    },
+    {
+      "name": "Start Algae Intake",
+      "waypointRelativePos": 0.7195121951219497,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Intake Algae"
+        }
+      }
     }
   ],
   "globalConstraints": {

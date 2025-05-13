@@ -31,6 +31,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructArrayPublisher;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -134,6 +136,10 @@ public class SwerveSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("Mod 1 drive Pose", mSwerveModules[1].getDriveMotorRotation());
     // SmartDashboard.putNumber("Mod 2 drive Pose", mSwerveModules[2].getDriveMotorRotation());
     // SmartDashboard.putNumber("Mod 3 drive Pose", mSwerveModules[3].getDriveMotorRotation());
+
+    SmartDashboard.putNumber("Limelight TX", getBoundedLimelightTx());
+    SmartDashboard.putNumber("limelight TY", LimelightHelpers.getTY("limelight"));
+    SmartDashboard.putNumber("limelight distance from target", distanceToTag());
 
     SmartDashboard.putNumber("Wheel MPS", mSwerveModules[0].getWheelMPS());
     SmartDashboard.putNumber("Wheel Meters", mSwerveModules[0].getModuleMeters());
@@ -308,6 +314,33 @@ public class SwerveSubsystem extends SubsystemBase {
     }
   }
 
+  public static double getBoundedLimelightTx(){
+    return -Math.max(-5, Math.min(5, LimelightHelpers.getTX("limelight")));
+  }
+
+  public static double distanceToTag(){
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry ty = table.getEntry("ty");
+    double targetOffsetAngle_Vertical = ty.getDouble(0.0);
+
+    // how many degrees back is your limelight rotated from perfectly vertical?
+    double limelightMountAngleDegrees = 0; 
+
+    // distance from the center of the Limelight lens to the floor
+    double limelightLensHeightInches = 11; 
+
+    // distance from the target to the floor
+    double goalHeightInches = 12; 
+
+    double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
+    double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
+
+    //calculate distance
+    double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
+
+    return distanceFromLimelightToGoalInches;
+  }
+
   public static Pair<Pose2d, Double> getLimelight1Pose(){
     boolean doRejectUpdate = false;
     Pose2d returnPose = null;
@@ -433,7 +466,7 @@ public class SwerveSubsystem extends SubsystemBase {
               this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
               (speeds, feedforwards) -> driveRobotRelative(speeds),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), -speeds.omegaRadiansPerSecond / Constants.SwerveConstants.maxAngularVelocity, false, false),//drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond / 3.1154127, false, true),//driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
               new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                      new PIDConstants(5, 0.0, 0.025), // Translation PID constants// 3.8 - p
+                      new PIDConstants(5, 0.0, 0.2), // Translation PID constants// 3.8 - p
                       new PIDConstants(5, 0.0, 0.0) // Rotation PID constants//kp 0.00755, ki 0.0001
               ),
               config, // The robot configuration

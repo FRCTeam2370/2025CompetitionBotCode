@@ -5,6 +5,8 @@
 package frc.robot.Commands.SwingArmCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.ManipulatorConstants;
+import frc.robot.Subsystems.ManipulatorSubsystem;
 import frc.robot.Subsystems.SwerveSubsystem;
 import frc.robot.Subsystems.SwingArmSubsystem;
 
@@ -33,6 +35,10 @@ public class SetSwingArmForDescore extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(ManipulatorSubsystem.hasAlgae){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

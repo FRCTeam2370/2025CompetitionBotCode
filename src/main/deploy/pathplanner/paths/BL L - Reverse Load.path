@@ -16,20 +16,39 @@
     },
     {
       "anchor": {
-        "x": 1.5584016393442621,
-        "y": 7.339600409836065
+        "x": 1.3665983606557375,
+        "y": 7.471465163934425
       },
       "prevControl": {
-        "x": 1.8700819672131148,
-        "y": 7.183760245901639
+        "x": 1.6782786885245902,
+        "y": 7.315624999999999
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
-  "constraintZones": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.6545374835598415,
+      "rotationDegrees": 39.07921778435381
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.9019088016967132,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 1.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
@@ -65,7 +84,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 36.977596352672556
+    "rotation": 38.0345815099449
   },
   "reversed": false,
   "folder": "Left Auto Paths",

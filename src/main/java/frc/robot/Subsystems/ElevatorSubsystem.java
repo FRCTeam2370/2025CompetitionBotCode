@@ -56,9 +56,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Elevator Position in OutputShaft Rotations", 
-      KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()));//sends the position of the elevator to the Dashboard
-    
+    SmartDashboard.putNumber("Elevator Position in OutputShaft Rotations", KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()));//sends the position of the elevator to the Dashboard
+    SmartDashboard.putNumber("Elevator OutputShaft Rotations double", KrakenToOutputShaft(elevatorMotor.getPosition().getValueAsDouble()));
     SmartDashboard.putNumber("Elevator Voltage", elevatorMotor.getMotorVoltage().getValueAsDouble());
 
     offset = RobotContainer.offsetOI.getRawAxis(0) / 5;

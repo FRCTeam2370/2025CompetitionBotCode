@@ -80,7 +80,7 @@
     },
     {
       "name": "stow",
-      "waypointRelativePos": 0.4506892895015957,
+      "waypointRelativePos": 0.4761399787910847,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -91,7 +91,7 @@
     },
     {
       "name": "Elevator Descore",
-      "waypointRelativePos": 1.019088016967132,
+      "waypointRelativePos": 0.8154825026511142,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -99,6 +99,12 @@
           "name": "Descore High"
         }
       }
+    },
+    {
+      "name": "Intake Algae",
+      "waypointRelativePos": 1.0402969247083769,
+      "endWaypointRelativePos": null,
+      "command": null
     }
   ],
   "globalConstraints": {

@@ -53,6 +53,8 @@ public class SwingArmSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("swingArm Mechanism Rotations", getArmRotations());
     SmartDashboard.putNumber("SwingArm Absolut Encoder", swingArmEncoder.getAbsolutePosition().getValueAsDouble());
 
+    SmartDashboard.putNumber("swingArm Motor rotations double", swingArmMotor.getPosition().getValueAsDouble());
+
     offset = RobotContainer.offsetOI.getRawAxis(1) / 12;
     SmartDashboard.putNumber("swing arm offset", offset);
   }

@@ -76,7 +76,6 @@ public class ManipulatorSubsystem extends SubsystemBase {
 
     if(hasCoral()){
       LEDSubsystem.hasCoralLED();
-      runManipulator(0.05);
     }
 
     if(!hasAlgae && !hasCoral()){
@@ -106,7 +105,7 @@ public class ManipulatorSubsystem extends SubsystemBase {
     algaeConfig.idleMode(IdleMode.kBrake);
     algaeConfig.inverted(false);
 
-    algaeConfig.openLoopRampRate(0.1);
+    algaeConfig.openLoopRampRate(0);
 
     algaeConfig.smartCurrentLimit(40);
     //algaeConfig.secondaryCurrentLimit(40);

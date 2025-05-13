@@ -21,9 +21,9 @@
                 }
               },
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 0.125
+                  "name": "AlignToLeft"
                 }
               },
               {
@@ -61,6 +61,12 @@
                 "type": "named",
                 "data": {
                   "name": "Elevator L4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlignToLeft"
                 }
               },
               {

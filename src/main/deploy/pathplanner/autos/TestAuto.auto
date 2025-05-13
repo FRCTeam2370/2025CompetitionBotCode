@@ -7,13 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Straight Test"
+            "pathName": "TestPath"
           }
         },
         {
           "type": "wait",
           "data": {
             "waitTime": 5.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Return From TestPath"
           }
         }
       ]

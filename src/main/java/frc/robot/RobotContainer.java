@@ -22,9 +22,11 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Commands.ResetGyro;
 import frc.robot.Commands.ClimberCommands.ControlClimberManual;
+import frc.robot.Commands.Drive.AlignToTagWithTX;
 import frc.robot.Commands.Drive.DriveRobotRelative;
 import frc.robot.Commands.Drive.GoToSwervePose;
 import frc.robot.Commands.Drive.TeleopSwerve;
+import frc.robot.Commands.Drive.TestAllignToTarget;
 import frc.robot.Commands.ElevatorCommands.ElevatorControl;
 import frc.robot.Commands.ElevatorCommands.SetElevatorSpeed;
 import frc.robot.Commands.ElevatorCommands.StowElevator;
@@ -49,6 +51,7 @@ import frc.robot.Subsystems.ClimberSubsystem;
 import frc.robot.Subsystems.ElevatorSubsystem;
 import frc.robot.Subsystems.LEDSubsystem;
 import frc.robot.Subsystems.ManipulatorSubsystem;
+import frc.robot.Subsystems.PhotonVision;
 import frc.robot.Subsystems.SwerveSubsystem;
 import frc.robot.Subsystems.SwingArmSubsystem;
 import pabeles.concurrency.ConcurrencyOps.Reset;
@@ -65,6 +68,7 @@ public class RobotContainer {
   private final SwingArmSubsystem mSwingArmSubsystem = new SwingArmSubsystem();
   private final ClimberSubsystem mClimberSubsystem = new ClimberSubsystem();
   private final LEDSubsystem mLedSubsystem = new LEDSubsystem();
+  private final PhotonVision mPhotonVision = new PhotonVision();
 
   public static boolean enableOffsets = false;
 
@@ -72,9 +76,9 @@ public class RobotContainer {
 
   public RobotContainer() {
     //Put all NamedCommands here
-    NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.73, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPoseAuto(4.72, 0.38, mSwingArmSubsystem, mElevatorSubsystem));
-    NamedCommands.registerCommand("Elevator Barge Reverse", new SetMechanismToPoseAuto(4.72, -0.38, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Elevator L4", new SetMechanismToPoseAuto(4.73, 0.315, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    NamedCommands.registerCommand("Elevator Barge", new SetMechanismToPoseAuto(4.72, 0.39, mSwingArmSubsystem, mElevatorSubsystem));
+    NamedCommands.registerCommand("Elevator Barge Reverse", new SetMechanismToPoseAuto(4.72, -0.39, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Elevator L2", new SetMechanismToPoseAuto(0.31, 0.248, mSwingArmSubsystem, mElevatorSubsystem));
     NamedCommands.registerCommand("Stow Elevator", new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
     
@@ -93,6 +97,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("Intake Algae", new IntakeAlgae(mManipulatorSubsystem, 0.5));
     NamedCommands.registerCommand("Spit Algae", new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
+    NamedCommands.registerCommand("AlignToLeft", new AlignToTagWithTX(mSwerve, true));
+
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
     
@@ -108,19 +114,24 @@ public class RobotContainer {
 
     driver.start().onTrue(new ResetGyro(mSwerve));
 
-    driver.x().whileTrue(mSwerve.PathfindToPose(() -> SwervePOILogic.findNearestLeftScore()));
+    //driver.x().whileTrue(mSwerve.PathfindToPose(() -> SwervePOILogic.findNearestLeftScore()));
+    driver.x().whileTrue(mSwerve.PathfindToPose((()-> SwervePOILogic.findNearestDescore().getFirst())).andThen(new AlignToTagWithTX(mSwerve, true)));
     driver.y().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore().getFirst()));
     driver.a().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestReverseDescore().getFirst()));
     //driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
-    driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestRightScore()));
+    //driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestRightScore()));
+    driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore().getFirst()).andThen(new AlignToTagWithTX(mSwerve, false)));
     driver.leftTrigger().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestFarLoad()));
+
+    //driver.a().toggleOnTrue(new TestAllignToTarget(mSwerve));
+    //driver.a().toggleOnTrue(new AlignToTagWithTX(mSwerve, true));
 
     driver.leftBumper().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestCloseLoad()));
     driver.rightBumper().whileTrue(new RunManipulator(mManipulatorSubsystem, -1));
 
     driver.leftStick().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));
     driver.rightTrigger().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, -1));
-    //driver.povRight().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, 0.5));
+    driver.povRight().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, 0.5));
 
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.125));
@@ -134,10 +145,10 @@ public class RobotContainer {
 
     driver.povLeft().onTrue(new MechanismToLoadingAuto(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
 
-    operator.x().onTrue(new SetMechanismToPose(0.31, 0.240, mSwingArmSubsystem, mElevatorSubsystem));//L2, //swing arm 0.248
-    operator.y().onTrue(new SetMechanismToPose(1.88, 0.256, mSwingArmSubsystem, mElevatorSubsystem));//L3
+    operator.x().onTrue(new SetMechanismToPose(0.31, 0.25, mSwingArmSubsystem, mElevatorSubsystem));//L2, //swing arm 0.248
+    operator.y().onTrue(new SetMechanismToPose(1.88, 0.267, mSwingArmSubsystem, mElevatorSubsystem));//L3
     //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.73, 0.31, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.73, 0.3175, mSwingArmSubsystem, mElevatorSubsystem));//L4
     //operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));//Descore Don't pickup
     operator.leftBumper().onTrue(new MechanismToDescore(mManipulatorSubsystem, mElevatorSubsystem, mSwingArmSubsystem, mLedSubsystem));
     operator.leftStick().onTrue(new StowElevator(mElevatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2)));//Processor

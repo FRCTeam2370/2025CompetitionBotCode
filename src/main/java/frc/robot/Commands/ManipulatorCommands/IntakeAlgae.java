@@ -4,6 +4,7 @@
 
 package frc.robot.Commands.ManipulatorCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwingArmConstants;
 import frc.robot.Subsystems.ManipulatorSubsystem;
@@ -14,6 +15,7 @@ import frc.robot.Subsystems.ManipulatorSubsystem.AlgaeState;
 public class IntakeAlgae extends Command {
   private ManipulatorSubsystem mManipulatorSubsystem;
   private double speed;
+  private Timer timer = new Timer();
   /** Creates a new RunAlgaeManipulator. */
   public IntakeAlgae(ManipulatorSubsystem mManipulatorSubsystem, double speed) {
     this.mManipulatorSubsystem = mManipulatorSubsystem;
@@ -26,6 +28,8 @@ public class IntakeAlgae extends Command {
   @Override
   public void initialize() {
     ManipulatorSubsystem.hasAlgae = false;
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,12 +42,14 @@ public class IntakeAlgae extends Command {
   @Override
   public void end(boolean interrupted) {
     ManipulatorSubsystem.runAlgaeIntake(0);
+    timer.stop();
+    timer.reset();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ManipulatorSubsystem.algaeMotor.getOutputCurrent() >= 25){//55
+    if(ManipulatorSubsystem.algaeMotor.getOutputCurrent() >= 20 && timer.get() >= 0.1){//55
       ManipulatorSubsystem.hasAlgae = true;
       if(SwingArmSubsystem.getArmRotations() > 0){
         ManipulatorSubsystem.algaeState = AlgaeState.RIGHT;

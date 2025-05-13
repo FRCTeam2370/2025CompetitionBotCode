@@ -15,6 +15,8 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.Encoder;
 
 /** Add your docs here. */
@@ -31,11 +33,12 @@ public class Constants {
         public static final int SwingArmID = 15;
         public static final int SwingArmEncoderID = 16;
 
-        public static final double SwingArmOffset = 0.66381;//old offset 0.5202636
+        public static final double SwingArmOffset = 0.672;//old offset 0.5202636, 0.6665039
 
         public static final double SwingArmMax = 0.4672;
         public static final double SwingArmMin = -0.3447;
 
+        
         public static final double forwardDescoreVal = 0.34;
         public static final double reverseDescoreVal = -0.34;
     }
@@ -49,6 +52,12 @@ public class Constants {
 
     public static class ClimberConstants {
         public static final int climberMotorID = 20;
+    }
+
+    public static class PhotonVisionConstants {
+        public static final double cameraHeight = Units.inchesToMeters(11.75);
+
+        public static final double ReefTagHeights = Units.inchesToMeters(12);
     }
 
     public static class SwerveConstants {
@@ -92,37 +101,37 @@ public class Constants {
         public static final Pose2d RIGHT_LOADING_LEFT = new Pose2d(17, 6.76, Rotation2d.fromDegrees(142 - 180));
 
         public static final Pose2d LEFT_LOADING_RIGHT = new Pose2d(16.75,1.15, Rotation2d.fromDegrees(39 - 180));// May need some tuning// 220.5
-        public static final Pose2d LEFT_LOADING_LEFT = new Pose2d(16.10, 0.85, Rotation2d.fromDegrees(-143.12));
+        public static final Pose2d LEFT_LOADING_LEFT = new Pose2d(16.14, 0.68, Rotation2d.fromDegrees(-143.12));
 
         public static final Pose2d CLOSE_SCORE_RIGHT = new Pose2d(14.3, 4.49, Rotation2d.fromDegrees(-90));
         public static final Pose2d CLOSE_SCORE_LEFT = new Pose2d(14.32, 4.08, Rotation2d.fromDegrees(-90));
         public static final Pose2d CLOSE_REVERSE_DESCORE = new Pose2d(14.32, 3.81, Rotation2d.fromDegrees(90));
-        public static final Pose2d CLOSE_DESCORE = new Pose2d(14.31, 4.26, Rotation2d.fromDegrees(-90));
+        public static final Pose2d CLOSE_DESCORE = new Pose2d(14.325, 4.235, Rotation2d.fromDegrees(-90));
 
         public static final Pose2d CLOSE_LEFT_SCORE_RIGHT = new Pose2d(13.98, 3.13, Rotation2d.fromDegrees(-149));
         public static final Pose2d CLOSE_LEFT_SCORE_LEFT = new Pose2d(13.76, 3, Rotation2d.fromDegrees(-148));
         public static final Pose2d CLOSE_LEFT_REVERSE_DESCORE = new Pose2d(13.55, 2.68, Rotation2d.fromDegrees(33));
-        public static final Pose2d CLOSE_LEFT_DESCORE = new Pose2d(13.76, 3.06, Rotation2d.fromDegrees(-148));
+        public static final Pose2d CLOSE_LEFT_DESCORE = new Pose2d(13.87, 3.084, Rotation2d.fromDegrees(-150));
 
         public static final Pose2d FAR_LEFT_SCORE_RIGHT = new Pose2d(12.75, 2.75, Rotation2d.fromDegrees(148));
-        public static final Pose2d FAR_LEFT_SCORE_LEFT = new Pose2d(12.48, 2.98, Rotation2d.fromDegrees(153));
+        public static final Pose2d FAR_LEFT_SCORE_LEFT = new Pose2d(12.55, 2.92, Rotation2d.fromDegrees(150));
         public static final Pose2d FAR_LEFT_REVERSE_DESCORE = new Pose2d(12.29, 3.07, Rotation2d.fromDegrees(-29.5));
-        public static final Pose2d FAR_LEFT_DESCORE = new Pose2d(12.28, 3.4, Rotation2d.fromDegrees(153));
+        public static final Pose2d FAR_LEFT_DESCORE = new Pose2d(12.635, 2.844, Rotation2d.fromDegrees(150));
 
         public static final Pose2d FAR_SCORE_RIGHT = new Pose2d(11.84, 3.60, Rotation2d.fromDegrees(90));
         public static final Pose2d FAR_SCORE_LEFT = new Pose2d(11.82, 3.96, Rotation2d.fromDegrees(90));
         public static final Pose2d FAR_REVERSE_DESCORE = new Pose2d(11.90, 4.18, Rotation2d.fromDegrees(-90));
-        public static final Pose2d FAR_DESCORE = new Pose2d(11.76, 4, Rotation2d.fromDegrees(90));
+        public static final Pose2d FAR_DESCORE = new Pose2d(11.844, 3.767, Rotation2d.fromDegrees(90));
  
         public static final Pose2d FAR_RIGHT_SCORE_RIGHT = new Pose2d(12.11, 4.9, Rotation2d.fromDegrees(32.28));
         public static final Pose2d FAR_RIGHT_SCORE_LEFT = new Pose2d(12.4, 5.14, Rotation2d.fromDegrees(30));
         public static final Pose2d FAR_RIGHT_REVERSE_DESCORE = new Pose2d(12.76, 5.25, Rotation2d.fromDegrees(-149.7));
-        public static final Pose2d FAR_RIGHT_DESCORE = new Pose2d(12.76, 5.25, Rotation2d.fromDegrees(30));
+        public static final Pose2d FAR_RIGHT_DESCORE = new Pose2d(12.263, 4.99, Rotation2d.fromDegrees(30));
         
         public static final Pose2d CLOSE_RIGHT_SCORE_RIGHT = new Pose2d(13.33, 5.28, Rotation2d.fromDegrees(-31));
         public static final Pose2d CLOSE_RIGHT_SCORE_LEFT = new Pose2d(13.64, 5.07, Rotation2d.fromDegrees(-29));
         public static final Pose2d CLOSE_RIGHT_REVERSE_DESCORE = new Pose2d(13.92, 4.96, Rotation2d.fromDegrees(148));
-        public static final Pose2d CLOSE_RIGHT_DESCORE = new Pose2d(13.63, 5.2, Rotation2d.fromDegrees(-31));
+        public static final Pose2d CLOSE_RIGHT_DESCORE = new Pose2d(13.522, 5.218, Rotation2d.fromDegrees(-30));
 
         public static final Pose2d PROCESSOR = new Pose2d(11.39, 7.3, Rotation2d.fromDegrees(-180));
     }
@@ -137,32 +146,32 @@ public class Constants {
         public static final Pose2d CLOSE_SCORE_RIGHT = new Pose2d(3.23, 3.58, Rotation2d.fromDegrees(90));
         public static final Pose2d CLOSE_SCORE_LEFT = new Pose2d(3.24, 3.91, Rotation2d.fromDegrees(90));
         public static final Pose2d CLOSE_REVERSE_DESCORE = new Pose2d(3.3, 4.27, Rotation2d.fromDegrees(-90));
-        public static final Pose2d CLOSE_DESCORE = new Pose2d(3.03, 3.79, Rotation2d.fromDegrees(90));
+        public static final Pose2d CLOSE_DESCORE = new Pose2d(3.225, 3.82, Rotation2d.fromDegrees(90));
 
         public static final Pose2d CLOSE_LEFT_SCORE_RIGHT = new Pose2d(3.48, 4.85, Rotation2d.fromDegrees(33.02));
         public static final Pose2d CLOSE_LEFT_SCORE_LEFT = new Pose2d(3.81, 5.04, Rotation2d.fromDegrees(30));//35/02
         public static final Pose2d CLOSE_LEFT_REVERSE_DESCORE = new Pose2d(4.22, 5.2, Rotation2d.fromDegrees(-150));//-143.33
-        public static final Pose2d CLOSE_LEFT_DESCORE = new Pose2d(3.83, 5.24, Rotation2d.fromDegrees(35.02));
+        public static final Pose2d CLOSE_LEFT_DESCORE = new Pose2d(3.668, 4.99, Rotation2d.fromDegrees(30));
 
         public static final Pose2d FAR_LEFT_SCORE_RIGHT = new Pose2d(4.75, 5.3, Rotation2d.fromDegrees(-29));
         public static final Pose2d FAR_LEFT_SCORE_LEFT = new Pose2d(5.11, 5.15, Rotation2d.fromDegrees(-30));
         public static final Pose2d FAR_LEFT_REVERSE_DESCORE = new Pose2d(5.22, 4.96, Rotation2d.fromDegrees(150));
-        public static final Pose2d FAR_LEFT_DESCORE = new Pose2d(4.93, 5.23, Rotation2d.fromDegrees(-34.55));
+        public static final Pose2d FAR_LEFT_DESCORE = new Pose2d(4.927, 5.218, Rotation2d.fromDegrees(-30));
 
         public static final Pose2d FAR_SCORE_RIGHT = new Pose2d(5.71, 4.42, Rotation2d.fromDegrees(-90));
         public static final Pose2d FAR_SCORE_LEFT = new Pose2d(5.72, 4.07, Rotation2d.fromDegrees(-90));
         public static final Pose2d FAR_REVERSE_DESCORE = new Pose2d(5.83, 3.78, Rotation2d.fromDegrees(90));
-        public static final Pose2d FAR_DESCORE = new Pose2d(5.9, 4.14, Rotation2d.fromDegrees(-91.24));
+        public static final Pose2d FAR_DESCORE = new Pose2d(5.73, 4.235, Rotation2d.fromDegrees(-91.24));
 
-        public static final Pose2d FAR_RIGHT_SCORE_RIGHT = new Pose2d(5.45, 3.21, Rotation2d.fromDegrees(-149.76));
+        public static final Pose2d FAR_RIGHT_SCORE_RIGHT = new Pose2d(5.45, 3.21, Rotation2d.fromDegrees(-150));
         public static final Pose2d FAR_RIGHT_SCORE_LEFT = new Pose2d(5.13, 2.94, Rotation2d.fromDegrees(-149));
         public static final Pose2d FAR_RIGHT_REVERSE_DESCORE = new Pose2d(4.84, 2.89, Rotation2d.fromDegrees(36));
-        public static final Pose2d FAR_RIGHT_DESCORE = new Pose2d(5.30, 3.01, Rotation2d.fromDegrees(-150));
+        public static final Pose2d FAR_RIGHT_DESCORE = new Pose2d(5.323, 3.06, Rotation2d.fromDegrees(-150));
         
         public static final Pose2d CLOSE_RIGHT_SCORE_RIGHT = new Pose2d(4.24, 2.74, Rotation2d.fromDegrees(145.83));
         public static final Pose2d CLOSE_RIGHT_SCORE_LEFT = new Pose2d(3.92, 2.86, Rotation2d.fromDegrees(149.83));
         public static final Pose2d CLOSE_RIGHT_REVERSE_DESCORE = new Pose2d(3.68, 3.12, Rotation2d.fromDegrees(-30));
-        public static final Pose2d CLOSE_RIGHT_DESCORE = new Pose2d(4.04, 2.73, Rotation2d.fromDegrees(145.83));
+        public static final Pose2d CLOSE_RIGHT_DESCORE = new Pose2d(4.052, 2.832, Rotation2d.fromDegrees(150));
 
         public static final Pose2d PROCESSOR = new Pose2d(6.12, 0.72, Rotation2d.fromDegrees(-180));
     }
