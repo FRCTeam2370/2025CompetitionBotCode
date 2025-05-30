@@ -47,7 +47,7 @@ public class AlignToTagWithTX extends Command {
       if(left){
         mSwerve.drive(new Translation2d(translationPID.calculate(PhotonVision.GetBestTargetYawClamped(-2)),0),  0, false, true);
       }else{
-        mSwerve.drive(new Translation2d(translationPID.calculate(PhotonVision.GetBestTargetYawClamped(17.5)),0),  0, false, true);
+        mSwerve.drive(new Translation2d(translationPID.calculate(PhotonVision.GetBestTargetYawClamped(21.5)),0),  0, false, true);
       }
     }else{
       mSwerve.drive(new Translation2d(0,0), 0, false, true);

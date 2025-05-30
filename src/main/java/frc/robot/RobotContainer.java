@@ -98,6 +98,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Spit Algae", new RunAlgaeManipulator(mManipulatorSubsystem, -1));
 
     NamedCommands.registerCommand("AlignToLeft", new AlignToTagWithTX(mSwerve, true));
+    NamedCommands.registerCommand("AlignToRight", new AlignToTagWithTX(mSwerve, false));
 
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
@@ -148,7 +149,7 @@ public class RobotContainer {
     operator.x().onTrue(new SetMechanismToPose(0.31, 0.25, mSwingArmSubsystem, mElevatorSubsystem));//L2, //swing arm 0.248
     operator.y().onTrue(new SetMechanismToPose(1.88, 0.267, mSwingArmSubsystem, mElevatorSubsystem));//L3
     //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.73, 0.3175, mSwingArmSubsystem, mElevatorSubsystem));//L4
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.72, 0.3175, mSwingArmSubsystem, mElevatorSubsystem));//L4
     //operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));//Descore Don't pickup
     operator.leftBumper().onTrue(new MechanismToDescore(mManipulatorSubsystem, mElevatorSubsystem, mSwingArmSubsystem, mLedSubsystem));
     operator.leftStick().onTrue(new StowElevator(mElevatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2)));//Processor

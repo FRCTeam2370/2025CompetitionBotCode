@@ -113,6 +113,12 @@
                 }
               },
               {
+                "type": "named",
+                "data": {
+                  "name": "AlignToRight"
+                }
+              },
+              {
                 "type": "wait",
                 "data": {
                   "waitTime": 0.0

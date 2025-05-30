@@ -40,7 +40,7 @@ public class PhotonVision extends SubsystemBase {
 
   public static double GetBestTargetYawClamped(double offset){
     if(camera.getLatestResult().hasTargets() && camera.getLatestResult() != null){
-      double rVal = camera.getLatestResult().getBestTarget().getYaw();
+      double rVal = camera.getLatestResult().getBestTarget() != null ? camera.getLatestResult().getBestTarget().getYaw() : 0;// for future reference you probable don't need the .getBestTarget because there is only one target in frame
       rVal = Math.max(-5, Math.min(5, rVal + offset));
       return rVal;
     }else{
