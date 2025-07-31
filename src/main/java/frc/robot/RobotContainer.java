@@ -51,6 +51,7 @@ import frc.robot.Subsystems.ClimberSubsystem;
 import frc.robot.Subsystems.ElevatorSubsystem;
 import frc.robot.Subsystems.LEDSubsystem;
 import frc.robot.Subsystems.ManipulatorSubsystem;
+import frc.robot.Subsystems.PhotonLocalization;
 import frc.robot.Subsystems.PhotonVision;
 import frc.robot.Subsystems.SwerveSubsystem;
 import frc.robot.Subsystems.SwingArmSubsystem;
@@ -69,6 +70,7 @@ public class RobotContainer {
   private final ClimberSubsystem mClimberSubsystem = new ClimberSubsystem();
   private final LEDSubsystem mLedSubsystem = new LEDSubsystem();
   private final PhotonVision mPhotonVision = new PhotonVision();
+  private final PhotonLocalization mLocalization = new PhotonLocalization(mSwerve);
 
   public static boolean enableOffsets = false;
 
@@ -115,13 +117,13 @@ public class RobotContainer {
 
     driver.start().onTrue(new ResetGyro(mSwerve));
 
-    //driver.x().whileTrue(mSwerve.PathfindToPose(() -> SwervePOILogic.findNearestLeftScore()));
-    driver.x().whileTrue(mSwerve.PathfindToPose((()-> SwervePOILogic.findNearestDescore().getFirst())).andThen(new AlignToTagWithTX(mSwerve, true)));
+    driver.x().whileTrue(mSwerve.PathfindToPose(() -> SwervePOILogic.findNearestLeftScore()));
+    //driver.x().whileTrue(mSwerve.PathfindToPose((()-> SwervePOILogic.findNearestDescore().getFirst())).andThen(new AlignToTagWithTX(mSwerve, true)));
     driver.y().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore().getFirst()));
     driver.a().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestReverseDescore().getFirst()));
     //driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
-    //driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestRightScore()));
-    driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore().getFirst()).andThen(new AlignToTagWithTX(mSwerve, false)));
+    driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestRightScore()));
+    //driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore().getFirst()).andThen(new AlignToTagWithTX(mSwerve, false)));
     driver.leftTrigger().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestFarLoad()));
 
     //driver.a().toggleOnTrue(new TestAllignToTarget(mSwerve));
@@ -138,7 +140,6 @@ public class RobotContainer {
     //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.125));
     operator.rightStick().onTrue(new MechanismToLoadingAuto(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
     //driver.x().onTrue(new SetSwingArm(mSwingArmSubsystem, 0));
-
     //driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 1.70));//L2
     // driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 5.1));//max height
     // driver.start().onTrue(new ElevatorControl(mElevatorSubsystem, 3));

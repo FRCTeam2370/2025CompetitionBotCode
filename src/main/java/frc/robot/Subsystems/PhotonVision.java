@@ -25,7 +25,7 @@ public class PhotonVision extends SubsystemBase {
     // if(camera.getLatestResult().hasTargets()){
     //   SmartDashboard.putNumber("PhotonCamera distance from target", PhotonUtils.calculateDistanceToTargetMeters(Constants.PhotonVisionConstants.cameraHeight, Constants.PhotonVisionConstants.ReefTagHeights, 0, camera.getLatestResult().getBestTarget().getPitch()));
     // }
-    SmartDashboard.putNumber("PhotonVisionYaw", GetBestTargetYawClamped(10));
+    //SmartDashboard.putNumber("PhotonVisionYaw", GetBestTargetYawClamped(10));
   }
 
   public static double GetBestTargetYaw(){
@@ -40,9 +40,14 @@ public class PhotonVision extends SubsystemBase {
 
   public static double GetBestTargetYawClamped(double offset){
     if(camera.getLatestResult().hasTargets() && camera.getLatestResult() != null){
-      double rVal = camera.getLatestResult().getBestTarget() != null ? camera.getLatestResult().getBestTarget().getYaw() : 0;// for future reference you probable don't need the .getBestTarget because there is only one target in frame
-      rVal = Math.max(-5, Math.min(5, rVal + offset));
-      return rVal;
+      if(camera.getLatestResult().getBestTarget() != null){
+        //double rVal = camera.getLatestResult().getBestTarget() != null ? camera.getLatestResult().getBestTarget().getYaw() : 0;// for future reference you probable don't need the .getBestTarget because there is only one target in frame
+        double rVal = camera.getLatestResult().getBestTarget().getYaw();
+        rVal = Math.max(-5, Math.min(5, rVal + offset));
+        return rVal;
+      }else{
+        return 0;
+      }
     }else{
       return 0;
     }

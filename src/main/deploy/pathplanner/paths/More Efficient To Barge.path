@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 7.22858606557377,
-        "y": 5.025973360655737
+        "x": 7.372438524590163,
+        "y": 5.0379610655737705
       },
       "prevControl": {
-        "x": 6.868954918032785,
-        "y": 4.498514344262294
+        "x": 7.012807377049178,
+        "y": 4.510502049180328
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": "Middle Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -89.169684513742
+    "rotation": -89.16968451374201
   },
   "useDefaultConstraints": false
 }

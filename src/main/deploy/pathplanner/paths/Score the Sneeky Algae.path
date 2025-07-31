@@ -3,59 +3,50 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.262602459016393,
-        "y": 5.001997950819672
+        "x": 12.275409836065574,
+        "y": 4.978022540983606
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.610245901639344,
-        "y": 5.265727459016393
+        "x": 11.807889344262295,
+        "y": 5.6013831967213115
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.192622950819672,
-        "y": 5.7811987704918035
+        "x": 10.225512295081966,
+        "y": 5.925051229508195
       },
       "prevControl": {
-        "x": 6.192622950819672,
-        "y": 5.7811987704918035
+        "x": 11.016700819672131,
+        "y": 6.032940573770491
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.3248575186321804,
-      "rotationDegrees": 153.48508841206535
-    },
-    {
-      "waypointRelativePos": 0.8544498027181039,
-      "rotationDegrees": -83.50183680856742
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Barge",
-      "waypointRelativePos": 0.44379639448568536,
+      "name": "Elevator Barge Reverse",
+      "waypointRelativePos": 0.37115588547189804,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Elevator Barge"
+          "name": "Elevator Barge Reverse"
         }
       }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 4.5,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -63,13 +54,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -89.40934278535337
+    "rotation": -88.93908830973594
   },
   "reversed": false,
   "folder": "Middle Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 150.59281093926637
+    "rotation": 29.744881296942356
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

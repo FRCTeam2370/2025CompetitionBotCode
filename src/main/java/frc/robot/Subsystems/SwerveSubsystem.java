@@ -18,11 +18,13 @@ import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.PathPlannerLogging;
 
+import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -30,12 +32,15 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructArrayPublisher;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -158,7 +163,8 @@ public class SwerveSubsystem extends SubsystemBase {
 
     //SmartDashboard.putNumber("limelight tx", LimelightHelpers.getTX("limelight"));
 
-    updateOdometry();
+    //TODO: put this back: updateOdometry();
+    updateOdometryButFRThisTime();
     //odometry.update(getRotation2d(), getModulePositions());//USE THIS WHEN TESTING AUTOS WITHOUT FIELD LOCALIZATION
     resetOdometry(poseEstimator.getEstimatedPosition());
 
@@ -258,6 +264,21 @@ public class SwerveSubsystem extends SubsystemBase {
   public void resetOdometry(Pose2d pose){
     odometry.resetPosition(getRotation2d(), getModulePositions(), pose);//pose.getRotation()
     poseEstimator.resetPose(pose);
+  }
+
+  public void updateEstimatorWithPose(Pose3d pose, double timestampSeconds, Matrix<N3, N1> sdDevs){
+    poseEstimator.update(getYaw(), getModulePositions());
+    if(sdDevs != null){
+      poseEstimator.addVisionMeasurement(pose.toPose2d(), timestampSeconds, sdDevs);
+    }else{
+      poseEstimator.addVisionMeasurement(pose.toPose2d(), timestampSeconds);
+    }
+
+    
+  }
+
+  public void updateOdometryButFRThisTime(){
+    poseEstimator.update(getYaw(), getModulePositions());
   }
 
   public void updateOdometry(){

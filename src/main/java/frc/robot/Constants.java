@@ -11,10 +11,18 @@ import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.pathplanner.lib.path.PathConstraints;
 
 import frc.robot.Lib.Utils.SwerveModuleConstants;
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.Encoder;
@@ -58,6 +66,17 @@ public class Constants {
         public static final double cameraHeight = Units.inchesToMeters(11.75);
 
         public static final double ReefTagHeights = Units.inchesToMeters(12);
+
+        public static final String cameraName = "PhotonCamera";
+        public static final String cameraName2 = "PhotonCamera2";
+
+        public static final Matrix<N3, N1> kSingleTagStdDevs = VecBuilder.fill(4, 4, 8);
+        public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(0.5, 0.5, 1);
+
+        public static final AprilTagFieldLayout kTagLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+
+        public static final Transform3d camToRobot = new Transform3d(-0.1524, 0.14605, 0.3175, new Rotation3d(0, 0, Math.toRadians(-47)/*the math here is -43(the degrees that the camera is at relative to one side of the robot) + 90 (because we reset the gyro to be 90 degrees off) */));
+        public static final Transform3d cam2ToRobot = new Transform3d(-0.2032, 0.2667, 0.4064, new Rotation3d(0,0,Math.toRadians(-90)));
     }
 
     public static class SwerveConstants {

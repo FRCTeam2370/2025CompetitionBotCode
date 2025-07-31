@@ -43,7 +43,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Reposition"
+            "pathName": "More Effecient Reposition"
           }
         },
         {
@@ -55,19 +55,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "To Barge"
+            "pathName": "More Efficient To Barge"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Elevator Barge"
+            "name": "Elevator Barge Reverse"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Get off the line BL"
+            "pathName": "Sneak Right"
           }
         },
         {
@@ -79,25 +79,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "From Descore BL - Barge"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Elevator Barge"
+            "pathName": "Score Right Sneeky Algae"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Spit Algae"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Get Off the Line Pt 2 Electric Boogaloo"
           }
         }
       ]

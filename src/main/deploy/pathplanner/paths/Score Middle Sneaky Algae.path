@@ -3,59 +3,61 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.262602459016393,
-        "y": 5.001997950819672
+        "x": 11.819877049180327,
+        "y": 3.815215163934426
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.610245901639344,
-        "y": 5.265727459016393
+        "x": 11.18452868852459,
+        "y": 3.6953381147540982
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.192622950819672,
-        "y": 5.7811987704918035
+        "x": 10.2015368852459,
+        "y": 5.0379610655737705
       },
       "prevControl": {
-        "x": 6.192622950819672,
-        "y": 5.7811987704918035
+        "x": 10.621106557377047,
+        "y": 4.666342213114754
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.3248575186321804,
-      "rotationDegrees": 153.48508841206535
-    },
-    {
-      "waypointRelativePos": 0.8544498027181039,
-      "rotationDegrees": -83.50183680856742
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "Barge",
-      "waypointRelativePos": 0.44379639448568536,
+      "waypointRelativePos": 0.5644834571235656,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Elevator Barge"
+          "name": "Elevator Barge Reverse"
+        }
+      }
+    },
+    {
+      "name": "Spit Algae",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Spit Algae"
         }
       }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 4.5,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -63,13 +65,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -89.40934278535337
+    "rotation": -102.26477372789242
   },
   "reversed": false,
   "folder": "Middle Auto Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 150.59281093926637
+    "rotation": 90.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

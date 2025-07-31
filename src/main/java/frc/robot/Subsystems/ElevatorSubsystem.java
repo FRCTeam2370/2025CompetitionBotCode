@@ -32,7 +32,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   private static final PositionDutyCycle elevatorPosCycle = new PositionDutyCycle(0);
   private static final PositionDutyCycle elevatorDownPosCycle = new PositionDutyCycle(0);
-  private static final MotionMagicVoltage elevatorMagic = new MotionMagicVoltage(0);
+  private static final MotionMagicDutyCycle elevatorMagicCycle = new MotionMagicDutyCycle(0);
   private static final VoltageOut elevatorVoltOut = new VoltageOut(0);
 
   public static double lastElevatorPosition; 
@@ -78,9 +78,9 @@ public class ElevatorSubsystem extends SubsystemBase {
           break;
         }else{
           if(RobotContainer.enableOffsets){
-            setElevatorPos(0.1 - offset);
+            setElevatorPosWithMagic(0.1 - offset);
           }else{
-            setElevatorPos(0.1);
+            setElevatorPosWithMagic(0.1);
           }
         }
         break;
@@ -108,7 +108,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public static void setElevatorPosWithMagic(double position){
     position = OutputShaftToKraken(position);
-    elevatorMotor.setControl(elevatorMagic.withPosition(position));
+    elevatorMotor.setControl(elevatorMagicCycle.withPosition(position));
   }
 
   public static void setElevatorVolt(double voltage){
@@ -136,6 +136,13 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorConfiguration.Slot0.GravityType = GravityTypeValue.Elevator_Static;
     elevatorConfiguration.Slot0.kG = 0.027;//0.03
 
+    elevatorConfiguration.Slot0.kS = 0.0; // Add 0.25 V output to overcome static friction
+    elevatorConfiguration.Slot0.kV = 0.002; //For this value do 12.0 Volts / max rpm
+    elevatorConfiguration.Slot0.kA = 0.0; // An acceleration of 1 rps/s requires 0.01 V output
+
+    elevatorConfiguration.MotionMagic.MotionMagicCruiseVelocity = 700; // Target cruise velocity of 40 rps
+    elevatorConfiguration.MotionMagic.MotionMagicAcceleration = 900;// double your cruise velocity
+
     elevatorConfiguration.Slot2.kP = 0.01;//needs more tunning with weight and maybe Motion Magic pls , 2.25
     elevatorConfiguration.Slot2.kI = 0.0;
     elevatorConfiguration.Slot2.kD = 0.001;//0.62
@@ -162,8 +169,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorConfiguration.CurrentLimits.StatorCurrentLimit = 40;
 
     elevatorPosCycle.Slot = 0;
-    elevatorDownPosCycle.Slot = 2;
-    elevatorMagic.Slot = 1;
+    elevatorDownPosCycle.Slot = 2;//2
+    elevatorMagicCycle.Slot = 0;
 
     elevatorMotor.getConfigurator().apply(elevatorConfiguration);
   }

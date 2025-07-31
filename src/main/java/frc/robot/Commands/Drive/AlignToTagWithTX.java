@@ -45,9 +45,9 @@ public class AlignToTagWithTX extends Command {
     //mSwerve.drive(new Translation2d(translationPID.calculate(-Math.max(-2, Math.min(2, LimelightHelpers.getTX("limelight") + 3))),0 /*joystickLimiter.calculate(joystickValue) * Constants.SwerveConstants.maxSpeed //translationPID.calculate(Math.max(-10, Math.min(10, SwerveSubsystem.distanceToTag() - 22))))*/),  0, false, true);
     if(PhotonVision.camera.getLatestResult().hasTargets()){
       if(left){
-        mSwerve.drive(new Translation2d(translationPID.calculate(PhotonVision.GetBestTargetYawClamped(-2)),0),  0, false, true);
+        mSwerve.drive(new Translation2d(translationPID.calculate(PhotonVision.GetBestTargetYawClamped(-2.2)),0),  0, false, true);
       }else{
-        mSwerve.drive(new Translation2d(translationPID.calculate(PhotonVision.GetBestTargetYawClamped(21.5)),0),  0, false, true);
+        mSwerve.drive(new Translation2d(translationPID.calculate(PhotonVision.GetBestTargetYawClamped(18.5)),0),  0, false, true);
       }
     }else{
       mSwerve.drive(new Translation2d(0,0), 0, false, true);

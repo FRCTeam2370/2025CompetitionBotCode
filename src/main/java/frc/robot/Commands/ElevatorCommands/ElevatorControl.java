@@ -32,7 +32,7 @@ public class ElevatorControl extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ElevatorSubsystem.setElevatorPos(elevatorPos);
+    ElevatorSubsystem.setElevatorPosWithMagic(elevatorPos);
   }
 
   // Called once the command ends or is interrupted.

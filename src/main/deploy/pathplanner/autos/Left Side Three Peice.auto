@@ -23,12 +23,6 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignToLeft"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
                   "name": "Spit Piece"
                 }
               }
@@ -61,12 +55,6 @@
                 "type": "named",
                 "data": {
                   "name": "Elevator L4"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlignToLeft"
                 }
               },
               {
@@ -110,12 +98,6 @@
                 "type": "named",
                 "data": {
                   "name": "Elevator L4"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlignToRight"
                 }
               },
               {

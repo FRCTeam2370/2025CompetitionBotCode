@@ -1,0 +1,129 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.3484631147540975,
+        "y": 5.073924180327869
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.0967213114754095,
+        "y": 4.43857581967213
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.686731557377049,
+        "y": 4.0
+      },
+      "prevControl": {
+        "x": 7.43715881179377,
+        "y": 4.014609745446919
+      },
+      "nextControl": {
+        "x": 7.936304302960329,
+        "y": 3.9853902545530806
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 9.93780737704918,
+        "y": 4.0
+      },
+      "prevControl": {
+        "x": 9.370806544470184,
+        "y": 3.9954344545478375
+      },
+      "nextControl": {
+        "x": 10.504808209628177,
+        "y": 4.004565545452163
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 11.867827868852457,
+        "y": 3.815215163934426
+      },
+      "prevControl": {
+        "x": 11.472233606557376,
+        "y": 3.8032274590163935
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.9019189765458482,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 1.8422174840085286,
+      "rotationDegrees": 0.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Spit Algae",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Spit Algae"
+        }
+      }
+    },
+    {
+      "name": "Stow Elevator",
+      "waypointRelativePos": 0.18636056718433436,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Stow Elevator"
+        }
+      }
+    },
+    {
+      "name": "Descore Reverse",
+      "waypointRelativePos": 2.309250506414589,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Elevator Descore Reverse"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 90.0
+  },
+  "reversed": false,
+  "folder": "Middle Auto Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 90.62275568720628
+  },
+  "useDefaultConstraints": true
+}

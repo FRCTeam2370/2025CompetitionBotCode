@@ -1,0 +1,93 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 12.311372950819672,
+        "y": 3.0719774590163933
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 11.951741803278686,
+        "y": 2.5684938524590155
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 10.573155737704917,
+        "y": 3.335706967213115
+      },
+      "prevControl": {
+        "x": 10.929789959016393,
+        "y": 2.848706454918033
+      },
+      "nextControl": {
+        "x": 10.264137163545765,
+        "y": 3.757686112598513
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 10.2015368852459,
+        "y": 5.0379610655737705
+      },
+      "prevControl": {
+        "x": 10.621106557377047,
+        "y": 4.666342213114754
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Barge",
+      "waypointRelativePos": 1.15,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Elevator Barge"
+        }
+      }
+    },
+    {
+      "name": "Spit Algae",
+      "waypointRelativePos": 2.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Spit Algae"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 59.84545208208383
+  },
+  "reversed": false,
+  "folder": "Middle Auto Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -31.60750224624896
+  },
+  "useDefaultConstraints": true
+}
