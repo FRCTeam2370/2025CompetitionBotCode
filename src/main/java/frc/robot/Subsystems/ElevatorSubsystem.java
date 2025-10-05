@@ -64,10 +64,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Elevator position offset", offset);
     SmartDashboard.putBoolean("Offsets Enabled", RobotContainer.enableOffsets);
 
-    if(RobotContainer.operator.a().getAsBoolean()){
+    if(RobotContainer.operator.start().getAsBoolean()){
       RobotContainer.enableOffsets = true;
     }
-    if(RobotContainer.operator.b().getAsBoolean()){
+    if(RobotContainer.operator.back().getAsBoolean()){
       RobotContainer.enableOffsets = false;
     }
 
@@ -140,8 +140,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorConfiguration.Slot0.kV = 0.002; //For this value do 12.0 Volts / max rpm
     elevatorConfiguration.Slot0.kA = 0.0; // An acceleration of 1 rps/s requires 0.01 V output
 
-    elevatorConfiguration.MotionMagic.MotionMagicCruiseVelocity = 700; // Target cruise velocity of 40 rps
-    elevatorConfiguration.MotionMagic.MotionMagicAcceleration = 900;// double your cruise velocity
+    elevatorConfiguration.MotionMagic.MotionMagicCruiseVelocity = 120;//700; // Target cruise velocity of 40 rps
+    elevatorConfiguration.MotionMagic.MotionMagicAcceleration = 240;//900;// double your cruise velocity
 
     elevatorConfiguration.Slot2.kP = 0.01;//needs more tunning with weight and maybe Motion Magic pls , 2.25
     elevatorConfiguration.Slot2.kI = 0.0;

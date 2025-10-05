@@ -163,8 +163,9 @@ public class SwerveSubsystem extends SubsystemBase {
 
     //SmartDashboard.putNumber("limelight tx", LimelightHelpers.getTX("limelight"));
 
-    //TODO: put this back: updateOdometry();
-    updateOdometryButFRThisTime();
+    //TODO: put this back:
+     updateOdometry();
+    //updateOdometryButFRThisTime();
     //odometry.update(getRotation2d(), getModulePositions());//USE THIS WHEN TESTING AUTOS WITHOUT FIELD LOCALIZATION
     resetOdometry(poseEstimator.getEstimatedPosition());
 

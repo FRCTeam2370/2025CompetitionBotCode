@@ -33,6 +33,7 @@ public class ElevatorControl extends Command {
   @Override
   public void execute() {
     ElevatorSubsystem.setElevatorPosWithMagic(elevatorPos);
+    //ElevatorSubsystem.setElevatorPos(elevatorPos);
   }
 
   // Called once the command ends or is interrupted.

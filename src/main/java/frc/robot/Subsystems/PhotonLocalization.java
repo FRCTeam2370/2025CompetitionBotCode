@@ -61,7 +61,7 @@ public class PhotonLocalization extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
+  public void periodic() {  
     // This method will be called once per scheduler run
     // for(PhotonPipelineResult change : camera.getAllUnreadResults()){
     //   poseEstimator.update(change);
@@ -80,8 +80,8 @@ public class PhotonLocalization extends SubsystemBase {
     //     SmartDashboard.putNumber("Field to camera Rotation", fieldToCamera.getRotation().getAngle());
     //   }
     // }
-    checkCamera(camera, poseEstimator, curSdDevs1);
-    checkCamera(camera2, poseEstimator2, curSdDevs2);
+    //checkCamera(camera, poseEstimator, curSdDevs1);
+    //checkCamera(camera2, poseEstimator2, curSdDevs2);
     
       
   }

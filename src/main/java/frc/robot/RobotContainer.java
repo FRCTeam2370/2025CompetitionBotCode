@@ -113,58 +113,87 @@ public class RobotContainer {
 
     SmartDashboard.putNumber("offsetOI axis 0", offsetOI.getRawAxis(0));
     SmartDashboard.putNumber("offsetOI axis 1", offsetOI.getRawAxis(1));
-    //driver.b().toggleOnTrue(new GoToSwervePose(mSwerve, new Pose2d(new Translation2d(11.4, 7.7), Rotation2d.fromDegrees(90))));
 
+
+    // DRIVER CONTROLS
+
+
+    // Start button: Gyro Reset
     driver.start().onTrue(new ResetGyro(mSwerve));
-
-    driver.x().whileTrue(mSwerve.PathfindToPose(() -> SwervePOILogic.findNearestLeftScore()));
-    //driver.x().whileTrue(mSwerve.PathfindToPose((()-> SwervePOILogic.findNearestDescore().getFirst())).andThen(new AlignToTagWithTX(mSwerve, true)));
-    driver.y().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore().getFirst()));
-    driver.a().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestReverseDescore().getFirst()));
-    //driver.a().whileTrue(mSwerve.PathfindToPose(()-> findNearestLoad()));
-    driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestRightScore()));
-    //driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore().getFirst()).andThen(new AlignToTagWithTX(mSwerve, false)));
-    driver.leftTrigger().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestFarLoad()));
-
-    //driver.a().toggleOnTrue(new TestAllignToTarget(mSwerve));
-    //driver.a().toggleOnTrue(new AlignToTagWithTX(mSwerve, true));
-
-    driver.leftBumper().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestCloseLoad()));
+    
+    // Right Bumper: Spit out coral
     driver.rightBumper().whileTrue(new RunManipulator(mManipulatorSubsystem, -1));
 
+    // Left Mouse Button (extra button on the top of the controller in between the trigger and the bumper): Intake Algae
     driver.leftStick().toggleOnTrue(new IntakeAlgae(mManipulatorSubsystem, 0.5));
+    // Right Trigger: Spit out Algae
     driver.rightTrigger().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, -1));
+
+    //D-PAD Right: Run Algae Manipulator 
     driver.povRight().whileTrue(new RunAlgaeManipulator(mManipulatorSubsystem, 0.5));
 
-    //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, 0.165));//loading station
-    //driver.leftStick().onTrue(new SetSwingArm(mSwingArmSubsystem, -0.125));
-    operator.rightStick().onTrue(new MechanismToLoadingAuto(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
-    //driver.x().onTrue(new SetSwingArm(mSwingArmSubsystem, 0));
-    //driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 1.70));//L2
-    // driver.y().onTrue(new ElevatorControl(mElevatorSubsystem, 5.1));//max height
-    // driver.start().onTrue(new ElevatorControl(mElevatorSubsystem, 3));
+    // Right Mouse Button: Stow Elevator
     driver.rightStick().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
 
+    // D-PAD Left: Set the elevator to the position to intake a piece from the loading station
     driver.povLeft().onTrue(new MechanismToLoadingAuto(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
 
-    operator.x().onTrue(new SetMechanismToPose(0.31, 0.25, mSwingArmSubsystem, mElevatorSubsystem));//L2, //swing arm 0.248
-    operator.y().onTrue(new SetMechanismToPose(1.88, 0.267, mSwingArmSubsystem, mElevatorSubsystem));//L3
-    //operator.rightBumper().onTrue(new SetMechanismToPose(4.66, 0.324, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    operator.rightBumper().onTrue(new SetMechanismToPose(4.72, 0.3175, mSwingArmSubsystem, mElevatorSubsystem));//L4
-    //operator.leftBumper().onTrue(new SetMechanismToPose(1.55, -0.251, mSwingArmSubsystem, mElevatorSubsystem));//Descore Don't pickup
-    operator.leftBumper().onTrue(new MechanismToDescore(mManipulatorSubsystem, mElevatorSubsystem, mSwingArmSubsystem, mLedSubsystem));
-    operator.leftStick().onTrue(new StowElevator(mElevatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2)));//Processor
-    
-    operator.povUp().onTrue(new SetMechanismToPose(4.73, 0.405, mSwingArmSubsystem, mElevatorSubsystem));//Barge
-    operator.povDown().onTrue(new SetMechanismToPose(0.1, -0.254, mSwingArmSubsystem, mElevatorSubsystem));//L1
-    operator.povLeft().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));//Descore high Algae
-    //operator.povLeft().onTrue(new MechanismToDescore(mManipulatorSubsystem, mElevatorSubsystem, mSwingArmSubsystem, mLedSubsystem));
-    operator.povRight().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.35)));//Descore low Algae
-    operator.start().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
+    // D-PAD Down: some random intermediate value between descore low and Process
+    driver.povDown().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2857)));
+    //D-PAD Up: Set the Elevator to Descore low algae
+    driver.povUp().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.35)));
 
-    driver.povDown().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2857)));//If this doesn't work then set it back to just the swing arm command
-    driver.povUp().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.35)));//Descore low Algae on the driver's controller
+    //AUTO ALIGN CONTROLS
+
+    // X: Auto Align to closest left reef pole
+    driver.x().whileTrue(mSwerve.PathfindToPose(() -> SwervePOILogic.findNearestLeftScore()));
+    // Y: Auto Align to closest descore, robot facing forward
+    driver.y().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestDescore().getFirst()));
+    // A: Auto Align to closest descore, robot facing backwards
+    driver.a().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestReverseDescore().getFirst()));
+    // B: Auto Align to closest right reef pole
+    driver.b().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestRightScore()));
+    // Left Trigger: Auto Align to closer loading station on the outside of the field (aka closer to the other alliance)
+    driver.leftTrigger().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestFarLoad()));
+    // Left Bumper: Auto Align to closer loading station on the inside of the field (aka closer to the driverstations)
+    driver.leftBumper().whileTrue(mSwerve.PathfindToPose(()-> SwervePOILogic.findNearestCloseLoad()));
+
+
+    // OPERATOR CONTROLS
+
+
+    // Right Mouse Button: Set the mechanism to the loading position 
+    operator.rightStick().onTrue(new MechanismToLoadingAuto(mManipulatorSubsystem, mSwingArmSubsystem, mLedSubsystem, mElevatorSubsystem));
+    
+    // A: Sets mechanism for L1
+    operator.a().onTrue(new SetMechanismToPose(0.1, -0.254, mSwingArmSubsystem, mElevatorSubsystem));
+    // B: Sets the Elevator to the scoring hight L2
+    operator.b().onTrue(new SetMechanismToPose(0.31, 0.25, mSwingArmSubsystem, mElevatorSubsystem));//swing arm 0.248
+    // X: Sets the Elevator to the scoring hight L3
+    operator.x().onTrue(new SetMechanismToPose(1.88, 0.267, mSwingArmSubsystem, mElevatorSubsystem));
+    // Y: Sets the Elevator to the scoring hight L4
+    operator.y().onTrue(new SetMechanismToPose(4.72, 0.3175, mSwingArmSubsystem, mElevatorSubsystem));//4.66, 0.324
+    // Right Bumper: Sets mechanism for the Barge
+    operator.rightBumper().onTrue(new SetMechanismToPose(4.73, 0.405, mSwingArmSubsystem, mElevatorSubsystem));
+    
+    // Left Bumper: Sets the mechanism to the correct Descore position based on robot field position
+    operator.leftBumper().onTrue(new MechanismToDescore(mManipulatorSubsystem, mElevatorSubsystem, mSwingArmSubsystem, mLedSubsystem));
+    
+    // Left Mouse Button: Sets the Elevator for Processor
+    operator.leftStick().onTrue(new StowElevator(mElevatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.2)));
+
+    // D-PAD Left: manual descore high
+    operator.povLeft().onTrue(new SetMechanismToPose(1.55, 0.34, mSwingArmSubsystem, mElevatorSubsystem));
+    // D-PAD Right: manual descore low
+    operator.povRight().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem).andThen(new SetSwingArm(mSwingArmSubsystem, 0.35)));
+    // D-PAD UP: Stow Mechanism
+    operator.povUp().onTrue(new StowMechanismWithCoral(mElevatorSubsystem, mSwingArmSubsystem, mManipulatorSubsystem));
+
+    // CLIMBING CONTROLS
+
+    // Right Trigger: unspool climber
     operator.rightTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, 0.8));
+    // Right Trigger: climb
     operator.leftTrigger().whileTrue(new ControlClimberManual(mClimberSubsystem, -0.8));
 
     //driver.back().toggleOnTrue(new SetElevatorSpeed(mElevatorSubsystem));//this is for finding the kg for the elevator
