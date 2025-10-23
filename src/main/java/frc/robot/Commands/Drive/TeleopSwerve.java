@@ -19,9 +19,9 @@ public class TeleopSwerve extends Command {
   private SwerveSubsystem mSwerve;
   private DoubleSupplier xSup, ySup, rotSup;
   private BooleanSupplier robotCentricSup;
-  private SlewRateLimiter xLimiter = new SlewRateLimiter(8.5);//6.5
-  private SlewRateLimiter yLimiter = new SlewRateLimiter(8.5);//6.5
-  private SlewRateLimiter rotLimiter = new SlewRateLimiter(6.5);//
+  private SlewRateLimiter xLimiter = new SlewRateLimiter(2.25);//6.5
+  private SlewRateLimiter yLimiter = new SlewRateLimiter(2.25);//6.5
+  private SlewRateLimiter rotLimiter = new SlewRateLimiter(8.5);//
   /** Creates a new TeleopSwerve. */
   public TeleopSwerve(SwerveSubsystem mSwerve, DoubleSupplier xSup, DoubleSupplier ySup, DoubleSupplier rotSup, BooleanSupplier robotCentricSup) {
     // Use addRequirements() here to declare subsystem dependencies.
